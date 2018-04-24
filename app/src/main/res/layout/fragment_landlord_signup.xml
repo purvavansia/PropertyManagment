@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="30dp"
+        android:textSize="30dp"
+        android:text="@string/signup"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/editTextLandlordEmail"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="20dp"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/editTextLandlordPassword"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textSize="20dp"
+        android:inputType="textPassword"
+        android:hint="@string/password"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/editTextLandlordConfirmPassword"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:inputType="textPassword"
+        android:textSize="20dp"
+        android:hint="@string/confirm_password"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/buttonSignUp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:inputType="textPassword"
+        android:textSize="20dp"
+        android:hint="@string/sign_up"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
