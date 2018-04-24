@@ -1,6 +1,7 @@
 package com.example.purva.propertymanagment.ui.signup;
 
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,7 +27,8 @@ public class SignUpActivity extends AppCompatActivity implements TabLayout.OnTab
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+              //  FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+               // transaction.replace(,new TenantSignup(), "TENANTSIGNUP");
             }
 
             @Override
@@ -41,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity implements TabLayout.OnTab
 
             }
         });
-        TabsPagerAdapter pageAdapter = new TabsPagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        TabsPagerAdapter pageAdapter = new TabsPagerAdapter(SignUpActivity.this, getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
 
         tabLayout.addOnTabSelectedListener(this);
