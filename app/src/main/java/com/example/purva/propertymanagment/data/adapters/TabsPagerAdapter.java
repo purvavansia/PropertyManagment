@@ -1,8 +1,11 @@
-package com.example.purva.propertymanagment.ui.signup;
+package com.example.purva.propertymanagment.data.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.example.purva.propertymanagment.ui.signup.LandlordSignup;
+import com.example.purva.propertymanagment.ui.signup.TenantSignup;
 
 /**
  * Created by purva on 4/23/18.

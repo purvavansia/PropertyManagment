@@ -4,4 +4,13 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="password">Password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="alerts">Alerts</string>
+    <string name="properties">Properties</string>
+    <string name="tenants">Tenants</string>
+    <string name="vendors">Vendors</string>
+    <string name="documents">Documents</string>
+    <string name="trips">Trips</string>
+    <string name="to_do_list">To-Do List</string>
+    <string name="collect_rent">Collect Rent</string>
+    <string name="transactions">Transactions</string>
 </resources>

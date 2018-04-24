@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.purva.propertymanagment.R;
+import com.example.purva.propertymanagment.data.adapters.TabsPagerAdapter;
 
 public class SignUpActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
 
