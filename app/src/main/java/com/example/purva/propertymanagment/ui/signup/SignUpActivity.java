@@ -1,11 +1,9 @@
 package com.example.purva.propertymanagment.ui.signup;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 
 import com.example.purva.propertymanagment.R;
 
@@ -24,13 +22,9 @@ public class SignUpActivity extends AppCompatActivity implements TabLayout.OnTab
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
-       // tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("LandLord"));
         tabLayout.addTab(tabLayout.newTab().setText("Tenant"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        //viewPager = findViewById(R.id.pager);
-        Log.d("SIGNUPACT", "In Signup activity");
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
