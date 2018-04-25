@@ -15,8 +15,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
         startActivity(intent);
-        //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        //transaction.replace(MainActivity.this,new TenantSignup(), "TENANTSIGNUP");
     }
 
 }

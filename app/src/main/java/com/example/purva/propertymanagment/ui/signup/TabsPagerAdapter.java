@@ -12,11 +12,10 @@ import android.support.v4.app.FragmentTransaction;
  */
 
 public class TabsPagerAdapter extends FragmentStatePagerAdapter{
-
+    private int PAGE_COUNT=2;
     int tabCount;
-
-
-    Context mContext;
+    //private String tabTitles[] = new String[]{"Login", "SignUp"};
+    private Context mContext;
     public TabsPagerAdapter(Context context, FragmentManager fragmentManager, int tabCount){
         super(fragmentManager);
         this.mContext = context;
@@ -30,11 +29,9 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter{
                 LandlordSignup tab1 = new LandlordSignup();
                 return tab1;
             case 1:
-                TenantSignupFragment tab2 = new TenantSignupFragment();
-               // FragmentTransaction fragmentTransaction = this.m
-                return tab2;
+               return TenantSignupFragment.getInstant();
             default:
-                return null;
+                return TenantSignupFragment.getInstant();
         }
     }
 
@@ -42,4 +39,7 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter{
     public int getCount() {
         return tabCount;
     }
+
+//    @Override
+//    public CharSequence getPageTitle(int pos){return tabTitles[pos];}
 }

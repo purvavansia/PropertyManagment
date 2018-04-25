@@ -5,30 +5,35 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.purva.propertymanagment.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SignUpActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    @BindView(R.id.pager)
+    ViewPager viewPager;
+    @BindView(R.id.tabLayout)
+    TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
-        tabLayout = findViewById(R.id.tabLayout);
+        ButterKnife.bind(this);
+       // tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addTab(tabLayout.newTab().setText("LandLord"));
         tabLayout.addTab(tabLayout.newTab().setText("Tenant"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        viewPager = findViewById(R.id.pager);
-
+        //viewPager = findViewById(R.id.pager);
+        Log.d("SIGNUPACT", "In Signup activity");
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-              //  FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-               // transaction.replace(,new TenantSignup(), "TENANTSIGNUP");
             }
 
             @Override
