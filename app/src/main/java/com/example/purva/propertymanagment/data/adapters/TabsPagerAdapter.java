@@ -1,14 +1,12 @@
 package com.example.purva.propertymanagment.data.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 
+import com.example.purva.propertymanagment.ui.signup.TenantSignupFragment;
 import com.example.purva.propertymanagment.ui.signup.landlord.LandlordSignup;
-import com.example.purva.propertymanagment.ui.signup.tenant.TenantSignup;
 
 /**
  * Created by purva on 4/23/18.
@@ -17,7 +15,6 @@ import com.example.purva.propertymanagment.ui.signup.tenant.TenantSignup;
 public class TabsPagerAdapter extends FragmentStatePagerAdapter{
     private int PAGE_COUNT=2;
     int tabCount;
-    //private String tabTitles[] = new String[]{"Login", "SignUp"};
     private Context mContext;
     public TabsPagerAdapter(Context context, FragmentManager fragmentManager, int tabCount){
         super(fragmentManager);
