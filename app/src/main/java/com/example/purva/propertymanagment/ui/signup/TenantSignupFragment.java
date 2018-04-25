@@ -88,6 +88,7 @@ public class TenantSignupFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View v)
     {
+        Log.d("BTNCLICK", "Button clicked");
         if (subscription == null || subscription.isUnsubscribed())
         {
             subscription = RxValidator.validate(this).subscribe(new Action1<ValidationResult>() {
@@ -113,7 +114,7 @@ public class TenantSignupFragment extends Fragment implements View.OnClickListen
             Log.d("Valid", "email and password are given");
             String password = passEt.getText().toString();
             String confimPw = confirmEt.getText().toString();
-            if(password == confimPw)
+            if(password.equals(confimPw))
                 Toast.makeText(getActivity(), PropertyConstant.SUCCESS_REGISTRATION, Toast.LENGTH_SHORT).show();
             else
                 Toast.makeText(getActivity(), PropertyConstant.PASSWORD_MUST_BE_MATChED, Toast.LENGTH_SHORT).show();

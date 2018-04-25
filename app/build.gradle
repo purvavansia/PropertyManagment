@@ -9,6 +9,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
     }
     buildTypes {
         release {
@@ -26,6 +32,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.malinkang:rxvalidator:0.1'
-    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:support-annotations:27.1.1'
+    implementation 'com.malinkang:rxvalidator-compiler:0.1'
 }
