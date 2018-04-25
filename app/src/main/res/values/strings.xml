@@ -15,4 +15,5 @@
     <string name="transactions">Transactions</string>
     <string name="log_in">Log In</string>
     <string name="login">LogIn</string>
+    <string name="signup_here">SignUp here!</string>
 </resources>
