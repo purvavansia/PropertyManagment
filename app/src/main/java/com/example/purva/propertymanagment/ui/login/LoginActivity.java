@@ -14,10 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.purva.propertymanagment.R;
+import com.example.purva.propertymanagment.ui.signup.SignUpActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -26,7 +29,11 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText editTextPassword;
     ImageButton speak;
+    Button login,signup;
     ILoginPresenter iLoginPresenter;
+
+    String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +42,14 @@ public class LoginActivity extends AppCompatActivity {
         checkPermission();
         editTextPassword = findViewById(R.id.editTextLoginPassword);
         speak = findViewById(R.id.micImage);
+        login = findViewById(R.id.buttonLogin);
+        signup = findViewById(R.id.buttonCreateAcc);
         final SpeechRecognizer mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        iLoginPresenter = new LoginPresenter(this);
+        //iLoginPresenter = new LoginPresenter(this);
 
         final Intent mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE,
-                Locale.getDefault());
+        mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
         mSpeechRecognizer.setRecognitionListener(new RecognitionListener() {
             @Override
@@ -78,12 +85,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResults(Bundle bundle) {
                 //getting all the matches
-                ArrayList<String> matches = bundle
-                        .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                ArrayList<String> matches = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
                 //displaying the first match
-                if (matches != null)
+                if (matches != null) {
                     editTextPassword.setText(matches.get(0));
+                    password = matches.get(0);
+                }
             }
 
             @Override
@@ -97,8 +105,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (password.equals("Hello")) {
+                    Toast.makeText(LoginActivity.this, "Login successfull", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signUpIntent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(signUpIntent);
+            }
+        });
         speak.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -126,7 +149,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkPermission() {
 
-        iLoginPresenter.checkPermission();
-        finish();
+        //iLoginPresenter.checkPermission();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)) {
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + this.getPackageName()));
+                startActivity(intent);
+
+                finish();
+            }
+        }
     }
 }
