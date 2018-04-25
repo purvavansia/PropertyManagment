@@ -1,4 +1,4 @@
-package com.example.purva.propertymanagment.ui.signup;
+package com.example.purva.propertymanagment.ui.signup.landlord;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;

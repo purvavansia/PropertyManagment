@@ -36,7 +36,7 @@
                     </ImageView>
 
                     <ImageView
-                        android:layout_marginLeft="60dp"
+                        android:layout_marginLeft="70dp"
                         android:src="@drawable/properties"
                         android:layout_width="60dp"
                         android:layout_height="60dp">
@@ -44,7 +44,7 @@
                     </ImageView>
                     <ImageView
 
-                        android:layout_marginLeft="60dp"
+                        android:layout_marginLeft="70dp"
                         android:src="@drawable/tenant"
                         android:layout_width="60dp"
                         android:layout_height="60dp">
@@ -64,7 +64,7 @@
 
                     <TextView
                         android:text="@string/properties"
-                        android:layout_marginLeft="60dp"
+                        android:layout_marginLeft="70dp"
                         android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -73,7 +73,7 @@
                     <TextView
                         android:text="@string/tenants"
                         android:gravity="center"
-                        android:layout_marginLeft="60dp"
+                        android:layout_marginLeft="70dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -83,24 +83,23 @@
                     android:layout_margin="15dp"
                     >
                     <ImageView
-
-                        android:src="@drawable/alert"
+                        android:src="@drawable/transaction"
                         android:layout_width="60dp"
                         android:layout_height="60dp">
 
                     </ImageView>
                     <ImageView
 
-                        android:layout_marginLeft="60dp"
-                        android:src="@drawable/alert"
+                        android:layout_marginLeft="70dp"
+                        android:src="@drawable/collectrent"
                         android:layout_width="60dp"
                         android:layout_height="60dp">
 
                     </ImageView>
                     <ImageView
 
-                        android:layout_marginLeft="60dp"
-                        android:src="@drawable/alert"
+                        android:layout_marginLeft="70dp"
+                        android:src="@drawable/todo"
                         android:layout_width="60dp"
                         android:layout_height="60dp">
 
@@ -128,7 +127,7 @@
                     <TextView
                         android:text="@string/to_do_list"
                         android:gravity="center"
-                        android:layout_marginLeft="60dp"
+                        android:layout_marginLeft="70dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
@@ -139,23 +138,23 @@
                     >
                     <ImageView
 
-                        android:src="@drawable/alert"
+                        android:src="@drawable/car"
                         android:layout_width="50dp"
                         android:layout_height="60dp">
 
                     </ImageView>
                     <ImageView
 
-                        android:layout_marginLeft="60dp"
-                        android:src="@drawable/alert"
+                        android:layout_marginLeft="70dp"
+                        android:src="@drawable/documents"
                         android:layout_width="50dp"
                         android:layout_height="60dp">
 
                     </ImageView>
                     <ImageView
 
-                        android:layout_marginLeft="60dp"
-                        android:src="@drawable/alert"
+                        android:layout_marginLeft="70dp"
+                        android:src="@drawable/vendors"
                         android:layout_width="50dp"
                         android:layout_height="60dp">
 
@@ -174,7 +173,7 @@
 
                     <TextView
                         android:text="@string/documents"
-                        android:layout_marginLeft="60dp"
+                        android:layout_marginLeft="70dp"
                         android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -183,7 +182,7 @@
                     <TextView
                         android:text="@string/vendors"
                         android:gravity="center"
-                        android:layout_marginLeft="60dp"
+                        android:layout_marginLeft="70dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
