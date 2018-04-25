@@ -1,23 +1,24 @@
 package com.example.purva.propertymanagment.data.adapters;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.example.purva.propertymanagment.ui.signup.TenantSignupFragment;
 import com.example.purva.propertymanagment.ui.signup.landlord.LandlordSignup;
-import com.example.purva.propertymanagment.ui.signup.tenant.TenantSignup;
 
 /**
  * Created by purva on 4/23/18.
  */
 
 public class TabsPagerAdapter extends FragmentStatePagerAdapter{
-
+    private int PAGE_COUNT=2;
     int tabCount;
-
-
-    public TabsPagerAdapter(FragmentManager fragmentManager, int tabCount){
+    private Context mContext;
+    public TabsPagerAdapter(Context context, FragmentManager fragmentManager, int tabCount){
         super(fragmentManager);
+        this.mContext = context;
         this.tabCount = tabCount;
 
     }
@@ -28,10 +29,9 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter{
                 LandlordSignup tab1 = new LandlordSignup();
                 return tab1;
             case 1:
-                TenantSignup tab2 = new TenantSignup();
-                return tab2;
+               return TenantSignupFragment.getInstant();
             default:
-                return null;
+                return TenantSignupFragment.getInstant();
         }
     }
 
@@ -39,4 +39,7 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter{
     public int getCount() {
         return tabCount;
     }
+
+//    @Override
+//    public CharSequence getPageTitle(int pos){return tabTitles[pos];}
 }

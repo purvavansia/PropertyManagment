@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="background">#dff9ea</color>
     <color name="home_backgroud">#daeef7</color>
+
+    <color name="color_disable_text">#424242</color>
+    <color name="color_disable">#E0E0E0</color>
 </resources>
