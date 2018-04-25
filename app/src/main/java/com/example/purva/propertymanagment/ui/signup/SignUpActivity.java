@@ -1,33 +1,34 @@
 package com.example.purva.propertymanagment.ui.signup;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.adapters.TabsPagerAdapter;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class SignUpActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener{
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    @BindView(R.id.pager)
+    ViewPager viewPager;
+    @BindView(R.id.tabLayout)
+    TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
-        tabLayout = findViewById(R.id.tabLayout);
+        ButterKnife.bind(this);
         tabLayout.addTab(tabLayout.newTab().setText("LandLord"));
         tabLayout.addTab(tabLayout.newTab().setText("Tenant"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        viewPager = findViewById(R.id.pager);
-
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -42,7 +43,7 @@ public class SignUpActivity extends AppCompatActivity implements TabLayout.OnTab
 
             }
         });
-        TabsPagerAdapter pageAdapter = new TabsPagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        TabsPagerAdapter pageAdapter = new TabsPagerAdapter(SignUpActivity.this, getSupportFragmentManager(),tabLayout.getTabCount());
         viewPager.setAdapter(pageAdapter);
 
         tabLayout.addOnTabSelectedListener(this);

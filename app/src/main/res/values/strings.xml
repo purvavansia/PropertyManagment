@@ -4,6 +4,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="password">Password</string>
     <string name="sign_up">Sign Up</string>
+
     <string name="alerts">Alerts</string>
     <string name="properties">Properties</string>
     <string name="tenants">Tenants</string>
@@ -15,4 +16,21 @@
     <string name="transactions">Transactions</string>
     <string name="log_in">Log In</string>
     <string name="login">LogIn</string>
+
+    <string name="action_share">Share</string>
+    <string name="str_login">Login</string>
+    <string name="str_signup">SignUp</string>
+    <string name="str_email">Email</string>
+    <string name="str_password">Password</string>
+    <string name="str_enter_valid_email">Invalid Email</string>
+    <string name="str_enter_password">Invalid Password</string>
+    <string name="str_password_must_be_same">Password does not match</string>
+    <string name="str_confirm_password">Confirm password</string>
+    <string name="str_phone">Phone</string>
+    <string name="str_i_accept">I accept terms and conditions</string>
+    <string name="str_invalid_phone_number">Invalid phone number</string>
+    <string name="str_signup_success">Great! You are ready to SignUp.</string>
+    <string name="str_please_accept">Please accept terms and conditions</string>
+    <string name="str_share">Share</string>
+
 </resources>
