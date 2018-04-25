@@ -1,4 +1,4 @@
-package com.example.purva.propertymanagment.ui.signup;
+package com.example.purva.propertymanagment.ui.signup.tenant;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

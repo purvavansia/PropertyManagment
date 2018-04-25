@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.adapters.TabsPagerAdapter;
@@ -23,6 +24,7 @@ public class SignUpActivity extends AppCompatActivity implements TabLayout.OnTab
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
+        Log.d("SIGNUPACT", "Sign up Activity");
         tabLayout.addTab(tabLayout.newTab().setText("LandLord"));
         tabLayout.addTab(tabLayout.newTab().setText("Tenant"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
