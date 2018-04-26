@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.purva.propertymanagment.R;
 
@@ -61,8 +62,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         // Default value
         //data.setValueFormatter(new DefaultValueFormatter(0));
         pieChart.setData(data);
-
-       // pieChart.setDescription("Expenses");
+        pieChart.getDescription().setEnabled(false);
 
         data.setValueTextSize(13f);
         data.setValueTextColor(Color.DKGRAY);
@@ -73,6 +73,16 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     @Override
     public void onValueSelected(Entry e, Highlight h) {
 
+        /*int pos1 = e.toString().indexOf("");
+        String sales = e.toString().substring(pos1 + 7);
+        for(int i = 0; i < yvalues.length; i++){
+            if(yvalues[i] == Float.parseFloat(sales)){
+                pos1 = i;
+                break;
+            }
+        }
+        String employee = xvals[pos1 + 1];
+        Toast.makeText(MainActivity.this, "Employee " + employee + "\n" + "Sales: $" + sales + "K", Toast.LENGTH_LONG).show();*/
     }
 
     @Override
