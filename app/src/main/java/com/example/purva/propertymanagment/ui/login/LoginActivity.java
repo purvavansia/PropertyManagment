@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.model.User;
+import com.example.purva.propertymanagment.ui.home.MainActivity;
 import com.example.purva.propertymanagment.ui.signup.Constants;
 import com.example.purva.propertymanagment.ui.signup.SignUpActivity;
 import com.example.purva.propertymanagment.ui.signup.landlord.ApiServiceLandlordSignUp;
@@ -143,6 +144,8 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             else if(response.body().getUsertype().contains("landlord")){
 
+                                Intent honeIntent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(honeIntent);
                             }
 
                         }
