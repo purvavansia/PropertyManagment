@@ -18,6 +18,7 @@ import com.jakewharton.rxbinding.widget.RxTextView;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -32,7 +33,7 @@ import rx.subscriptions.CompositeSubscription;
 public class LandlordSignupFragment extends BaseFragment {
 
     //TextInput Layout
-    @BindView(R.id.landlord_email_text_input_layout)
+    @BindView(R.id.ll_email_text_input_layout)
     TextInputLayout text_input_email;
     @BindView(R.id.landlord_password_text_input_layout)
     TextInputLayout text_input_password;
@@ -83,7 +84,6 @@ public class LandlordSignupFragment extends BaseFragment {
      * init edittext observable
      */
     private void initEditTextObservable() {
-        //mEmailLandlordObservable = RxTextView.textChanges()
         mEmailObservable = RxTextView.textChanges(emailEt);
         mPasswordObservable = RxTextView.textChanges(passwordEt);
         mPasswordConfirmObservable = RxTextView.textChanges(pwConfirmEt);
@@ -100,8 +100,7 @@ public class LandlordSignupFragment extends BaseFragment {
                 .filter(new Func1<CharSequence, Boolean>() {
                     @Override
                     public Boolean call(CharSequence charSequence) {
-                        return !TextUtils.isEmpty(passwordEt.getText().toString())
-                                && !TextUtils.isEmpty(charSequence.toString());
+                        return !TextUtils.isEmpty(charSequence.toString());
                     }
                 }).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<CharSequence>() {
@@ -138,7 +137,7 @@ public class LandlordSignupFragment extends BaseFragment {
                         passwordEditTextError(1);
                     }
                 })
-                .debounce(500, TimeUnit.MILLISECONDS)
+                .debounce(100, TimeUnit.MILLISECONDS)
                 .filter(new Func1<CharSequence, Boolean>() {
 
                     @Override
@@ -178,7 +177,7 @@ public class LandlordSignupFragment extends BaseFragment {
             public void call(CharSequence charSequence) {
                 passwordEditTextError(3);
             }
-        }).debounce(500, TimeUnit.MILLISECONDS)
+        }).debounce(100, TimeUnit.MILLISECONDS)
                 .filter(new Func1<CharSequence, Boolean>() {
                     @Override
                     public Boolean call(CharSequence charSequence) {
@@ -337,6 +336,11 @@ public class LandlordSignupFragment extends BaseFragment {
                 return userInput.length() >= 10;
         }
         return false;
+    }
+
+    @OnClick(R.id.buttonLandlordSignUp)
+    public void onClick(){
+
     }
 
 }
