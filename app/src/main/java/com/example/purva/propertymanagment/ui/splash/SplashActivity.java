@@ -59,7 +59,6 @@ public class SplashActivity extends AppCompatActivity {
         if (isFinishing())
             return;
         iSplashPresenter.startHomeActivity();
-
         finish();
     }
 }

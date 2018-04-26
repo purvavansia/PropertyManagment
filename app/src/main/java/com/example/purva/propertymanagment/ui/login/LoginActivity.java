@@ -1,7 +1,9 @@
 package com.example.purva.propertymanagment.ui.login;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -12,6 +14,7 @@ import android.speech.SpeechRecognizer;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -20,17 +23,27 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.purva.propertymanagment.R;
+import com.example.purva.propertymanagment.data.model.User;
+import com.example.purva.propertymanagment.ui.signup.Constants;
 import com.example.purva.propertymanagment.ui.signup.SignUpActivity;
+import com.example.purva.propertymanagment.ui.signup.landlord.ApiServiceLandlordSignUp;
+import com.example.purva.propertymanagment.ui.signup.landlord.RetrofitInstanceLandlordSignUp;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LoginActivity extends AppCompatActivity {
 
-    EditText editTextPassword;
+    EditText editTextPassword, editTextName;
     ImageButton speak;
     Button login,signup;
     ILoginPresenter iLoginPresenter;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     String password;
 
@@ -41,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
         checkPermission();
         editTextPassword = findViewById(R.id.editTextLoginPassword);
+        editTextName = findViewById(R.id.editTextLoginName);
         speak = findViewById(R.id.micImage);
         login = findViewById(R.id.buttonLogin);
         signup = findViewById(R.id.buttonCreateAcc);
@@ -104,13 +118,41 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
+        sharedPreferences = getSharedPreferences("mydata", Context.MODE_PRIVATE);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (password.equals("Hello")) {
-                    Toast.makeText(LoginActivity.this, "Login successfull", Toast.LENGTH_SHORT).show();
-                }
+                String login_email = editTextName.getText().toString();
+                String login_password = editTextPassword.getText().toString();
+                ApiServiceLogin apiService = RetrofitInstanceLandlordSignUp.getRetrofitInstance().create(ApiServiceLogin.class);
+
+                Call<User> signUpCall =  apiService.getUserDetails(login_email,login_password);
+                signUpCall.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        Log.i(Constants.TAG,""+response.body().getMsg());
+                        if(response.body().getMsg().contains("success")){
+                            editor = sharedPreferences.edit();
+                            editor.putString("userid",response.body().getUserid());
+                            editor.putString("usertype",response.body().getUsertype());
+                            editor.putString("useremail", response.body().getUseremail());
+                            editor.putString("appapikey",response.body().getAppapikey());
+
+                            if(response.body().getUsertype().contains("tenant")){
+
+                            }
+                            else if(response.body().getUsertype().contains("landlord")){
+
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Log.i(Constants.TAG,""+t);
+                    }
+                });
             }
         });
 
