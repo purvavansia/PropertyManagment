@@ -31,15 +31,18 @@ import rx.subscriptions.CompositeSubscription;
 
 public class TenantSignupFragment extends BaseFragment {
 
-    //TextInput Layout
+    @BindView(R.id.landlord_email_text_input_layout)
+    TextInputLayout landlord_text_input_email;
     @BindView(R.id.tenant_email_text_input_layout)
-    TextInputLayout text_input_email;
+    TextInputLayout tenant_text_input_email;
     @BindView(R.id.tenant_password_text_input_layout)
     TextInputLayout text_input_password;
     @BindView(R.id.tenant_confirmPassword_text_input_layout)
     TextInputLayout text_input_pwconfirm;
 
     //EditText
+    @BindView(R.id.eTlandLordEmail)
+    EditText llEmailEt;
     @BindView(R.id.editTextTenantEmail)
     EditText emailEt;
     @BindView(R.id.editTextTenantPassword)
@@ -54,7 +57,7 @@ public class TenantSignupFragment extends BaseFragment {
     //subscription that represents a group of Subscriptions that are unsubscriped together
     private CompositeSubscription mCompositeSubscription;
 
-    private Observable<CharSequence> mEmailObservable, mPasswordObservable, mPasswordConfirmObservable;
+    private Observable<CharSequence> mEmailLLObservable, mEmailObservable, mPasswordObservable, mPasswordConfirmObservable;
 
     public static TenantSignupFragment INSTANT = null;
 
@@ -83,24 +86,24 @@ public class TenantSignupFragment extends BaseFragment {
      * init edittext observable
      */
     private void initEditTextObservable() {
+        mEmailLLObservable = RxTextView.textChanges(llEmailEt);
         mEmailObservable = RxTextView.textChanges(emailEt);
         mPasswordObservable = RxTextView.textChanges(passwordEt);
         mPasswordConfirmObservable = RxTextView.textChanges(pwConfirmEt);
     }
 
     private void initSubscriber() {
-        Subscription mEmailSubscription = mEmailObservable.doOnNext(new Action1<CharSequence>() {
+        Subscription mEmailLLSubscription = mEmailLLObservable.doOnNext(new Action1<CharSequence>() {
             @Override
             public void call(CharSequence charSequence) {
                 emailEditTextError(1);  //disable email
             }
         })
-                .debounce(500, TimeUnit.MILLISECONDS)
+                .debounce(100, TimeUnit.MILLISECONDS)
                 .filter(new Func1<CharSequence, Boolean>() {
                     @Override
                     public Boolean call(CharSequence charSequence) {
-                        return !TextUtils.isEmpty(passwordEt.getText().toString())
-                                && !TextUtils.isEmpty(charSequence.toString());
+                        return !TextUtils.isEmpty(charSequence.toString());
                     }
                 }).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<CharSequence>() {
@@ -116,11 +119,46 @@ public class TenantSignupFragment extends BaseFragment {
 
                     @Override
                     public void onNext(CharSequence charSequence) {
-                        if (!isUserInputValid(charSequence.toString(), "",
-                                1)) {
+                        if (!isUserInputValid(charSequence.toString(), "", 1)) {
                             emailEditTextError(2);
                         } else {
                             emailEditTextError(1);
+                        }
+                    }
+                });
+        mCompositeSubscription.add(mEmailLLSubscription);
+
+
+        Subscription mEmailSubscription = mEmailObservable.doOnNext(new Action1<CharSequence>() {
+            @Override
+            public void call(CharSequence charSequence) {
+                emailEditTextError(3);  //disable email
+            }
+        })
+                .debounce(100, TimeUnit.MILLISECONDS)
+                .filter(new Func1<CharSequence, Boolean>() {
+                    @Override
+                    public Boolean call(CharSequence charSequence) {
+                        return !TextUtils.isEmpty(charSequence.toString());
+                    }
+                }).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<CharSequence>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("mPwdConfirmSubscription", e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(CharSequence charSequence) {
+                        if (!isUserInputValid(charSequence.toString(), "", 1)) {
+                            emailEditTextError(4);
+                        } else {
+                            emailEditTextError(3);
                         }
                     }
                 });
@@ -137,7 +175,7 @@ public class TenantSignupFragment extends BaseFragment {
                         passwordEditTextError(1);
                     }
                 })
-                .debounce(500, TimeUnit.MILLISECONDS)
+                .debounce(100, TimeUnit.MILLISECONDS)
                 .filter(new Func1<CharSequence, Boolean>() {
 
                     @Override
@@ -177,7 +215,7 @@ public class TenantSignupFragment extends BaseFragment {
             public void call(CharSequence charSequence) {
                 passwordEditTextError(3);
             }
-        }).debounce(500, TimeUnit.MILLISECONDS)
+        }).debounce(100, TimeUnit.MILLISECONDS)
                 .filter(new Func1<CharSequence, Boolean>() {
                     @Override
                     public Boolean call(CharSequence charSequence) {
@@ -262,8 +300,8 @@ public class TenantSignupFragment extends BaseFragment {
         }
 
     }
-    
-    
+
+
     /**
      * Enable and disable Email error as per case
      *
@@ -271,17 +309,28 @@ public class TenantSignupFragment extends BaseFragment {
      */
     private void emailEditTextError(int whichCase) {
         switch (whichCase) {
-            case 1: // for hide error
-                if (text_input_email.getChildCount() == 2) {
-                    text_input_email.getChildAt(1).setVisibility(View.GONE);
+            case 1:
+                if (landlord_text_input_email.getChildCount() == 2) {
+                    landlord_text_input_email.getChildAt(1).setVisibility(View.GONE);
                 }
-                text_input_email.setError(null);
+                landlord_text_input_email.setError(null);
                 break;
-            case 2: // for show error
-                if (text_input_email.getChildCount() == 2) {
-                    text_input_email.getChildAt(1).setVisibility(View.VISIBLE);
+            case 2:
+                if (landlord_text_input_email.getChildCount() == 2) {
+                    landlord_text_input_email.getChildAt(1).setVisibility(View.VISIBLE);
                 }
-                text_input_email.setError(getString(R.string.str_enter_valid_email));
+                landlord_text_input_email.setError(getString(R.string.str_enter_valid_email));
+            case 3: // for hide error
+                if (tenant_text_input_email.getChildCount() == 2) {
+                    tenant_text_input_email.getChildAt(1).setVisibility(View.GONE);
+                }
+                tenant_text_input_email.setError(null);
+                break;
+            case 4: // for show error
+                if (tenant_text_input_email.getChildCount() == 2) {
+                    tenant_text_input_email.getChildAt(1).setVisibility(View.VISIBLE);
+                }
+                tenant_text_input_email.setError(getString(R.string.str_enter_valid_email));
                 break;
         }
     }
@@ -332,10 +381,9 @@ public class TenantSignupFragment extends BaseFragment {
                 return userInput.length() >= 6; // password should be 6 or more than 6.
             case 3: // confirm password
                 return TextUtils.equals(userInput, userInputMatch); // for both password same
-            case 4: // Check Phone number
-                return userInput.length() >= 10;
+//            case 4: // Check landlord email
+//                return !TextUtils.isEmpty(userInput) && Patterns.EMAIL_ADDRESS.matcher(userInput).matches();
         }
         return false;
     }
-
 }

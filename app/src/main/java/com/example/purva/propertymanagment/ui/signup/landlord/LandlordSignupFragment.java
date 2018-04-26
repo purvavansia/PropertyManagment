@@ -114,7 +114,7 @@ public class LandlordSignupFragment extends BaseFragment {
         }).debounce(100, TimeUnit.MILLISECONDS).filter(new Func1<CharSequence, Boolean>() {
             @Override
             public Boolean call(CharSequence charSequence) {
-                return !TextUtils.isEmpty(passwordEt.getText().toString()) && !TextUtils.isEmpty(charSequence.toString());
+                return  !TextUtils.isEmpty(charSequence.toString());
             }
         }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<CharSequence>() {
             @Override
