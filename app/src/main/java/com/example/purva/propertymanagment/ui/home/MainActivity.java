@@ -1,10 +1,16 @@
 package com.example.purva.propertymanagment.ui.home;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 
 import com.example.purva.propertymanagment.R;
+import com.example.purva.propertymanagment.ui.signup.tenant.TenantSignupFragment;
+import com.example.purva.propertymanagment.ui.tenant.TenantActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -70,20 +76,17 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     @Override
     public void onValueSelected(Entry e, Highlight h) {
 
-        /*int pos1 = e.toString().indexOf("");
-        String sales = e.toString().substring(pos1 + 7);
-        for(int i = 0; i < yvalues.length; i++){
-            if(yvalues[i] == Float.parseFloat(sales)){
-                pos1 = i;
-                break;
-            }
-        }
-        String employee = xvals[pos1 + 1];
-        Toast.makeText(MainActivity.this, "Employee " + employee + "\n" + "Sales: $" + sales + "K", Toast.LENGTH_LONG).show();*/
     }
 
     @Override
     public void onNothingSelected() {
+
+    }
+
+    public void onClickTenants(View view) {
+        Log.d("TEnant", "clicked");
+       Intent intent = new Intent(MainActivity.this, TenantActivity.class);
+       startActivity(intent);
 
     }
 }
