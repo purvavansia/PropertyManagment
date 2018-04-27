@@ -26,7 +26,7 @@
             android:layout_width="300dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorAccent">
+            android:textColorHint="@color/accent">
 
             <EditText
                 android:id="@+id/eTlandLordEmail"
@@ -48,7 +48,7 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColorHint="@color/colorAccent">
+            android:textColorHint="@color/accent">
 
             <EditText
                 android:id="@+id/editTextTenantEmail"
@@ -68,7 +68,7 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/accent"
             app:passwordToggleEnabled="true">
 
             <EditText
@@ -86,7 +86,7 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:textColorHint="@color/colorAccent"
+            android:textColorHint="@color/accent"
             app:passwordToggleEnabled="true">
 
             <EditText
@@ -104,7 +104,7 @@
 
     <Button
         android:id="@+id/buttonTenantSignUp"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@drawable/button_layout_simple"
         android:layout_gravity="center"

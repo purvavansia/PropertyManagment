@@ -252,36 +252,7 @@ public class TenantSignupFragment extends BaseFragment {
                 });
         mCompositeSubscription.add(mPasswordConfirmSubscription);
 
-        Subscription allSignUpFieldSubScription = Observable.combineLatest(mEmailLLObservable, mEmailObservable, mPasswordObservable, mPasswordConfirmObservable, new Func4<CharSequence, CharSequence, CharSequence, CharSequence, Boolean>() {
-            @Override
-            public Boolean call(CharSequence mEmail, CharSequence mPassword, CharSequence mPasswordConfirm, CharSequence mLandlordEmail) {
 
-                return isUserInputValid(mEmail.toString(), "", 1) // Email
-                        && isUserInputValid(mPassword.toString(), "", 2) // Password
-                        && isUserInputValid(mPassword.toString(), mPasswordConfirm.toString(), 3) // Confirm Password
-                        && isUserInputValid(mLandlordEmail.toString(), "", 4);
-            }
-        }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Boolean>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e("SignUpFieldSubScription", e.getMessage());
-            }
-
-            @Override
-            public void onNext(Boolean aBoolean) {
-                if (aBoolean) {
-                    signUpButtonState(1);
-                } else {
-                    signUpButtonState(2);
-                }
-            }
-        });
-        mCompositeSubscription.add(allSignUpFieldSubScription);
 
         Subscription mLandlordEmailSubscription = mEmailObservable.doOnNext(new Action1<CharSequence>() {
             @Override
@@ -314,6 +285,38 @@ public class TenantSignupFragment extends BaseFragment {
             }
         });
         mCompositeSubscription.add(mLandlordEmailSubscription);
+
+        Subscription allSignUpFieldSubScription = Observable.combineLatest(mEmailLLObservable, mEmailObservable, mPasswordObservable, mPasswordConfirmObservable, new Func4<CharSequence, CharSequence, CharSequence, CharSequence, Boolean>() {
+            @Override
+            public Boolean call(CharSequence mEmail, CharSequence mPassword, CharSequence mPasswordConfirm, CharSequence mLandlordEmail) {
+
+                return isUserInputValid(mEmail.toString(), "", 1) // Email
+                        && isUserInputValid(mPassword.toString(), "", 2) // Password
+                        && isUserInputValid(mPassword.toString(), mPasswordConfirm.toString(), 3) // Confirm Password
+                        && isUserInputValid(mLandlordEmail.toString(), "", 4);
+            }
+        }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<Boolean>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("SignUpFieldSubScription", e.getMessage());
+            }
+
+            @Override
+            public void onNext(Boolean aBoolean) {
+                if (aBoolean) {
+                    signUpButtonState(1);
+                } else {
+                    signUpButtonState(2);
+                }
+            }
+        });
+        mCompositeSubscription.add(allSignUpFieldSubScription);
+
     }
 
     /**
@@ -324,7 +327,7 @@ public class TenantSignupFragment extends BaseFragment {
     private void signUpButtonState(int whichCase) {
         switch (whichCase) {
             case 1: // enable button
-                signupBtn.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
+                signupBtn.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.primary));
                 signupBtn.setEnabled(true);
                 signupBtn.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
                 break;

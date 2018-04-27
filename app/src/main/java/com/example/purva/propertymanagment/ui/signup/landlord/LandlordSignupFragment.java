@@ -251,7 +251,7 @@ public class LandlordSignupFragment extends BaseFragment {
     private void signUpButtonState(int whichCase) {
         switch (whichCase) {
             case 1: // enable button
-                signupBtn.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimaryDark));
+                signupBtn.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.primary));
                 signupBtn.setEnabled(true);
                 signupBtn.setTextColor(ContextCompat.getColor(getContext(), android.R.color.white));
                 break;

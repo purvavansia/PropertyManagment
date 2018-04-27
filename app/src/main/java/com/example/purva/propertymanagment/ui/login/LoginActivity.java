@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.buttonLogin);
         signup = findViewById(R.id.buttonCreateAcc);
         final SpeechRecognizer mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        //iLoginPresenter = new LoginPresenter(this);
+        iLoginPresenter = new LoginPresenter(this);
 
         final Intent mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -133,7 +133,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String login_email = editTextName.getText().toString();
                 String login_password = editTextPassword.getText().toString();
-                ApiServiceLogin apiService = RetrofitInstanceLandlordSignUp.getRetrofitInstance().create(ApiServiceLogin.class);
+
+
+
                 Boolean remember = cbRemember.isChecked();
                 if(cbRemember.isChecked()) {
                     editor = sharedPreferences.edit();
@@ -148,6 +150,8 @@ public class LoginActivity extends AppCompatActivity {
                     editor.commit();
                 }
 
+                iLoginPresenter.callApiLogin(login_email,login_password);
+                /*ApiServiceLogin apiService = RetrofitInstanceLandlordSignUp.getRetrofitInstance().create(ApiServiceLogin.class);
                 Call<User> signUpCall =  apiService.getUserDetails(login_email,login_password);
                 signUpCall.enqueue(new Callback<User>() {
                     @Override
@@ -179,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onFailure(Call<User> call, Throwable t) {
                         Log.i(Constants.TAG,""+t);
                     }
-                });
+                });*/
             }
         });
 
@@ -187,8 +191,9 @@ public class LoginActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signUpIntent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(signUpIntent);
+                /*Intent signUpIntent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(signUpIntent);*/
+                iLoginPresenter.signUpClicked();
             }
         });
         speak.setOnTouchListener(new View.OnTouchListener() {
