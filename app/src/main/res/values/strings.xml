@@ -32,6 +32,8 @@
     <string name="str_signup_success">Great! You are ready to SignUp.</string>
     <string name="str_please_accept">Please accept terms and conditions</string>
     <string name="str_share">Share</string>
+    <string name="add_new_property">Add New Property</string>
+    <string name="remember_check">Remember Me</string>
 
->>>>>>> copy_master
+    >>>>>>> copy_master
 </resources>

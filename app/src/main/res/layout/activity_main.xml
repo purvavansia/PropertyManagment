@@ -36,6 +36,7 @@
                     </ImageView>
 
                     <ImageView
+                        android:id="@+id/imageProperty"
                         android:layout_marginLeft="70dp"
                         android:src="@drawable/properties"
                         android:layout_width="60dp"

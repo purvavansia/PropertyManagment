@@ -39,6 +39,4 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter{
         return tabCount;
     }
 
-//    @Override
-//    public CharSequence getPageTitle(int pos){return tabTitles[pos];}
 }

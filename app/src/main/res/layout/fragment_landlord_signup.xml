@@ -80,6 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@drawable/button_layout_simple"
         android:layout_marginTop="30dp"
         android:hint="@string/sign_up"
         android:inputType="textPassword"

@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -45,8 +46,10 @@ public class LoginActivity extends AppCompatActivity {
     ILoginPresenter iLoginPresenter;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-
+    private CheckBox cbRemember;
+    String storedName;
     String password;
+    Boolean storedCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
         checkPermission();
         editTextPassword = findViewById(R.id.editTextLoginPassword);
+        cbRemember = findViewById(R.id.checkRemember);
         editTextName = findViewById(R.id.editTextLoginName);
         speak = findViewById(R.id.micImage);
         login = findViewById(R.id.buttonLogin);
@@ -120,12 +124,29 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         sharedPreferences = getSharedPreferences("mydata", Context.MODE_PRIVATE);
+        storedName = sharedPreferences.getString("useremail","");
+        storedCheck = sharedPreferences.getBoolean("checkbox", false);
+        editTextName.setText(storedName);
+        cbRemember.setChecked(storedCheck);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String login_email = editTextName.getText().toString();
                 String login_password = editTextPassword.getText().toString();
                 ApiServiceLogin apiService = RetrofitInstanceLandlordSignUp.getRetrofitInstance().create(ApiServiceLogin.class);
+                Boolean remember = cbRemember.isChecked();
+                if(cbRemember.isChecked()) {
+                    editor = sharedPreferences.edit();
+                    editor.putString("useremail", login_email);
+                    editor.putBoolean("checkbox", remember);
+                    editor.commit();
+                }
+                else {
+                    editor = sharedPreferences.edit();
+                    editor.putString("useremail", "");
+                    editor.putBoolean("checkbox", false);
+                    editor.commit();
+                }
 
                 Call<User> signUpCall =  apiService.getUserDetails(login_email,login_password);
                 signUpCall.enqueue(new Callback<User>() {
@@ -133,15 +154,18 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<User> call, Response<User> response) {
                         Log.i(Constants.TAG,""+response.body().getMsg());
                         if(response.body().getMsg().contains("success")){
-                            editor = sharedPreferences.edit();
-                            editor.putString("userid",response.body().getUserid());
-                            editor.putString("usertype",response.body().getUsertype());
-                            editor.putString("useremail", response.body().getUseremail());
-                            editor.putString("appapikey",response.body().getAppapikey());
 
-                            if(response.body().getUsertype().contains("tenant")){
+                                editor = sharedPreferences.edit();
+                                editor.putString("userid", response.body().getUserid());
+                                editor.putString("usertype", response.body().getUsertype());
+                                editor.putString("useremail", response.body().getUseremail());
+                                editor.putString("appapikey", response.body().getAppapikey());
+                                editor.commit();
 
-                            }
+                                if (response.body().getUsertype().contains("tenant")) {
+
+                                }
+
                             else if(response.body().getUsertype().contains("landlord")){
 
                                 Intent honeIntent = new Intent(LoginActivity.this, MainActivity.class);
