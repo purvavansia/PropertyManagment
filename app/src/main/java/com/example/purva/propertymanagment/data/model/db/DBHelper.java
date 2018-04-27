@@ -1,12 +1,14 @@
 package com.example.purva.propertymanagment.data.model.db;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.purva.propertymanagment.data.model.Property;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String TEXT_TYPE = "TEXT";
@@ -38,9 +40,17 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + PROPERTY_TABLE);
     }
 
-//    ArrayList<Property> getAllProperties(){
-//        String[] projection = {
-//
-//        }
-//    }
+    ArrayList<Property> getAllProperties(){
+        ArrayList<Property> propertyList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + Property.TABLE_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if(cursor.moveToFirst()){
+            do{
+                String propertyId = cursor.getString(cursor.getColumnIndex(Property.COLUMN_LANDLORD_ID));
+            }while(cursor.moveToNext());
+        }
+        return propertyList;
+    }
 }
