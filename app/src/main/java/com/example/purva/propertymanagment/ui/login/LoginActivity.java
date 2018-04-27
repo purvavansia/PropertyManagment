@@ -138,7 +138,10 @@ public class LoginActivity extends AppCompatActivity {
                             editor.putString("usertype",response.body().getUsertype());
                             editor.putString("useremail", response.body().getUseremail());
                             editor.putString("appapikey",response.body().getAppapikey());
-
+                            String userid = response.body().getUserid();
+                            String usertype = response.body().getUsertype();
+                            Log.i("usertype: ", usertype);
+                            Log.d("userid", userid);
                             if(response.body().getUsertype().contains("tenant")){
 
                             }

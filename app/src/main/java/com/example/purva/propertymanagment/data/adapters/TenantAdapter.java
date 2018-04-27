@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.model.Tenant;
@@ -19,12 +20,20 @@ import java.util.ArrayList;
 public class TenantAdapter extends RecyclerView.Adapter<TenantAdapter.MyViewHolder> {
     ArrayList<Tenant> mTenants;
     Context mContext;
-
+    private TenantClickListener listener;
     public TenantAdapter(ArrayList<Tenant> tenants, Context context) {
         Log.i("TenantConstructor", "constructing");
         mTenants = tenants;
         mContext = context;
         Log.i("Tenant_Size2", mTenants.size()+"");
+    }
+    public void addItem(Tenant tenant){
+        mTenants.add(tenant);
+        this.notifyItemInserted(mTenants.size()-1);
+    }
+
+    public void setTenantClickListener(TenantClickListener clickListener){
+        this.listener = clickListener;
     }
 
     @NonNull
@@ -50,7 +59,7 @@ public class TenantAdapter extends RecyclerView.Adapter<TenantAdapter.MyViewHold
         return mTenants.size();
     }
 
-    public class MyViewHolder extends ViewHolder {
+    public class MyViewHolder extends ViewHolder implements View.OnClickListener{
         ImageView img;
         TextView address, name;
         public MyViewHolder(View itemView) {
@@ -58,6 +67,11 @@ public class TenantAdapter extends RecyclerView.Adapter<TenantAdapter.MyViewHold
             img = itemView.findViewById(R.id.tenant_img);
             name = itemView.findViewById(R.id.tenant_name);
             address = itemView.findViewById(R.id.tenant_addr);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onTenantClicked(v, getLayoutPosition());
         }
     }
 }

@@ -79,6 +79,7 @@ public class LandlordSignupFragment extends BaseFragment {
             INSTANT = new LandlordSignupFragment();
         }
         return INSTANT;
+        //return new LandlordSignupFragment();
     }
 
     @Override

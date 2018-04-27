@@ -20,4 +20,6 @@
         android:layout_height="wrap_content"
         android:textSize="28sp"
         android:text="@string/tenants"/>
+
+
 </android.support.v7.widget.Toolbar>

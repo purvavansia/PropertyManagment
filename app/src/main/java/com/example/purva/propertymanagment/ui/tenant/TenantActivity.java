@@ -13,9 +13,8 @@ public class TenantActivity extends AppCompatActivity {
         Log.i("TENANTACTIVITY", "On Create Tenant Activity");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tenant);
-        ListTenantFragment ltf = ListTenantFragment.getInstant();
-        getSupportFragmentManager().beginTransaction().replace(R.id.tenantFragmentContainer, ltf).commit();
-
-
+            Log.d("GetFromMain", "Create Fragment in TenantActivity");
+            ListTenantFragment ltf = new ListTenantFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.tenantFragmentContainer, ltf).commit();
     }
 }
