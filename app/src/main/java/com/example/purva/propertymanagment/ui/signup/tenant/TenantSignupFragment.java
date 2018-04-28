@@ -418,9 +418,6 @@ public class TenantSignupFragment extends BaseFragment {
                 return userInput.length() >= 6; // password should be 6 or more than 6.
             case 3: // confirm password
                 return TextUtils.equals(userInput, userInputMatch); // for both password same
-
-//            case 4: // Check landlord email
-//                return !TextUtils.isEmpty(userInput) && Patterns.EMAIL_ADDRESS.matcher(userInput).matches();
         }
         return false;
     }

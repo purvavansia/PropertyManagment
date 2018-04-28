@@ -20,7 +20,7 @@ public interface IDbHelper {
     List<Tenant.TenantBean> getAllTenants();
     public int getTenantCount();
     public long insertTenantRecord(String propertyId, String landlordId, String name, String email, String mobile, String address);
-    public int deleteTenantByPropertyId(String email, String propertyId);
+    public int deleteTenantByLandlordId(String email, String landlordId);
     public boolean clearTenantTable();
     public boolean validateTenant(Tenant tenant);
 }

@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         iDbHelper.insertTenantRecord("0003", "p8989", "nimabi dingfeng cheng", "abcd@gmail.com", "China", "000032");
         int tenantCount = iDbHelper.getTenantCount();
         Log.d("TenantCount", tenantCount+"");
-        iDbHelper.deleteTenantByPropertyId("abc@gmail.com", "0001");
+        iDbHelper.deleteTenantByLandlordId("abc@gmail.com", "0001");
         Log.d("Afterdeletion", iDbHelper.getTenantCount()+"");
     }
 
