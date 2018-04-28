@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.purva.propertymanagment.R;
+import com.example.purva.propertymanagment.data.database.DbHelper;
+import com.example.purva.propertymanagment.data.database.IDbHelper;
 import com.example.purva.propertymanagment.ui.signup.tenant.TenantSignupFragment;
 import com.example.purva.propertymanagment.ui.tenant.TenantActivity;
 import com.github.mikephil.charting.charts.PieChart;
@@ -34,42 +36,64 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        PieChart pieChart = (PieChart) findViewById(R.id.pieChart);
-        pieChart.setUsePercentValues(true);
-        pieChart.setRotationEnabled(true);
-        pieChart.setDrawHoleEnabled(false);
+        Log.d("DBTEST", "TEST");
+//        PieChart pieChart = (PieChart) findViewById(R.id.pieChart);
+//        pieChart.setUsePercentValues(true);
+//        pieChart.setRotationEnabled(true);
+//        pieChart.setDrawHoleEnabled(false);
+//
+//        ArrayList<PieEntry> yEntrys = new ArrayList<PieEntry>();
+//
+//        for (int i = 0; i<yvalues.length; i++){
+//            yEntrys.add(new PieEntry(yvalues[i],i));
+//
+//        }
+//
+//        ArrayList<String> xEntrys = new ArrayList<String>();
+//
+//        for (int i = 0; i<xvals.length; i++){
+//            xEntrys.add(xvals[i]);
+//
+//        }
+//        PieDataSet dataSet = new PieDataSet(yEntrys, "Expenses");
+//        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+//
+//        Legend legend = pieChart.getLegend();
+//        legend.setForm(Legend.LegendForm.CIRCLE);
+//        legend.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
+//
+//        PieData data = new PieData(dataSet);
+//        // In Percentage term
+//        data.setValueFormatter(new PercentFormatter());
+//        // Default value
+//        //data.setValueFormatter(new DefaultValueFormatter(0));
+//        pieChart.setData(data);
+//        pieChart.getDescription().setEnabled(false);
+//
+//        data.setValueTextSize(13f);
+//        data.setValueTextColor(Color.DKGRAY);
+//        pieChart.setOnChartValueSelectedListener(MainActivity.this);
+        IDbHelper iDbHelper = new DbHelper(MainActivity.this);
+       // iDbHelper iDbHelper = new iDbHelper(MainActivity.this);
+        iDbHelper.insertPropertyRecord("001", "0010", "USA","IL", "ST Charles",
+                "3809 Illinois Ave", "4800$", "300$","Vacant");
+        int rowNum = iDbHelper.getPropertyCount();
+        Log.d("ROWS", rowNum + "");
+        iDbHelper.insertPropertyRecord("004", "0010", "USA","IL", "ST Charles",
+                "3809 Illinois Ave", "4800$", "300$","Vacant");
+        rowNum = iDbHelper.getPropertyCount();
+        Log.d("ROWS2",rowNum +  "");
 
-        ArrayList<PieEntry> yEntrys = new ArrayList<PieEntry>();
+        iDbHelper.clearPropertyTable();
+        rowNum = iDbHelper.getPropertyCount();
+        Log.d("EntryCounter", rowNum+"");
 
-        for (int i = 0; i<yvalues.length; i++){
-            yEntrys.add(new PieEntry(yvalues[i],i));
-
-        }
-
-        ArrayList<String> xEntrys = new ArrayList<String>();
-
-        for (int i = 0; i<xvals.length; i++){
-            xEntrys.add(xvals[i]);
-
-        }
-        PieDataSet dataSet = new PieDataSet(yEntrys, "Expenses");
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-
-        Legend legend = pieChart.getLegend();
-        legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
-
-        PieData data = new PieData(dataSet);
-        // In Percentage term
-        data.setValueFormatter(new PercentFormatter());
-        // Default value
-        //data.setValueFormatter(new DefaultValueFormatter(0));
-        pieChart.setData(data);
-        pieChart.getDescription().setEnabled(false);
-
-        data.setValueTextSize(13f);
-        data.setValueTextColor(Color.DKGRAY);
-        pieChart.setOnChartValueSelectedListener(MainActivity.this);
+        iDbHelper.insertTenantRecord("0001", "p9090", "shabi apartment", "abc@gmail.com", "China", "7788414");
+        iDbHelper.insertTenantRecord("0003", "p8989", "nimabi dingfeng cheng", "abcd@gmail.com", "China", "000032");
+        int tenantCount = iDbHelper.getTenantCount();
+        Log.d("TenantCount", tenantCount+"");
+        iDbHelper.deleteTenantByPropertyId("abc@gmail.com", "0001");
+        Log.d("Afterdeletion", iDbHelper.getTenantCount()+"");
     }
 
 

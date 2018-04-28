@@ -85,7 +85,7 @@ public class ListTenantFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.add_tenants) {
-            adapter.addItem(new Tenant("gg@gmail.com", "Rui", "USA", "Tenant", "890", "Ray"));
+            adapter.addItem(new Tenant.TenantBean("0001", "1233", "Rui", "liurui@gmail.com", "USA", "890"));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -104,9 +104,9 @@ public class ListTenantFragment extends Fragment {
         TextView tenantTv = mToolbar.findViewById(R.id.back);
 
         mRecyclerView = view.findViewById(R.id.tenant_list);
-        ArrayList<Tenant> tenants = new ArrayList<>();
+        ArrayList<Tenant.TenantBean> tenants = new ArrayList<>();
         for(int i = 0; i < 10; i++) {
-            tenants.add(new Tenant("jason@gmail.com", "Jason", "USA", "Property"+ String.valueOf(i*30), "LLID", "4444444444"));
+            tenants.add(new Tenant.TenantBean("0004", "99998", "Jason", "jason@gmail.com", "302 Ball st", "4444444444"));
         }
 
         adapter = new TenantAdapter(tenants, mContext);

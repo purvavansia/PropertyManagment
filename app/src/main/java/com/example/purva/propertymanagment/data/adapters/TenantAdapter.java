@@ -15,19 +15,20 @@ import android.widget.Toast;
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.model.Tenant;
 
+
 import java.util.ArrayList;
 
 public class TenantAdapter extends RecyclerView.Adapter<TenantAdapter.MyViewHolder> {
-    ArrayList<Tenant> mTenants;
+    ArrayList<Tenant.TenantBean> mTenants;
     Context mContext;
     private TenantClickListener listener;
-    public TenantAdapter(ArrayList<Tenant> tenants, Context context) {
+    public TenantAdapter(ArrayList<Tenant.TenantBean> tenants, Context context) {
         Log.i("TenantConstructor", "constructing");
         mTenants = tenants;
         mContext = context;
         Log.i("Tenant_Size2", mTenants.size()+"");
     }
-    public void addItem(Tenant tenant){
+    public void addItem(Tenant.TenantBean tenant){
         mTenants.add(tenant);
         this.notifyItemInserted(mTenants.size()-1);
     }
