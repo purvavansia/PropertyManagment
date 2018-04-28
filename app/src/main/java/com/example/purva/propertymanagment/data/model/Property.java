@@ -30,6 +30,7 @@ public class Property {
          */
 
         private String id;
+        private String landlordId;
         private String propertyaddress;
         private String propertycity;
         private String propertystate;
@@ -37,6 +38,18 @@ public class Property {
         private String propertystatus;
         private String propertypurchaseprice;
         private String propertymortageinfo;
+
+        public PropertyBean(String id, String landlordId, String propertyaddress, String propertycity, String propertystate, String propertycountry, String propertystatus, String propertypurchaseprice, String propertymortageinfo) {
+            this.id = id;
+            this.landlordId = landlordId;
+            this.propertyaddress = propertyaddress;
+            this.propertycity = propertycity;
+            this.propertystate = propertystate;
+            this.propertycountry = propertycountry;
+            this.propertystatus = propertystatus;
+            this.propertypurchaseprice = propertypurchaseprice;
+            this.propertymortageinfo = propertymortageinfo;
+        }
 
         public PropertyBean(String propertyaddress, String propertycity, String propertystate, String propertycountry, String propertypurchaseprice) {
             this.propertyaddress = propertyaddress;

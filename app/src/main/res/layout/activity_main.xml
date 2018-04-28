@@ -22,18 +22,19 @@
             android:orientation="vertical" >
 
             <TableLayout
-                android:background="@color/home_backgroud"
+
                 android:layout_width="match_parent"
-                android:layout_height="340dp">
+                android:layout_height="240dp">
 
                 <TableRow
+                    android:layout_gravity="center"
                     android:layout_margin="15dp"
                     >
-                    <ImageView
+                    <!--<ImageView
                         android:src="@drawable/alert"
                         android:layout_width="60dp"
                         android:layout_height="60dp">
-                    </ImageView>
+                    </ImageView>-->
 
                     <ImageView
                         android:id="@+id/imageProperty"
@@ -45,7 +46,7 @@
                     </ImageView>
                     <ImageView
 
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="100dp"
                         android:src="@drawable/tenant"
                         android:layout_width="60dp"
                         android:layout_height="60dp">
@@ -53,15 +54,16 @@
                     </ImageView>
                 </TableRow>
                 <TableRow
+                    android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     >
-                    <TextView
+                   <!-- <TextView
                         android:text="@string/alerts"
                         android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-                    </TextView>
+                    </TextView>-->
 
                     <TextView
                         android:text="@string/properties"
@@ -74,21 +76,22 @@
                     <TextView
                         android:text="@string/tenants"
                         android:gravity="center"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="100dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                     </TextView>
                 </TableRow>
                 <TableRow
+                    android:layout_gravity="center"
                     android:layout_margin="15dp"
                     >
-                    <ImageView
+                    <!--<ImageView
                         android:src="@drawable/transaction"
                         android:layout_width="60dp"
                         android:layout_height="60dp">
 
-                    </ImageView>
+                    </ImageView>-->
                     <ImageView
 
                         android:layout_marginLeft="70dp"
@@ -99,7 +102,7 @@
                     </ImageView>
                     <ImageView
 
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="100dp"
                         android:src="@drawable/todo"
                         android:layout_width="60dp"
                         android:layout_height="60dp">
@@ -107,15 +110,16 @@
                     </ImageView>
                 </TableRow>
                 <TableRow
+                    android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
                     >
-                    <TextView
+                    <!--<TextView
                         android:text="@string/transactions"
                         android:gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
-                    </TextView>
+                    </TextView>-->
 
                     <TextView
                         android:text="@string/collect_rent"
@@ -128,68 +132,159 @@
                     <TextView
                         android:text="@string/to_do_list"
                         android:gravity="center"
-                        android:layout_marginLeft="70dp"
+                        android:layout_marginLeft="100dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                     </TextView>
                 </TableRow>
-                <TableRow
-                    android:layout_margin="15dp"
-                    >
-                    <ImageView
 
-                        android:src="@drawable/car"
-                        android:layout_width="50dp"
-                        android:layout_height="60dp">
-
-                    </ImageView>
-                    <ImageView
-
-                        android:layout_marginLeft="70dp"
-                        android:src="@drawable/documents"
-                        android:layout_width="50dp"
-                        android:layout_height="60dp">
-
-                    </ImageView>
-                    <ImageView
-
-                        android:layout_marginLeft="70dp"
-                        android:src="@drawable/vendors"
-                        android:layout_width="50dp"
-                        android:layout_height="60dp">
-
-                    </ImageView>
-                </TableRow>
-                <TableRow
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    >
-                    <TextView
-                        android:text="@string/trips"
-                        android:gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                    </TextView>
-
-                    <TextView
-                        android:text="@string/documents"
-                        android:layout_marginLeft="70dp"
-                        android:gravity="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                    </TextView>
-                    <TextView
-                        android:text="@string/vendors"
-                        android:gravity="center"
-                        android:layout_marginLeft="70dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                    </TextView>
-                </TableRow>
             </TableLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="350dp"
+                android:layout_gravity="center"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="70dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/man"
+                    android:layout_height="70dp" />
+
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@string/quote1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="350dp"
+                android:layout_gravity="center"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="70dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/spider"
+                    android:layout_height="70dp" />
+
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="@string/quote2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="350dp"
+                android:layout_gravity="center"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="70dp"
+                    android:src="@drawable/captain"
+                    android:layout_height="70dp" />
+
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/quote3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="350dp"
+                android:layout_gravity="center"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
+                    android:layout_width="70dp"
+                    android:src="@drawable/doctor"
+                    android:layout_height="70dp" />
+
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="No matter where you are, you can manage your properties easily. -Doctor Strange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+            <View
+                android:layout_marginTop="10dp"
+                android:layout_width="350dp"
+                android:layout_gravity="center"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
             <com.github.mikephil.charting.charts.PieChart
                 android:layout_marginTop="30dp"

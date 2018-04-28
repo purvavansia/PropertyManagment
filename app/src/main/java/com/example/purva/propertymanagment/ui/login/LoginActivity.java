@@ -151,39 +151,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 iLoginPresenter.callApiLogin(login_email,login_password);
-                /*ApiServiceLogin apiService = RetrofitInstanceLandlordSignUp.getRetrofitInstance().create(ApiServiceLogin.class);
-                Call<User> signUpCall =  apiService.getUserDetails(login_email,login_password);
-                signUpCall.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-                        Log.i(Constants.TAG,""+response.body().getMsg());
-                        if(response.body().getMsg().contains("success")){
 
-                                editor = sharedPreferences.edit();
-                                editor.putString("userid", response.body().getUserid());
-                                editor.putString("usertype", response.body().getUsertype());
-                                editor.putString("useremail", response.body().getUseremail());
-                                editor.putString("appapikey", response.body().getAppapikey());
-                                editor.commit();
-
-                                if (response.body().getUsertype().contains("tenant")) {
-
-                                }
-
-                            else if(response.body().getUsertype().contains("landlord")){
-
-                                Intent honeIntent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(honeIntent);
-                            }
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-                        Log.i(Constants.TAG,""+t);
-                    }
-                });*/
             }
         });
 

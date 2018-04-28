@@ -20,7 +20,10 @@ public class PropertyActivity extends AppCompatActivity {
             PropertyInfoFragment propertyInfoFragment = new PropertyInfoFragment();
             getFragmentManager().beginTransaction().add(R.id.frameLayoutProperty,propertyInfoFragment,"add frag").commit();
         }
-
+        if(getIntent().getExtras().getString("selection").equals("details")){
+            PropertyDetailsFragment propertyDetailsFragment = new PropertyDetailsFragment();
+            getFragmentManager().beginTransaction().add(R.id.frameLayoutProperty,propertyDetailsFragment,"add frag").commit();
+        }
 
     }
 }

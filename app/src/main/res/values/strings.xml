@@ -34,6 +34,10 @@
     <string name="str_share">Share</string>
     <string name="add_new_property">Add New Property</string>
     <string name="remember_check">Remember Me</string>
+    <string name="quote1">PROPERTY MANAGEMENT is a property management app for landlords in the smartphone world. Manage your rental business and tenants on your Phone -Iron man</string>
+    <string name="quote2">Now, property managers should be using the latest technology to assist them with their property management duties. -SpiderMan</string>
+    <string name="quote3">Property managers tend to juggle a lot in one day. Do all at one place. -Captain America</string>
+    <string name="property_details">Property Details</string>
 
     >>>>>>> copy_master
 </resources>

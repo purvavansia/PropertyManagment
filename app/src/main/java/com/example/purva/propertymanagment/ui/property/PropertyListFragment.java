@@ -52,7 +52,7 @@ public class PropertyListFragment extends Fragment {
        sharedPreferences = getActivity().getSharedPreferences("mydata", Context.MODE_PRIVATE);
         String userid = sharedPreferences.getString("userid","");
 
-        ApiServiceProperty apiService = RetrofitInstanceProperty.getRetrofitInstance().create(ApiServiceProperty.class);
+        ApiServiceProperties apiService = RetrofitInstanceProperty.getRetrofitInstance().create(ApiServiceProperties.class);
 
         Call<Property> propertyCall =  apiService.getPropertyDetails(userid, Constants.LANDLORD);
         propertyCall.enqueue(new Callback<Property>() {

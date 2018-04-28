@@ -253,39 +253,6 @@ public class TenantSignupFragment extends BaseFragment {
         mCompositeSubscription.add(mPasswordConfirmSubscription);
 
 
-
-        Subscription mLandlordEmailSubscription = mEmailObservable.doOnNext(new Action1<CharSequence>() {
-            @Override
-            public void call(CharSequence charSequence) {
-                emailEditTextError(3);  //disable email
-            }
-        }).debounce(500, TimeUnit.MILLISECONDS).filter(new Func1<CharSequence, Boolean>() {
-            @Override
-            public Boolean call(CharSequence charSequence) {
-                return !TextUtils.isEmpty(llEmailEt.getText().toString()) && !TextUtils.isEmpty(charSequence.toString());
-            }
-        }).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<CharSequence>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.e("mPwdConfirmSubscription", e.getMessage());
-            }
-
-            @Override
-            public void onNext(CharSequence charSequence) {
-                if (!isUserInputValid(charSequence.toString(), "", 4)) {
-                    emailEditTextError(4);
-                } else {
-                    emailEditTextError(3);
-                }
-            }
-        });
-        mCompositeSubscription.add(mLandlordEmailSubscription);
-
         Subscription allSignUpFieldSubScription = Observable.combineLatest(mEmailLLObservable, mEmailObservable, mPasswordObservable, mPasswordConfirmObservable, new Func4<CharSequence, CharSequence, CharSequence, CharSequence, Boolean>() {
             @Override
             public Boolean call(CharSequence mEmail, CharSequence mPassword, CharSequence mPasswordConfirm, CharSequence mLandlordEmail) {
