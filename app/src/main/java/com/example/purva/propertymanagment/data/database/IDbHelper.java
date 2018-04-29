@@ -12,7 +12,7 @@ public interface IDbHelper {
     public int getPropertyCount();
     public int insertPropertyRecord(String id, String lordId, String country, String state, String city,
                              String street, String price, String mortage, String status);
-    public void deletePropertyById(String propertyId, String landloardId);
+    public void deletePropertyById(String propertyId, String landlordId);
     public boolean clearPropertyTable();
     public void closeDb();
     public SQLiteDatabase openDb();
