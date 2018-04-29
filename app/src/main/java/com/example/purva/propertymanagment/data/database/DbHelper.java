@@ -77,8 +77,8 @@ public class DbHelper implements IDbHelper{
 
     @Override
     public int insertPropertyRecord(String id, String lordId, String country, String state, String city, String street, String price, String mortage, String status) {
-        if(validateProperty(id)==true)
-            return -1;
+//        if(validateProperty(id)==true)
+//            return -1;
         ContentValues values = new ContentValues();
         values.put(PropertyContract.PropertyEntry.PROPERTY_ID, id);
         values.put(PropertyContract.PropertyEntry.COLUMN_LANDLORD_ID, lordId);

@@ -172,7 +172,7 @@ public class PropertyInfoFragment extends Fragment {
                             }
                         }
                         IDbHelper iDbHelper = new DbHelper(getActivity());
-                        iDbHelper.insertRecord(propertyId,userid,pro_country,pro_state,pro_city,pro_street,pro_price,pro_mortgage,pro_for);
+                        iDbHelper.insertPropertyRecord(propertyId,userid,pro_country,pro_state,pro_city,pro_street,pro_price,pro_mortgage,pro_for);
                         int rowNum = iDbHelper.getPropertyCount();
                         Log.d("ROWS", ""+rowNum );
                         Intent propertyIntent = new Intent(getActivity(), PropertyActivity.class);

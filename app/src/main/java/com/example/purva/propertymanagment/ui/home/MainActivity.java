@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
         Legend legend = pieChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
+        //legend.setPosition(Legend.LegendPosition.LEFT_OF_CHART);
         PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter());
         pieChart.setData(data);

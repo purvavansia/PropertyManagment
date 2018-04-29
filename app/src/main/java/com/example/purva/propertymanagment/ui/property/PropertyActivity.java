@@ -14,15 +14,16 @@ public class PropertyActivity extends AppCompatActivity {
 
         if(getIntent().getExtras().getString("selection").equals("main")){
             PropertyListFragment propertyListFragment = new PropertyListFragment();
-            getFragmentManager().beginTransaction().add(R.id.frameLayoutProperty,propertyListFragment,"adding frag").commit();
+            getFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyListFragment,"adding frag").commit();
+
         }
         if(getIntent().getExtras().getString("selection").equals("addprop")){
             PropertyInfoFragment propertyInfoFragment = new PropertyInfoFragment();
-            getFragmentManager().beginTransaction().add(R.id.frameLayoutProperty,propertyInfoFragment,"add frag").commit();
+            getFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyInfoFragment,"add frag").commit();
         }
         if(getIntent().getExtras().getString("selection").equals("details")){
             PropertyDetailsFragment propertyDetailsFragment = new PropertyDetailsFragment();
-            getFragmentManager().beginTransaction().add(R.id.frameLayoutProperty,propertyDetailsFragment,"add frag").commit();
+            getFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyDetailsFragment,"add frag").commit();
         }
 
     }
