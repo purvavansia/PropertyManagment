@@ -40,5 +40,9 @@ public class TabsPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return tabCount;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> homePropertyBranch
 }
 

@@ -7,4 +7,6 @@ package com.example.purva.propertymanagment.ui.login;
 public interface ILoginPresenter {
 
     public void checkPermission();
+    public void signUpClicked();
+    public void callApiLogin(String email, String password);
 }

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/property_details"
+        android:textColor="@color/text"
+        android:textSize="35dp" />
+
+
+    <TextView
+        android:id="@+id/propertyDetailsStreet"
+        android:layout_marginTop="50dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:text="abc"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/text_color"
+        android:textSize="25dp" />
+    <TextView
+        android:id="@+id/propertyDetailsCity"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="abc"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/text_color"
+        android:textSize="25dp" />
+    <TextView
+        android:id="@+id/propertyDetailsState"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/text_color"
+        android:textSize="25dp" />
+    <TextView
+        android:id="@+id/propertyDetailsCountry"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/text_color"
+        android:textSize="25dp" />
+    <TextView
+        android:id="@+id/propertyDetailsPrice"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/text_color"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/propertyDetailsMortgage"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/text_color"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/propertyDetailsStatus"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/text_color"
+        android:textSize="25dp" />
+    <Button
+        android:id="@+id/buttonDeleteProperty"
+        android:layout_marginTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_layout_simple"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/text_color"
+        android:text="Remove Property"
+        android:textSize="20dp" />
+
+</LinearLayout>

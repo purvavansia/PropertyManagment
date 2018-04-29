@@ -8,4 +8,13 @@
 
     <color name="color_disable_text">#424242</color>
     <color name="color_disable">#E0E0E0</color>
+
+
+
+    <color name="primary">#b1ca80</color>
+    <color name="primaryDark">#436c00</color>
+    <color name="accent">#666382</color>
+    <color name="text">#19181f</color>
+    <color name="accentLight">#8f8ca7</color>
+    <color name="text_color">#91959e</color>
 </resources>

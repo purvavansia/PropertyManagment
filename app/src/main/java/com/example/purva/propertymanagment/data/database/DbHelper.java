@@ -5,11 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+<<<<<<< HEAD
 import android.util.Log;
 import com.example.purva.propertymanagment.data.model.Property;
 import com.example.purva.propertymanagment.data.model.PropertyContract;
 import com.example.purva.propertymanagment.data.model.Tenant;
 import com.example.purva.propertymanagment.data.model.TenantContract;
+=======
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.example.purva.propertymanagment.data.model.Property;
+import com.example.purva.propertymanagment.data.model.PropertyContract;
+>>>>>>> homePropertyBranch
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +26,10 @@ public class DbHelper implements  IDbHelper{
 
     DbOpenHelper mDbOpenHelper;
     SQLiteDatabase mSQLiteDatabase;
+<<<<<<< HEAD
     Context mContext;
+=======
+>>>>>>> homePropertyBranch
 
     public DbHelper(Context context){
         mDbOpenHelper = new DbOpenHelper(context);
@@ -28,7 +39,11 @@ public class DbHelper implements  IDbHelper{
     public List<Property.PropertyBean> getAllProperties() {
         List<Property.PropertyBean> properties = new ArrayList<>();
         String selectQuery = "SELECT * FROM " + PropertyContract.PropertyEntry.TABLE_NAME;
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> homePropertyBranch
         Cursor cursor = mSQLiteDatabase.rawQuery(selectQuery, null);
         if(cursor.moveToFirst()){
             do{
@@ -51,6 +66,7 @@ public class DbHelper implements  IDbHelper{
 
     @Override
     public int getPropertyCount() {
+<<<<<<< HEAD
         return (int) DatabaseUtils.queryNumEntries(mSQLiteDatabase, PropertyContract.PropertyEntry.TABLE_NAME);
     }
 
@@ -77,6 +93,14 @@ public class DbHelper implements  IDbHelper{
     public int insertPropertyRecord(String id, String lordId, String country, String state, String city, String street, String price, String mortage, String status) {
         if(validateProperty(id)==true)
             return -1;
+=======
+
+        return (int) DatabaseUtils.queryNumEntries(mSQLiteDatabase, PropertyContract.PropertyEntry.TABLE_NAME);
+    }
+
+    @Override
+    public long insertRecord(String id, String lordId, String country, String state, String city, String street, String price, String mortage, String status) {
+>>>>>>> homePropertyBranch
         ContentValues values = new ContentValues();
         values.put(PropertyContract.PropertyEntry.PROPERTY_ID, id);
         values.put(PropertyContract.PropertyEntry.COLUMN_LANDLORD_ID, lordId);
@@ -84,6 +108,7 @@ public class DbHelper implements  IDbHelper{
         values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_STATE, state);
         values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_CITY, city);
         values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_STREET, street);
+<<<<<<< HEAD
         values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_PRICE,price);
         values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_PRICE, mortage);
         values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_STATUS, status);
@@ -100,6 +125,29 @@ public class DbHelper implements  IDbHelper{
 
     @Override
     public boolean clearPropertyTable() {
+=======
+        values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_STATUS, status);
+        values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_PRICE,price);
+        values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPETY_MORTAGE, mortage);
+
+        Log.i("inseted",price+" "+mortage);
+
+        long row_id = mSQLiteDatabase.insert(PropertyContract.PropertyEntry.TABLE_NAME, null, values);
+
+        return row_id;
+    }
+
+    @Override
+    public void deletePropertyById(String propertyId, String landlordId) {
+        //SQLiteDatabase mSQLiteDatabase = this.getWritableDatabase();
+        mSQLiteDatabase.delete(PropertyContract.PropertyEntry.TABLE_NAME, PropertyContract.PropertyEntry.PROPERTY_ID +
+                " = ? and "+ PropertyContract.PropertyEntry.COLUMN_LANDLORD_ID+ " = ?", new String[]{propertyId,landlordId});
+        Log.i("deleterows",""+getPropertyCount());
+    }
+
+    @Override
+    public boolean clearTable() {
+>>>>>>> homePropertyBranch
         mSQLiteDatabase.execSQL("delete from " + PropertyContract.PropertyEntry.TABLE_NAME);
         return getPropertyCount()==0;
     }
@@ -108,6 +156,7 @@ public class DbHelper implements  IDbHelper{
     public void closeDb() {
         mSQLiteDatabase.close();
     }
+<<<<<<< HEAD
 
     @Override
     public SQLiteDatabase openDb() {
@@ -172,3 +221,6 @@ public class DbHelper implements  IDbHelper{
     }
 
 }
+=======
+}
+>>>>>>> homePropertyBranch

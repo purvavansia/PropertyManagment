@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="5dp"
+        android:text="Property Info"
+        android:textColor="#91959e"
+        android:textSize="35dp" />
+
+
+    <EditText
+        android:id="@+id/propertyAddStreet"
+        android:layout_marginTop="50dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:hint="Enter Street"
+        android:textColor="#91959e"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/propertyAddCity"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:hint="Enter City"
+        android:textColor="#91959e"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/propertyAddState"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:hint="Enter State"
+        android:textColor="#91959e"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/propertyAddCountry"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:hint="Enter Country"
+        android:textColor="#91959e"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/propertyAddStatus"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:hint="Property For"
+        android:textColor="#91959e"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/propertyAddPrice"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:hint="Property Price"
+        android:textColor="#91959e"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/propertyAddMortgage"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:hint="Mortgage Info"
+        android:textColor="#91959e"
+        android:textSize="20dp" />
+
+
+    <Button
+        android:id="@+id/buttonAddNewProperty"
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button_layout_simple"
+        android:layout_gravity="center"
+        android:paddingLeft="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="#000"
+        android:hint="Add Property"
+        android:textSize="20dp" />
+
+</LinearLayout>

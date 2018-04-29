@@ -35,19 +35,17 @@ public class Property {
         private String propertypurchaseprice;
         private String propertymortageinfo;
 
-
-        public PropertyBean(String id, String landlordId, String propertycountry, String propertystate, String propertycity, String propertyaddress, String propertystatus, String propertypurchaseprice, String propertymortageinfo) {
+        public PropertyBean(String id, String landlordId, String propertyaddress, String propertycity, String propertystate, String propertycountry, String propertystatus, String propertypurchaseprice, String propertymortageinfo) {
             this.id = id;
             this.landlordId = landlordId;
-            this.propertycountry = propertycountry;
-            this.propertystate = propertystate;
-            this.propertycity = propertycity;
             this.propertyaddress = propertyaddress;
+            this.propertycity = propertycity;
+            this.propertystate = propertystate;
+            this.propertycountry = propertycountry;
             this.propertystatus = propertystatus;
             this.propertypurchaseprice = propertypurchaseprice;
             this.propertymortageinfo = propertymortageinfo;
         }
-
 
         public PropertyBean(String id, String propertycountry, String propertystate, String propertycity, String propertyaddress, String propertystatus, String propertypurchaseprice, String propertymortageinfo) {
             this.id = id;
@@ -60,7 +58,13 @@ public class Property {
             this.propertymortageinfo = propertymortageinfo;
         }
 
-
+        public PropertyBean(String propertyaddress, String propertycity, String propertystate, String propertycountry, String propertypurchaseprice) {
+            this.propertyaddress = propertyaddress;
+            this.propertycity = propertycity;
+            this.propertystate = propertystate;
+            this.propertycountry = propertycountry;
+            this.propertypurchaseprice = propertypurchaseprice;
+        }
 
         public String getId() {
             return id;
