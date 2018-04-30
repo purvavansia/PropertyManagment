@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:titleTextColor="@android:color/white"
-    android:background="#e1dede">
+    android:background="@color/primary">
 
     <TextView
         android:textColor="@drawable/back_home"

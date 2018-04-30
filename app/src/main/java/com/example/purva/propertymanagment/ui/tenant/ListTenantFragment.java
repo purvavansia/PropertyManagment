@@ -23,11 +23,13 @@ import android.widget.Toast;
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.adapters.TenantAdapter;
 import com.example.purva.propertymanagment.data.adapters.TenantClickListener;
+import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.data.model.Tenant;
 import com.example.purva.propertymanagment.ui.BaseFragment;
 import com.example.purva.propertymanagment.ui.home.MainActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -49,15 +51,6 @@ public class ListTenantFragment extends Fragment {
         super.onAttach(context);
         this.mContext = context;
     }
-
-//    public static ListTenantFragment INSTANT = null;
-//
-//    public static ListTenantFragment getInstant() {
-//        if (INSTANT == null) {
-//            INSTANT = new ListTenantFragment();
-//        }
-//        return INSTANT;
-//    }
 
     @Nullable
     @Override
@@ -85,17 +78,10 @@ public class ListTenantFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.add_tenants) {
-            adapter.addItem(new Tenant.TenantBean("0001", "1233", "Rui", "liurui@gmail.com", "USA", "890"));
+            ((AppCompatActivity)this.mContext).getSupportFragmentManager().beginTransaction().replace(R.id.tenantFragmentContainer, new AddTenantFragment()).commit();
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-//
-//    @Override
-//    protected int getLayoutResource() {
-//        return R.layout.fragment_list_tenant;
-//    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -104,13 +90,10 @@ public class ListTenantFragment extends Fragment {
         TextView tenantTv = mToolbar.findViewById(R.id.back);
 
         mRecyclerView = view.findViewById(R.id.tenant_list);
-        ArrayList<Tenant.TenantBean> tenants = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
-            tenants.add(new Tenant.TenantBean("0004", "99998", "Jason", "jason@gmail.com", "302 Ball st", "4444444444"));
-        }
+        DbHelper dbHelper = new DbHelper(getActivity());
+        List<Tenant.TenantBean> tenants = dbHelper.getAllTenants();
 
         adapter = new TenantAdapter(tenants, mContext);
-        Log.i("ADAPTER", "Finish creating adapter");
         LinearLayoutManager llayout = new LinearLayoutManager(mContext);
         DividerItemDecoration itemDecor = new DividerItemDecoration(mRecyclerView.getContext(), llayout.getOrientation());
         mRecyclerView.addItemDecoration(itemDecor);

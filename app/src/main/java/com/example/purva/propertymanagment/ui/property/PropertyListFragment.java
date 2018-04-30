@@ -1,11 +1,11 @@
 package com.example.purva.propertymanagment.ui.property;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -59,10 +59,10 @@ public class PropertyListFragment extends Fragment {
             @Override
             public void onResponse(Call<Property> call, Response<Property> response) {
 
-                Log.i(Constants.TAG, "" + response.body().getProperty());
-
-                    PropertyAdapter propertyAdapter = new PropertyAdapter(response.body().getProperty(),getActivity());
-                    recyclerView.setAdapter(propertyAdapter);
+                Log.i(Constants.TAG, "SIZE: " + response.body().getProperty().size()+"");
+                PropertyAdapter propertyAdapter = new PropertyAdapter(response.body().getProperty(),getActivity());
+                propertyAdapter.setImages(response.body().getProperty().size());
+                recyclerView.setAdapter(propertyAdapter);
 
 
             }
@@ -77,9 +77,11 @@ public class PropertyListFragment extends Fragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addPropIntent = new Intent(getActivity(),PropertyActivity.class);
-                addPropIntent.putExtra("selection","addprop");
-                startActivity(addPropIntent);
+//                Intent addPropIntent = new Intent(getActivity(),PropertyActivity.class);
+//                addPropIntent.putExtra("selection","addprop");
+//                startActivity(addPropIntent);
+                PropertyInfoFragment propertyInfoFragment = new PropertyInfoFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyInfoFragment,"add frag").commit();
             }
         });
 

@@ -1,47 +1,35 @@
 package com.example.purva.propertymanagment.ui.property;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.data.database.IDbHelper;
 import com.example.purva.propertymanagment.data.model.Property;
-import com.example.purva.propertymanagment.ui.login.LoginActivity;
 import com.example.purva.propertymanagment.ui.signup.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.List;
-import java.util.ListIterator;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.android.schedulers.AndroidSchedulers;
-import io.reactivex.*;
-import io.reactivex.disposables.*;
+
+import java.util.List;
+import java.util.ListIterator;
 
 
 /**
@@ -91,37 +79,6 @@ public class PropertyInfoFragment extends Fragment {
                 Gson gson = new GsonBuilder().setLenient().create();
 
                 Retrofit retrofit = new retrofit2.Retrofit.Builder().baseUrl(BASE_URL).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).build();
-                /*IDbHelper iDbHelper = new DbHelper(getActivity());
-                iDbHelper.insertRecord(String.valueOf(propertyID),userid,pro_country,pro_state,pro_city,pro_street,pro_price,pro_mortgage,pro_for);
-                int rowNum = iDbHelper.getPropertyCount();
-                Log.d("ROWS", ""+rowNum );*/
-
-                /*ApiServiceProperty apiService = RetrofitInstanceProperty.getRetrofitInstance().create(ApiServiceProperty.class);
-                Call<String> addPropertCall = apiService.addPropertyDetails(pro_street, pro_city, pro_state, pro_country,
-                        pro_for, pro_price, pro_mortgage, userid, Constants.LANDLORD);
-
-                addPropertCall.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        Log.i(Constants.TAG, ""+response.body());
-                        if(response.body().contains("successfully")){
-
-                            Intent propertyIntent = new Intent(getActivity(), PropertyActivity.class);
-                            propertyIntent.putExtra("selection","main");
-                            startActivity(propertyIntent);
-                        }
-                        else{
-                            Toast.makeText(getActivity(),""+response.body(),Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Log.i(Constants.TAG, ""+t);
-                    }
-                });
-            }
-        });*/
         final Observable<Property> propertyObservable = retrofit.create(ApiServiceProperty.class).getPropertyDetails(userid, Constants.LANDLORD);
 
 
@@ -168,16 +125,24 @@ public class PropertyInfoFragment extends Fragment {
                             if(country.equals(pro_country) && state.equals(pro_state) && city.equals(pro_city) && street.equals(pro_street)
                                     && price.equals(pro_price) && mortgage.equals(pro_mortgage) && status.equals(pro_for)){
                                 propertyId = propertyBean.getId();
+                                Log.d("FoundID", "PropertyID: " + propertyId);
+//                                DbHelper dbHelper = new DbHelper(getActivity());
+//                                dbHelper.insertPropertyRecord(propertyId, userid, country, state, city, street, price, mortgage, status);
                                 break;
                             }
                         }
                         IDbHelper iDbHelper = new DbHelper(getActivity());
-                        iDbHelper.insertPropertyRecord(propertyId,userid,pro_country,pro_state,pro_city,pro_street,pro_price,pro_mortgage,pro_for);
+                        int row_id = iDbHelper.insertPropertyRecord(propertyId,userid,pro_country,pro_state,pro_city,pro_street,pro_price,pro_mortgage,pro_for);
+                        if(row_id == -1){
+                            Log.d("FAILURE_INSERTED", "Failed inserted");
+                        }
                         int rowNum = iDbHelper.getPropertyCount();
                         Log.d("ROWS", ""+rowNum );
-                        Intent propertyIntent = new Intent(getActivity(), PropertyActivity.class);
-                        propertyIntent.putExtra("selection","main");
-                        startActivity(propertyIntent);
+//                        Intent propertyIntent = new Intent(getActivity(), PropertyActivity.class);
+//                        propertyIntent.putExtra("selection","main");
+//                        startActivity(propertyIntent);
+                        PropertyListFragment propertyListFragment = new PropertyListFragment();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyListFragment,"back_to_main").commit();
                     }
 
                     @Override

@@ -89,6 +89,7 @@ public class DbHelper implements IDbHelper{
         values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_STATUS, status);
         values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_PRICE,price);
         values.put(PropertyContract.PropertyEntry.COLUMN_NAME_PROPETY_MORTAGE, mortage);
+        Log.d("PROPERTY_ID",id);
         long row_id = mSQLiteDatabase.insert(PropertyContract.PropertyEntry.TABLE_NAME, null, values);
         return (int)row_id;
     }

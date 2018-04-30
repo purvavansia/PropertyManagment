@@ -17,12 +17,13 @@ import com.example.purva.propertymanagment.data.model.Tenant;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TenantAdapter extends RecyclerView.Adapter<TenantAdapter.MyViewHolder> {
-    ArrayList<Tenant.TenantBean> mTenants;
+    List<Tenant.TenantBean> mTenants;
     Context mContext;
     private TenantClickListener listener;
-    public TenantAdapter(ArrayList<Tenant.TenantBean> tenants, Context context) {
+    public TenantAdapter(List<Tenant.TenantBean> tenants, Context context) {
         Log.i("TenantConstructor", "constructing");
         mTenants = tenants;
         mContext = context;

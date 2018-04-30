@@ -12,6 +12,9 @@ public class PropertyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property);
 
+        PropertyListFragment propertyListFragment = new PropertyListFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyListFragment,"adding frag").commit();
+        /*
         if(getIntent().getExtras().getString("selection").equals("main")){
             PropertyListFragment propertyListFragment = new PropertyListFragment();
             getFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyListFragment,"adding frag").commit();
@@ -24,7 +27,6 @@ public class PropertyActivity extends AppCompatActivity {
         if(getIntent().getExtras().getString("selection").equals("details")){
             PropertyDetailsFragment propertyDetailsFragment = new PropertyDetailsFragment();
             getFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyDetailsFragment,"add frag").commit();
-        }
-
+        }*/
     }
 }

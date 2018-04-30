@@ -3,6 +3,7 @@ package com.example.purva.propertymanagment.data.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.data.database.IDbHelper;
 import com.example.purva.propertymanagment.data.model.Property;
 import com.example.purva.propertymanagment.ui.property.PropertyActivity;
+import com.example.purva.propertymanagment.ui.property.PropertyDetailsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +31,21 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.MyView
 
     List<Property.PropertyBean> propertyList;
     Context context;
-    private int image[]= {R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
-            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
-            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
-            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
-            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
-            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
-            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree};
+    private ArrayList<Integer> image = new ArrayList<Integer>();
+//    private int image[]= {R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
+//            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
+//            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
+//            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
+//            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
+//            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,
+//            R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree,R.drawable.buildingone,R.drawable.buidingtwo,R.drawable.buildingthree};
+
+    public void setImages(int num){
+        int counter = 0;
+        for(int i = 0; i< num;i++){
+            image.add(R.drawable.buildingone);
+        }
+    }
 
     public PropertyAdapter(List<Property.PropertyBean> propertyList, Context context) {
         this.propertyList = propertyList;
@@ -56,16 +66,18 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.MyView
         Property.PropertyBean property = propertyList.get(position);
         holder.address.setText("Address: "+property.getPropertyaddress()+" "+property.getPropertycity()+" "+property.getPropertystate()+" "+property.getPropertycountry());
         holder.price.setText("Price: "+property.getPropertypurchaseprice());
-        holder.property_image.setImageResource(image[position]);
+        holder.property_image.setImageResource(image.get(position));
 
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //property.getId();
-                Intent detailsIntent = new Intent(context, PropertyActivity.class);
-                detailsIntent.putExtra("selection","details");
-                context.startActivity(detailsIntent);
+//                Intent detailsIntent = new Intent(context, PropertyActivity.class);
+//                detailsIntent.putExtra("selection","details");
+//                context.startActivity(detailsIntent);
+                PropertyDetailsFragment propertyDetailsFragment = new PropertyDetailsFragment();
+                ((AppCompatActivity)(context)).getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyDetailsFragment,"add frag").commit();
             }
         });
 
