@@ -12,13 +12,10 @@ import com.example.purva.propertymanagment.data.model.TaskContract;
  */
 
 public class TaskDbHelper extends SQLiteOpenHelper {
-
-
     public TaskDbHelper(Context context) {
         super(context, TaskContract.DB_NAME, null, TaskContract.DB_VERSION);
 
     }
-
 
 
     @Override

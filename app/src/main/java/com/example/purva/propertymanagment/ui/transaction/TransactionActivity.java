@@ -3,31 +3,18 @@ package com.example.purva.propertymanagment.ui.transaction;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
-
+import android.widget.*;
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.data.database.IDbHelper;
 import com.example.purva.propertymanagment.data.model.Property;
-import com.example.purva.propertymanagment.data.model.Transaction;
-import com.example.purva.propertymanagment.ui.home.MainActivity;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Locale;
+import java.util.*;
 
 public class TransactionActivity extends AppCompatActivity {
 

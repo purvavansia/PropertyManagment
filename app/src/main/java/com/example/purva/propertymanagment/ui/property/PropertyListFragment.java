@@ -1,7 +1,6 @@
 package com.example.purva.propertymanagment.ui.property;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,19 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.adapters.PropertyAdapter;
 import com.example.purva.propertymanagment.data.model.Property;
 import com.example.purva.propertymanagment.network.ApiService;
 import com.example.purva.propertymanagment.network.RetrofitInstance;
 import com.example.purva.propertymanagment.ui.signup.Constants;
-
-import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.util.ArrayList;
 
 /**
  * Created by purva on 4/26/18.
