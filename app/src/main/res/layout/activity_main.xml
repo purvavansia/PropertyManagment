@@ -42,9 +42,9 @@
             android:orientation="vertical" >
 
             <TableLayout
-
+                android:layout_marginLeft="-30dp"
                 android:layout_width="match_parent"
-                android:layout_height="240dp">
+                android:layout_height="350dp">
 
                 <TableRow
                     android:layout_gravity="center"
@@ -145,7 +145,7 @@
                     </TextView>-->
 
                     <TextView
-                        android:text="Transactions"
+                        android:text="Add Transaction"
                         android:layout_marginLeft="60dp"
                         android:gravity="center"
                         android:layout_width="wrap_content"
@@ -154,6 +154,64 @@
                     </TextView>
                     <TextView
                         android:text="@string/to_do_list"
+                        android:gravity="center"
+                        android:layout_marginLeft="100dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                </TableRow>
+
+                <TableRow
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    >
+                    <!--<ImageView
+                        android:src="@drawable/transaction"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp">
+
+                    </ImageView>-->
+                    <ImageView
+
+                        android:layout_marginLeft="70dp"
+                        android:src="@drawable/viewtrans"
+                        android:layout_width="60dp"
+                        android:id="@+id/imageViewTransaction"
+                        android:layout_height="60dp">
+
+                    </ImageView>
+                    <ImageView
+                        android:id="@+id/imageDocuments"
+                        android:layout_marginLeft="100dp"
+                        android:src="@drawable/documents"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp">
+
+                    </ImageView>
+                </TableRow>
+                <TableRow
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    >
+                    <!--<TextView
+                        android:text="@string/transactions"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </TextView>-->
+
+                    <TextView
+                        android:text="View Transaction"
+                        android:layout_marginLeft="60dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                    <TextView
+                        android:text="Add Documents"
                         android:gravity="center"
                         android:layout_marginLeft="100dp"
                         android:layout_width="wrap_content"
