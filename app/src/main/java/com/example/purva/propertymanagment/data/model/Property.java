@@ -1,5 +1,8 @@
 package com.example.purva.propertymanagment.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 public class Property {
@@ -13,7 +16,7 @@ public class Property {
         this.Property = Property;
     }
 
-    public static class PropertyBean {
+    public static class PropertyBean implements Parcelable {
         /**
          * id : 1
          * propertyaddress : fla1234
@@ -24,6 +27,18 @@ public class Property {
          * propertypurchaseprice : 12000
          * propertymortageinfo : no
          */
+
+        public static final Creator<PropertyBean> CREATOR = new Creator<PropertyBean>() {
+            @Override
+            public PropertyBean createFromParcel(Parcel in) {
+                return new PropertyBean(in);
+            }
+
+            @Override
+            public PropertyBean[] newArray(int size) {
+                return new PropertyBean[size];
+            }
+        };
 
         private String id;
         private String propertycountry;
@@ -65,6 +80,20 @@ public class Property {
             this.propertycountry = propertycountry;
             this.propertypurchaseprice = propertypurchaseprice;
         }
+
+        protected PropertyBean(Parcel in) {
+            id = in.readString();
+            propertycountry = in.readString();
+            landlordId = in.readString();
+            propertystate = in.readString();
+            propertycity = in.readString();
+            propertyaddress = in.readString();
+            propertystatus = in.readString();
+            propertypurchaseprice = in.readString();
+            propertymortageinfo = in.readString();
+        }
+
+
 
         public String getId() {
             return id;
@@ -128,6 +157,24 @@ public class Property {
 
         public void setPropertymortageinfo(String propertymortageinfo) {
             this.propertymortageinfo = propertymortageinfo;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(id);
+            dest.writeString(propertycountry);
+            dest.writeString(landlordId);
+            dest.writeString(propertystate);
+            dest.writeString(propertycity);
+            dest.writeString(propertyaddress);
+            dest.writeString(propertystatus);
+            dest.writeString(propertypurchaseprice);
+            dest.writeString(propertymortageinfo);
         }
     }
 

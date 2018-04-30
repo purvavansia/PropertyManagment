@@ -1,4 +1,4 @@
-package com.example.purva.propertymanagment.ui.property;
+package com.example.purva.propertymanagment.network;
 
 import com.example.purva.propertymanagment.data.model.Property;
 

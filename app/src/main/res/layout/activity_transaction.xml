@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context="com.example.purva.propertymanagment.ui.transaction.TransactionActivity">
+
     <android.support.v7.widget.Toolbar
         android:orientation="horizontal"
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,22 +18,22 @@
         app:titleTextColor="@android:color/white"
         android:background="@color/primary">
 
-        <TextView
-            android:textColor="@drawable/back_home"
-            android:id="@+id/back"
-            android:textAlignment="viewStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="28sp"
-            android:text="Properties"/>
+    <TextView
+        android:textColor="@drawable/back_home"
+        android:id="@+id/back"
+        android:textAlignment="viewStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="28sp"
+        android:text="Properties"/>
 
-        <ImageView
-            android:textColor="@drawable/back_home"
-            android:id="@+id/imageViewTransactionHome"
-            android:layout_marginLeft="210dp"
-            android:src="@drawable/home"
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
+    <ImageView
+        android:textColor="@drawable/back_home"
+        android:id="@+id/imageViewTransactionHome"
+        android:layout_marginLeft="210dp"
+        android:src="@drawable/home"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
     </android.support.v7.widget.Toolbar>
 
     <TextView
@@ -39,13 +43,13 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginLeft="5dp"
-        android:text="Property Info"
+        android:text="Transaction Info"
         android:textColor="@color/text_color"
         android:textSize="35dp" />
 
 
     <EditText
-        android:id="@+id/propertyAddStreet"
+        android:id="@+id/transactionDate"
         android:layout_marginTop="50dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -53,12 +57,11 @@
         android:layout_gravity="center"
         android:paddingLeft="10dp"
         android:layout_marginLeft="5dp"
-        android:hint="Enter Street"
         android:textColor="@color/text_color"
         android:textSize="20dp" />
 
     <EditText
-        android:id="@+id/propertyAddCity"
+        android:id="@+id/transactionSummary"
         android:layout_marginTop="10dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -66,12 +69,12 @@
         android:layout_gravity="center"
         android:paddingLeft="10dp"
         android:layout_marginLeft="5dp"
-        android:hint="Enter City"
+        android:hint="Transaction Summary"
         android:textColor="@color/text_color"
         android:textSize="20dp" />
 
     <EditText
-        android:id="@+id/propertyAddState"
+        android:id="@+id/transactionDescription"
         android:layout_marginTop="10dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -79,12 +82,19 @@
         android:layout_gravity="center"
         android:paddingLeft="10dp"
         android:layout_marginLeft="5dp"
-        android:hint="Enter State"
+        android:hint="Transaction Description"
         android:textColor="@color/text_color"
         android:textSize="20dp" />
-
+    <Spinner
+        android:layout_marginTop="5dp"
+        android:id="@+id/spinnerTransactionProperty"
+        android:layout_width="300dp"
+        android:layout_gravity="center"
+        android:layout_height="40dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
     <EditText
-        android:id="@+id/propertyAddCountry"
+        android:id="@+id/transactionAmount"
         android:layout_marginTop="10dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -92,53 +102,22 @@
         android:layout_gravity="center"
         android:paddingLeft="10dp"
         android:layout_marginLeft="5dp"
-        android:hint="Enter Country"
+        android:hint="Transaction Amount"
         android:textColor="@color/text_color"
         android:textSize="20dp" />
-
-    <EditText
-        android:id="@+id/propertyAddStatus"
-        android:layout_marginTop="10dp"
+    <Spinner
+        android:layout_marginTop="5dp"
+        android:id="@+id/spinnerTransactionType"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_gravity="center"
-        android:paddingLeft="10dp"
-        android:layout_marginLeft="5dp"
-        android:hint="Property For"
-        android:textColor="@color/text_color"
-        android:textSize="20dp" />
-
-    <EditText
-        android:id="@+id/propertyAddPrice"
-        android:layout_marginTop="10dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:paddingLeft="10dp"
-        android:layout_marginLeft="5dp"
-        android:hint="Property Price"
-        android:textColor="@color/text_color"
-        android:textSize="20dp" />
-
-    <EditText
-        android:id="@+id/propertyAddMortgage"
-        android:layout_marginTop="10dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:paddingLeft="10dp"
-        android:layout_marginLeft="5dp"
-        android:hint="Mortgage Info"
-        android:textColor="@color/text_color"
-        android:textSize="20dp" />
+        android:layout_height="40dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
 
 
     <Button
-        android:id="@+id/buttonAddNewProperty"
-        android:layout_marginTop="10dp"
+        android:id="@+id/buttonAddTransaction"
+        android:layout_marginTop="40dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -147,7 +126,9 @@
         android:paddingLeft="10dp"
         android:layout_marginLeft="5dp"
         android:textColor="#000"
-        android:hint="Add Property"
+        android:hint="Add Transaction"
         android:textSize="20dp" />
+
+
 
 </LinearLayout>

@@ -4,15 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/toolbar_property" />
 
-    <Button
-        android:layout_margin="10dp"
-        android:id="@+id/buttonAddProperty"
-        android:layout_width="300dp"
-        android:background="@drawable/button_layout_simple"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:text="@string/add_new_property" />
     <TextView
         android:id="@+id/propertyStreet"
         android:layout_width="match_parent"

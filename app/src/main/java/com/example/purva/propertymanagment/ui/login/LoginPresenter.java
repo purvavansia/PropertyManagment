@@ -12,10 +12,12 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.example.purva.propertymanagment.data.model.User;
+import com.example.purva.propertymanagment.network.ApiService;
+import com.example.purva.propertymanagment.network.RetrofitInstance;
 import com.example.purva.propertymanagment.ui.home.MainActivity;
 import com.example.purva.propertymanagment.ui.signup.Constants;
 import com.example.purva.propertymanagment.ui.signup.SignUpActivity;
-import com.example.purva.propertymanagment.ui.signup.landlord.RetrofitInstanceLandlordSignUp;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,7 +59,7 @@ public class LoginPresenter implements ILoginPresenter {
     @Override
     public void callApiLogin(String email, String password) {
         sharedPreferences = context.getSharedPreferences("mydata",Context.MODE_PRIVATE);
-        ApiServiceLogin apiService = RetrofitInstanceLandlordSignUp.getRetrofitInstance().create(ApiServiceLogin.class);
+        ApiService apiService = RetrofitInstance.getRetrofitInstance().create(ApiService.class);
         Call<User> signUpCall =  apiService.getUserDetails(email,password);
         signUpCall.enqueue(new Callback<User>() {
             @Override

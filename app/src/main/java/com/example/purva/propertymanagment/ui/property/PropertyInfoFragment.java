@@ -13,13 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.data.database.IDbHelper;
 import com.example.purva.propertymanagment.data.model.Property;
-import com.example.purva.propertymanagment.ui.login.LoginActivity;
+import com.example.purva.propertymanagment.network.ApiServiceProperty;
 import com.example.purva.propertymanagment.ui.signup.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,15 +32,9 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.android.schedulers.AndroidSchedulers;
-import io.reactivex.*;
-import io.reactivex.disposables.*;
 
 
 /**
@@ -55,15 +48,14 @@ public class PropertyInfoFragment extends Fragment {
     Button addProperty;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    int propertyID;
-     int i = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_property_info,container,false);
         sharedPreferences = getActivity().getSharedPreferences("mydata", Context.MODE_PRIVATE);
-        propertyID = sharedPreferences.getInt("property_id", 0);
+
         String userid = sharedPreferences.getString("userid","");
         street = view.findViewById(R.id.propertyAddStreet);
         city = view.findViewById(R.id.propertyAddCity);
@@ -78,8 +70,7 @@ public class PropertyInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editor = sharedPreferences.edit();
-                editor.putInt("property_id",++propertyID);
-                i++;
+
                 String pro_street = street.getText().toString();
                 String pro_city = city.getText().toString();
                 String pro_state = state.getText().toString();
@@ -91,37 +82,7 @@ public class PropertyInfoFragment extends Fragment {
                 Gson gson = new GsonBuilder().setLenient().create();
 
                 Retrofit retrofit = new retrofit2.Retrofit.Builder().baseUrl(BASE_URL).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).build();
-                /*IDbHelper iDbHelper = new DbHelper(getActivity());
-                iDbHelper.insertRecord(String.valueOf(propertyID),userid,pro_country,pro_state,pro_city,pro_street,pro_price,pro_mortgage,pro_for);
-                int rowNum = iDbHelper.getPropertyCount();
-                Log.d("ROWS", ""+rowNum );*/
 
-                /*ApiServiceProperty apiService = RetrofitInstanceProperty.getRetrofitInstance().create(ApiServiceProperty.class);
-                Call<String> addPropertCall = apiService.addPropertyDetails(pro_street, pro_city, pro_state, pro_country,
-                        pro_for, pro_price, pro_mortgage, userid, Constants.LANDLORD);
-
-                addPropertCall.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        Log.i(Constants.TAG, ""+response.body());
-                        if(response.body().contains("successfully")){
-
-                            Intent propertyIntent = new Intent(getActivity(), PropertyActivity.class);
-                            propertyIntent.putExtra("selection","main");
-                            startActivity(propertyIntent);
-                        }
-                        else{
-                            Toast.makeText(getActivity(),""+response.body(),Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Log.i(Constants.TAG, ""+t);
-                    }
-                });
-            }
-        });*/
         final Observable<Property> propertyObservable = retrofit.create(ApiServiceProperty.class).getPropertyDetails(userid, Constants.LANDLORD);
 
 
@@ -177,6 +138,7 @@ public class PropertyInfoFragment extends Fragment {
                         Log.d("ROWS", ""+rowNum );
                         Intent propertyIntent = new Intent(getActivity(), PropertyActivity.class);
                         propertyIntent.putExtra("selection","main");
+
                         startActivity(propertyIntent);
                     }
 

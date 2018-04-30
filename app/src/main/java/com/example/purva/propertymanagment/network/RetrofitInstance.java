@@ -1,4 +1,4 @@
-package com.example.purva.propertymanagment.ui.login;
+package com.example.purva.propertymanagment.network;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by purva on 4/25/18.
  */
 
-public class RetrofitInstanceLogin {
+public class RetrofitInstance {
 
     final static String BASE_URL = "http://rjtmobile.com/aamir/property-mgmt/";
 

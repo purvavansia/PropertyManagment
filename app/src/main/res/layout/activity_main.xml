@@ -6,11 +6,31 @@
     android:layout_height="match_parent"
     tools:context="com.example.purva.propertymanagment.ui.home.MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar_main"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="@color/primary">
 
+        <TextView
+            android:textColor="@drawable/back_home"
+            android:id="@+id/back"
+            android:textAlignment="viewStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="Property Management"/>
+
+    </android.support.v7.widget.Toolbar>
     <ScrollView
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:fillViewport="true"
         android:scrollbars = "vertical"
         android:scrollbarStyle="insideInset"
@@ -97,13 +117,14 @@
                     <ImageView
 
                         android:layout_marginLeft="70dp"
-                        android:src="@drawable/collectrent"
+                        android:src="@drawable/transaction"
                         android:layout_width="60dp"
+                        android:id="@+id/imageTransaction"
                         android:layout_height="60dp">
 
                     </ImageView>
                     <ImageView
-
+                        android:id="@+id/imageToDo"
                         android:layout_marginLeft="100dp"
                         android:src="@drawable/todo"
                         android:layout_width="60dp"
@@ -124,7 +145,7 @@
                     </TextView>-->
 
                     <TextView
-                        android:text="@string/collect_rent"
+                        android:text="Transactions"
                         android:layout_marginLeft="60dp"
                         android:gravity="center"
                         android:layout_width="wrap_content"

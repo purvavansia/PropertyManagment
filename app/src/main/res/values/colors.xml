@@ -17,4 +17,5 @@
     <color name="text">#19181f</color>
     <color name="accentLight">#8f8ca7</color>
     <color name="text_color">#91959e</color>
+    <color name="todo_background">#f8f9d9</color>
 </resources>

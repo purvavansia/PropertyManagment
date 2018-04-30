@@ -9,15 +9,18 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.adapters.PropertyAdapter;
 import com.example.purva.propertymanagment.data.model.Property;
+import com.example.purva.propertymanagment.network.ApiService;
+import com.example.purva.propertymanagment.network.RetrofitInstance;
 import com.example.purva.propertymanagment.ui.signup.Constants;
 
 import java.util.ArrayList;
@@ -35,24 +38,28 @@ public class PropertyListFragment extends Fragment {
     RecyclerView recyclerView;
     SharedPreferences sharedPreferences;
     ArrayList<Property.PropertyBean> properties;
-    Button add;
+
+    Toolbar toolbar;
+    ImageView imageView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_property_list,container,false);
 
+        toolbar = view.findViewById(R.id.toolbar_property);
+        imageView = toolbar.findViewById(R.id.imageViewAddProp);
         recyclerView = view.findViewById(R.id.recyclerview_property);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
-        add = view.findViewById(R.id.buttonAddProperty);
+
         properties = new ArrayList<>();
 
        sharedPreferences = getActivity().getSharedPreferences("mydata", Context.MODE_PRIVATE);
         String userid = sharedPreferences.getString("userid","");
 
-        ApiServiceProperties apiService = RetrofitInstanceProperty.getRetrofitInstance().create(ApiServiceProperties.class);
+        ApiService apiService = RetrofitInstance.getRetrofitInstance().create(ApiService.class);
 
         Call<Property> propertyCall =  apiService.getPropertyDetails(userid, Constants.LANDLORD);
         propertyCall.enqueue(new Callback<Property>() {
@@ -74,7 +81,7 @@ public class PropertyListFragment extends Fragment {
             }
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent addPropIntent = new Intent(getActivity(),PropertyActivity.class);
@@ -85,5 +92,6 @@ public class PropertyListFragment extends Fragment {
 
         return view;
     }
+
 
 }
