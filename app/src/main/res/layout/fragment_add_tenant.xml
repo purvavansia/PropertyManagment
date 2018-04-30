@@ -6,7 +6,29 @@
     android:orientation="vertical"
     android:layout_height="wrap_content">
 
-    <include layout="@layout/toolbar_layout"/>
+    <android.support.v7.widget.Toolbar
+            android:orientation="horizontal"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/toolbaraddTenant"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleTextColor="@android:color/white"
+            android:background="@color/primary">
+
+        <TextView
+                android:textColor="@drawable/back_home"
+                android:id="@+id/back"
+                android:textAlignment="viewStart"
+                android:drawableLeft="@drawable/ic_back_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:text="@string/tenants"/>
+
+
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -46,12 +68,6 @@
         android:layout_width="match_parent"
         android:hint="Mobile"
         android:textSize="24sp"/>
-
-        <EditText android:textSize="24sp"
-                  android:hint="Landlord Email"
-                android:id="@+id/landlord_id"
-                android:layout_width="match_parent"
-                  android:layout_height="wrap_content"/>
 
         <EditText android:textSize="24sp"
                   android:hint="Property ID"

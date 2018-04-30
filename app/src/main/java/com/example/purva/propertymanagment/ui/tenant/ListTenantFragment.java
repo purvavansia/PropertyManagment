@@ -10,28 +10,16 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.view.*;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.adapters.TenantAdapter;
 import com.example.purva.propertymanagment.data.adapters.TenantClickListener;
 import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.data.model.Tenant;
-import com.example.purva.propertymanagment.ui.BaseFragment;
 import com.example.purva.propertymanagment.ui.home.MainActivity;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.ButterKnife;
 
 
 public class ListTenantFragment extends Fragment {
@@ -55,6 +43,9 @@ public class ListTenantFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if(container !=null){
+            container.removeAllViews();
+        }
         View view = inflater.inflate(R.layout.fragment_list_tenant, container, false);
         return view;
     }
@@ -92,14 +83,16 @@ public class ListTenantFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.tenant_list);
         DbHelper dbHelper = new DbHelper(getActivity());
         List<Tenant.TenantBean> tenants = dbHelper.getAllTenants();
-
+        Log.d("ListTenantSize", tenants.size()+"");
         adapter = new TenantAdapter(tenants, mContext);
+        adapter.notifyDataSetChanged();
         LinearLayoutManager llayout = new LinearLayoutManager(mContext);
         DividerItemDecoration itemDecor = new DividerItemDecoration(mRecyclerView.getContext(), llayout.getOrientation());
         mRecyclerView.addItemDecoration(itemDecor);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(llayout);
         mRecyclerView.setAdapter(adapter);
+
         tenantTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

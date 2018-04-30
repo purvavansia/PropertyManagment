@@ -1,19 +1,12 @@
 package com.example.purva.propertymanagment.data.database;
 //
-import android.content.ContentValues;
+
 import android.content.Context;
-import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import com.example.purva.propertymanagment.data.model.Property;
 import com.example.purva.propertymanagment.data.model.PropertyContract;
 import com.example.purva.propertymanagment.data.model.TenantContract;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class DbOpenHelper extends SQLiteOpenHelper {
     private static final String dbname = "properties.db";

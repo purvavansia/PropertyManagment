@@ -7,36 +7,23 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
-
 import com.example.purva.propertymanagment.R;
-import com.example.purva.propertymanagment.data.model.User;
-import com.example.purva.propertymanagment.ui.home.MainActivity;
-import com.example.purva.propertymanagment.ui.signup.Constants;
-import com.example.purva.propertymanagment.ui.signup.SignUpActivity;
-import com.example.purva.propertymanagment.ui.signup.landlord.ApiServiceLandlordSignUp;
-import com.example.purva.propertymanagment.ui.signup.landlord.RetrofitInstanceLandlordSignUp;
 
 import java.util.ArrayList;
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 

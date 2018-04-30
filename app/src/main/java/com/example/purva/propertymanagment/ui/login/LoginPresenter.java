@@ -75,7 +75,6 @@ public class LoginPresenter implements ILoginPresenter {
                     if (response.body().getUsertype().contains("tenant")) {
 
                     }
-
                     else if(response.body().getUsertype().contains("landlord")){
 
                         Intent honeIntent = new Intent(context, MainActivity.class);

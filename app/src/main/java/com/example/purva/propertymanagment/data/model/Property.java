@@ -25,8 +25,17 @@ public class Property {
          * propertymortageinfo : no
          */
 
-        private String id;
+        private String id;   // property Id
         private String propertycountry;
+
+        public String getLandlordId() {
+            return landlordId;
+        }
+
+        public void setLandlordId(String landlordId) {
+            this.landlordId = landlordId;
+        }
+
         private String landlordId;
         private String propertystate;
         private String propertycity;
