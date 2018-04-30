@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.purva.propertymanagment.R;
+import com.example.purva.propertymanagment.network.ApiService;
+
+import com.example.purva.propertymanagment.network.RetrofitInstance;
 import com.example.purva.propertymanagment.ui.BaseFragment;
 import com.example.purva.propertymanagment.ui.login.LoginActivity;
 import com.example.purva.propertymanagment.ui.signup.Constants;
@@ -359,7 +362,7 @@ public class LandlordSignupFragment extends BaseFragment {
 
         String landlord_email = emailEt.getText().toString();
         String landlord_password = passwordEt.getText().toString();
-        ApiServiceLandlordSignUp apiService = RetrofitInstanceLandlordSignUp.getRetrofitInstance().create(ApiServiceLandlordSignUp.class);
+        ApiService apiService = RetrofitInstance.getRetrofitInstance().create(ApiService.class);
 
         Call<String> signUpCall =  apiService.getSignUpDetails(landlord_email,landlord_email,landlord_password, Constants.LANDLORD);
         signUpCall.enqueue(new Callback<String>() {

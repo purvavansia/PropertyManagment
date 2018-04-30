@@ -26,6 +26,7 @@ public class PropertyActivity extends AppCompatActivity {
         }
         if(getIntent().getExtras().getString("selection").equals("details")){
             PropertyDetailsFragment propertyDetailsFragment = new PropertyDetailsFragment();
+
             getFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyDetailsFragment,"add frag").commit();
         }*/
     }

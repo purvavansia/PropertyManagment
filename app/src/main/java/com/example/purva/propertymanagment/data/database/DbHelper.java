@@ -10,6 +10,8 @@ import com.example.purva.propertymanagment.data.model.Property;
 import com.example.purva.propertymanagment.data.model.PropertyContract;
 import com.example.purva.propertymanagment.data.model.Tenant;
 import com.example.purva.propertymanagment.data.model.TenantContract;
+import com.example.purva.propertymanagment.data.model.Transaction;
+import com.example.purva.propertymanagment.data.model.TransactionContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -169,6 +171,68 @@ public class DbHelper implements IDbHelper{
     @Override
     public boolean validateTenant(Tenant tenant) {
         return false;
+    }
+
+
+
+    //Transaction db methods
+    @Override
+    public List<Transaction.TransactionBean> getAllTransaction() {
+
+        List<Transaction.TransactionBean> transactions = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + TransactionContract.TransactionEntry.TABLE_NAME;
+        Cursor cursor = mSQLiteDatabase.rawQuery(selectQuery,null);
+        if (cursor.moveToFirst()){
+            do{
+                String transactionId = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.TRANSACTION_ID));
+                String landlordId = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.COLUMN_LANDLORD_ID));
+                String transactionDate = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_DATE));
+                String transactionSummary = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_SUMMARY));
+                String transactionDescription = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_DESCRIPTION));
+                String propertyId = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_PROPERTY_ID));
+                String transactionAmount = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_AMOUNT));
+                String transactionType = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_TYPE));
+                Transaction.TransactionBean transactionBean = new Transaction.TransactionBean(transactionId,landlordId,transactionDate,
+                        transactionSummary,transactionDescription,propertyId,transactionAmount,transactionType);
+                transactions.add(transactionBean);
+
+            }while (cursor.moveToNext());
+        }
+        return transactions;
+    }
+
+    @Override
+    public int getTransactionCount() {
+        return (int) DatabaseUtils.queryNumEntries(mSQLiteDatabase, TransactionContract.TransactionEntry.TABLE_NAME);
+    }
+
+    @Override
+    public int insertTransactionRecord( String LandlordId, String date, String summary, String description, String propertyId, String amount, String type) {
+
+        ContentValues values = new ContentValues();
+        values.put(TransactionContract.TransactionEntry.COLUMN_LANDLORD_ID,LandlordId);
+        values.put(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_DATE,date);
+        values.put(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_SUMMARY,summary);
+        values.put(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_DESCRIPTION,description);
+        values.put(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_PROPERTY_ID,propertyId);
+        values.put(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_AMOUNT,amount);
+        values.put(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_TYPE,type);
+        long row_id = mSQLiteDatabase.insert(TransactionContract.TransactionEntry.TABLE_NAME,null,values);
+
+        return (int)row_id;
+    }
+
+    @Override
+    public void deleteTransactionById(String transactionId) {
+        mSQLiteDatabase.delete(TransactionContract.TransactionEntry.TABLE_NAME, TransactionContract.TransactionEntry.TRANSACTION_ID,
+                new String[]{transactionId});
+        Log.i("deleterows",""+getTransactionCount());
+    }
+
+    @Override
+    public boolean clearTransactionTable() {
+        mSQLiteDatabase.execSQL("delete from " + TransactionContract.TransactionEntry.TABLE_NAME);
+        return getTransactionCount()==0;
     }
 
 }

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.ui.property.PropertyActivity;
 import com.example.purva.propertymanagment.ui.tenant.TenantActivity;
+import com.example.purva.propertymanagment.ui.todo.ToDoActivity;
+import com.example.purva.propertymanagment.ui.transaction.TransactionActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -24,33 +26,70 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements OnChartValueSelectedListener {
+public class MainActivity extends AppCompatActivity implements OnChartValueSelectedListener, IHomeView {
 
 
 
-    ImageView property;
+    ImageView property, todo, transaction;
+    IHomePresenter iHomePresenter;
     private float[] yvalues = {50f, 25f, 25f};
     private String[] xvals = {"Mortgage Interest","Property Management","Other"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         property = findViewById(R.id.imageProperty);
-        displayPieChart();
+        todo = findViewById(R.id.imageToDo);
+        transaction = findViewById(R.id.imageTransaction);
+
+        iHomePresenter = new HomePresenter(this, (IHomeView) this);
 
         property.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent propertyIntent = new Intent(MainActivity.this, PropertyActivity.class);
-                propertyIntent.putExtra("selection","main");
-                startActivity(propertyIntent);
+               iHomePresenter.onClickProperty();
+            }
+        });
+
+        todo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iHomePresenter.onClickTodo();
+            }
+        });
+
+        transaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent transactionIntent = new Intent(MainActivity.this, TransactionActivity.class);
+                startActivity(transactionIntent);
             }
         });
 
     }
 
-    private void displayPieChart() {
 
+
+    @Override
+    public void onValueSelected(Entry e, Highlight h) {
+
+    }
+
+    @Override
+    public void onNothingSelected() {
+
+    }
+
+    public void onClickTenants(View view) {
+        Log.d("TEnant", "clicked");
+       Intent intent = new Intent(MainActivity.this, TenantActivity.class);
+       startActivity(intent);
+
+    }
+
+    @Override
+    public void displayPieChart() {
         PieChart pieChart = (PieChart) findViewById(R.id.pieChart);
         pieChart.setUsePercentValues(true);
         pieChart.setRotationEnabled(true);
@@ -79,23 +118,5 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         data.setValueTextSize(13f);
         data.setValueTextColor(Color.DKGRAY);
         pieChart.setOnChartValueSelectedListener(MainActivity.this);
-    }
-
-
-    @Override
-    public void onValueSelected(Entry e, Highlight h) {
-
-    }
-
-    @Override
-    public void onNothingSelected() {
-
-    }
-
-    public void onClickTenants(View view) {
-        Log.d("TEnant", "clicked");
-       Intent intent = new Intent(MainActivity.this, TenantActivity.class);
-       startActivity(intent);
-
     }
 }

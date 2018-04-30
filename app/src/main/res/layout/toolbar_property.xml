@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/toolbar"
+    android:id="@+id/toolbar_property"
     android:minHeight="?attr/actionBarSize"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,7 +18,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="28sp"
-        android:text="@string/tenants"/>
+        android:text="Properties"/>
 
+    <ImageView
+        android:textColor="@drawable/back_home"
+        android:id="@+id/imageViewAddProp"
+       android:layout_marginLeft="210dp"
+        android:src="@drawable/add_property"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
     <!--android:drawableLeft="@drawable/ic_back_arrow"-->
 </android.support.v7.widget.Toolbar>

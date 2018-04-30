@@ -15,6 +15,7 @@ import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.data.database.IDbHelper;
 import com.example.purva.propertymanagment.data.model.Property;
+import com.example.purva.propertymanagment.network.ApiServiceProperty;
 import com.example.purva.propertymanagment.ui.signup.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,20 +40,19 @@ import java.util.ListIterator;
 public class PropertyInfoFragment extends Fragment {
 
     final static String BASE_URL = "http://rjtmobile.com/aamir/property-mgmt/";
-    EditText street, city, state, country, price,propertFor,mortgageInfo;
+    EditText street, city, state, country, price, propertFor, mortgageInfo;
     Button addProperty;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    int propertyID;
-     int i = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_property_info,container,false);
+        View view = inflater.inflate(R.layout.fragment_property_info, container, false);
         sharedPreferences = getActivity().getSharedPreferences("mydata", Context.MODE_PRIVATE);
-        propertyID = sharedPreferences.getInt("property_id", 0);
-        String userid = sharedPreferences.getString("userid","");
+
+        String userid = sharedPreferences.getString("userid", "");
         street = view.findViewById(R.id.propertyAddStreet);
         city = view.findViewById(R.id.propertyAddCity);
         state = view.findViewById(R.id.propertyAddState);
@@ -66,8 +66,7 @@ public class PropertyInfoFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 editor = sharedPreferences.edit();
-                editor.putInt("property_id",++propertyID);
-                i++;
+
                 String pro_street = street.getText().toString();
                 String pro_city = city.getText().toString();
                 String pro_state = state.getText().toString();
@@ -79,83 +78,76 @@ public class PropertyInfoFragment extends Fragment {
                 Gson gson = new GsonBuilder().setLenient().create();
 
                 Retrofit retrofit = new retrofit2.Retrofit.Builder().baseUrl(BASE_URL).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).build();
-        final Observable<Property> propertyObservable = retrofit.create(ApiServiceProperty.class).getPropertyDetails(userid, Constants.LANDLORD);
+                final Observable<Property> propertyObservable = retrofit.create(ApiServiceProperty.class).getPropertyDetails(userid, Constants.LANDLORD);
 
 
-        retrofit.create(ApiServiceProperty.class)
-                .addPropertyDetails(pro_street, pro_city, pro_state, pro_country, pro_for, pro_price, pro_mortgage, userid, Constants.LANDLORD)
+                retrofit.create(ApiServiceProperty.class)
+                        .addPropertyDetails(pro_street, pro_city, pro_state, pro_country, pro_for, pro_price, pro_mortgage, userid, Constants.LANDLORD)
 
-                .flatMap(new Function<String, ObservableSource<Property>>() {
-                    @Override
-                    public ObservableSource<Property> apply(String reponse) throws Exception {
+                        .flatMap(new Function<String, ObservableSource<Property>>() {
+                            @Override
+                            public ObservableSource<Property> apply(String reponse) throws Exception {
 
-                        Log.i("response",""+reponse);
-                        if (reponse.contains("successfully")) {
+                                Log.i("response", "" + reponse);
+                                if (reponse.contains("successfully")) {
 
-                            Log.i("response",""+reponse);
-                            return propertyObservable;
-                        }
-                        return null;
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Property>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        Log.i("response","subscribed");
-
-                    }
-
-                    @Override
-                    public void onNext(Property property) {
-                        Log.i("response",property.getProperty().get(0).getId());
-                        List<Property.PropertyBean> propertyList = property.getProperty();
-                        ListIterator<Property.PropertyBean> listIterator = propertyList.listIterator();
-                        String propertyId = null;
-                        while(listIterator.hasNext()){
-                            Property.PropertyBean propertyBean = listIterator.next();
-                            String country = propertyBean.getPropertycountry();
-                            String state = propertyBean.getPropertystate();
-                            String city = propertyBean.getPropertycity();
-                            String street = propertyBean.getPropertyaddress();
-                            String price = propertyBean.getPropertypurchaseprice();
-                            String mortgage = propertyBean.getPropertymortageinfo();
-                            String status = propertyBean.getPropertystatus();
-                            if(country.equals(pro_country) && state.equals(pro_state) && city.equals(pro_city) && street.equals(pro_street)
-                                    && price.equals(pro_price) && mortgage.equals(pro_mortgage) && status.equals(pro_for)){
-                                propertyId = propertyBean.getId();
-                                Log.d("FoundID", "PropertyID: " + propertyId);
-//                                DbHelper dbHelper = new DbHelper(getActivity());
-//                                dbHelper.insertPropertyRecord(propertyId, userid, country, state, city, street, price, mortgage, status);
-                                break;
+                                    Log.i("response", "" + reponse);
+                                    return propertyObservable;
+                                }
+                                return null;
                             }
-                        }
-                        IDbHelper iDbHelper = new DbHelper(getActivity());
-                        int row_id = iDbHelper.insertPropertyRecord(propertyId,userid,pro_country,pro_state,pro_city,pro_street,pro_price,pro_mortgage,pro_for);
-                        if(row_id == -1){
-                            Log.d("FAILURE_INSERTED", "Failed inserted");
-                        }
-                        int rowNum = iDbHelper.getPropertyCount();
-                        Log.d("ROWS", ""+rowNum );
-//                        Intent propertyIntent = new Intent(getActivity(), PropertyActivity.class);
-//                        propertyIntent.putExtra("selection","main");
-//                        startActivity(propertyIntent);
-                        PropertyListFragment propertyListFragment = new PropertyListFragment();
-                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyListFragment,"back_to_main").commit();
-                    }
+                        })
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<Property>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+                                Log.i("response", "subscribed");
 
-                    @Override
-                    public void onError(Throwable e) {
+                            }
 
-                        Log.i("response","error"+e);
-                    }
+                            @Override
+                            public void onNext(Property property) {
+                                Log.i("response", property.getProperty().get(0).getId());
+                                List<Property.PropertyBean> propertyList = property.getProperty();
+                                ListIterator<Property.PropertyBean> listIterator = propertyList.listIterator();
+                                String propertyId = null;
+                                while (listIterator.hasNext()) {
+                                    Property.PropertyBean propertyBean = listIterator.next();
+                                    String country = propertyBean.getPropertycountry();
+                                    String state = propertyBean.getPropertystate();
+                                    String city = propertyBean.getPropertycity();
+                                    String street = propertyBean.getPropertyaddress();
+                                    String price = propertyBean.getPropertypurchaseprice();
+                                    String mortgage = propertyBean.getPropertymortageinfo();
+                                    String status = propertyBean.getPropertystatus();
+                                    if (country.equals(pro_country) && state.equals(pro_state) && city.equals(pro_city) && street.equals(pro_street)
+                                            && price.equals(pro_price) && mortgage.equals(pro_mortgage) && status.equals(pro_for)) {
+                                        propertyId = propertyBean.getId();
+                                        Log.d("FoundID", "PropertyID: " + propertyId);
+                                        break;
+                                    }
+                                }
+                                IDbHelper iDbHelper = new DbHelper(getActivity());
+                                int row_id = iDbHelper.insertPropertyRecord(propertyId, userid, pro_country, pro_state, pro_city, pro_street, pro_price, pro_mortgage, pro_for);
+                                if (row_id == -1) {
+                                    Log.d("FAILURE_INSERTED", "Failed inserted");
+                                }
+                                PropertyListFragment propertyListFragment = new PropertyListFragment();
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty, propertyListFragment, "back_to_main").commit();
+                            }
 
-                    @Override
-                    public void onComplete() {
-                        Log.i("response","completed");
-                    }
-                });
+                            @Override
+                            public void onError(Throwable e) {
+
+                                Log.i("response", "error" + e);
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                Log.i("response", "completed");
+                            }
+                        });
 
             }
         });

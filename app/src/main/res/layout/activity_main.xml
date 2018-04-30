@@ -6,11 +6,31 @@
     android:layout_height="match_parent"
     tools:context="com.example.purva.propertymanagment.ui.home.MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:orientation="horizontal"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar_main"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="@color/primary">
 
+        <TextView
+            android:textColor="@drawable/back_home"
+            android:id="@+id/back"
+            android:textAlignment="viewStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="Property Management"/>
+
+    </android.support.v7.widget.Toolbar>
     <ScrollView
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:fillViewport="true"
         android:scrollbars = "vertical"
         android:scrollbarStyle="insideInset"
@@ -22,9 +42,9 @@
             android:orientation="vertical" >
 
             <TableLayout
-
+                android:layout_marginLeft="-30dp"
                 android:layout_width="match_parent"
-                android:layout_height="240dp">
+                android:layout_height="350dp">
 
                 <TableRow
                     android:layout_gravity="center"
@@ -97,13 +117,14 @@
                     <ImageView
 
                         android:layout_marginLeft="70dp"
-                        android:src="@drawable/collectrent"
+                        android:src="@drawable/transaction"
                         android:layout_width="60dp"
+                        android:id="@+id/imageTransaction"
                         android:layout_height="60dp">
 
                     </ImageView>
                     <ImageView
-
+                        android:id="@+id/imageToDo"
                         android:layout_marginLeft="100dp"
                         android:src="@drawable/todo"
                         android:layout_width="60dp"
@@ -124,7 +145,7 @@
                     </TextView>-->
 
                     <TextView
-                        android:text="@string/collect_rent"
+                        android:text="Add Transaction"
                         android:layout_marginLeft="60dp"
                         android:gravity="center"
                         android:layout_width="wrap_content"
@@ -133,6 +154,64 @@
                     </TextView>
                     <TextView
                         android:text="@string/to_do_list"
+                        android:gravity="center"
+                        android:layout_marginLeft="100dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                </TableRow>
+
+                <TableRow
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    >
+                    <!--<ImageView
+                        android:src="@drawable/transaction"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp">
+
+                    </ImageView>-->
+                    <ImageView
+
+                        android:layout_marginLeft="70dp"
+                        android:src="@drawable/viewtrans"
+                        android:layout_width="60dp"
+                        android:id="@+id/imageViewTransaction"
+                        android:layout_height="60dp">
+
+                    </ImageView>
+                    <ImageView
+                        android:id="@+id/imageDocuments"
+                        android:layout_marginLeft="100dp"
+                        android:src="@drawable/documents"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp">
+
+                    </ImageView>
+                </TableRow>
+                <TableRow
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    >
+                    <!--<TextView
+                        android:text="@string/transactions"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    </TextView>-->
+
+                    <TextView
+                        android:text="View Transaction"
+                        android:layout_marginLeft="60dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+                    <TextView
+                        android:text="Add Documents"
                         android:gravity="center"
                         android:layout_marginLeft="100dp"
                         android:layout_width="wrap_content"
