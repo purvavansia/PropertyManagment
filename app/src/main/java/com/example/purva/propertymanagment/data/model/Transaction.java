@@ -20,9 +20,18 @@ public class Transaction {
 
     public static class TransactionBean{
 
-        String transactionId, landlordId, date, summary, description, propertyId, amount, type;
+        Integer transactionId;
+        String  landlordId, date, summary, description, propertyId, amount, type;
 
-        public TransactionBean(String transactionId, String landlordId, String date, String summary, String description, String propertyId, String amount, String type) {
+        public TransactionBean(String date, String summary, String description, String amount, String type) {
+            this.date = date;
+            this.summary = summary;
+            this.description = description;
+            this.amount = amount;
+            this.type = type;
+        }
+
+        public TransactionBean(Integer transactionId, String landlordId, String date, String summary, String description, String propertyId, String amount, String type) {
             this.transactionId = transactionId;
             this.landlordId = landlordId;
             this.date = date;
@@ -33,11 +42,11 @@ public class Transaction {
             this.type = type;
         }
 
-        public String getTransactionId() {
+        public Integer getTransactionId() {
             return transactionId;
         }
 
-        public void setTransactionId(String transactionId) {
+        public void setTransactionId(Integer transactionId) {
             this.transactionId = transactionId;
         }
 

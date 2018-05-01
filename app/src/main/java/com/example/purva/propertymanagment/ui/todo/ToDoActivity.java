@@ -10,12 +10,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.*;
+
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.database.TaskDbHelper;
 import com.example.purva.propertymanagment.data.model.TaskContract;
 
 import java.util.ArrayList;
+
+import io.paperdb.Paper;
 
 public class ToDoActivity extends AppCompatActivity {
 
@@ -108,6 +117,13 @@ public class ToDoActivity extends AppCompatActivity {
                 R.id.task_title, // where to put the String of data
                 taskList); // where to get all the data
 
+        if(taskList.size()==0){
+            Toast.makeText(ToDoActivity.this,"No tasks yet to do in todo list",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Paper.init(ToDoActivity.this);
+            Paper.book().write("text", taskList.get(0));
+        }
         mTaskListView.setAdapter(mAdapter); // set it as the adapter of the ListView instance
         cursor.close();
         db.close();

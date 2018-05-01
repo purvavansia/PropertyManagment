@@ -52,7 +52,7 @@ public class TransactionActivity extends AppCompatActivity {
                 String type = dropdownType.getSelectedItem().toString();
                 String propertyId = dropdownProperty.getSelectedItem().toString();
                 String landlordId = sharedPreferences.getString("userid","");
-                iDbHelper.insertTransactionRecord(landlordId,datetext,summary,desc,amount,type,propertyId);
+                iDbHelper.insertTransactionRecord(landlordId,datetext,summary,desc,propertyId,amount,type);
                 int rowNum = iDbHelper.getTransactionCount();
                 Log.d("ROWS", ""+rowNum );
                 Toast.makeText(TransactionActivity.this,"Transaction Added",Toast.LENGTH_SHORT).show();

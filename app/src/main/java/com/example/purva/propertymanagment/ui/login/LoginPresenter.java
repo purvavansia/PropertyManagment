@@ -10,12 +10,14 @@ import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.example.purva.propertymanagment.data.model.User;
 import com.example.purva.propertymanagment.network.ApiService;
 import com.example.purva.propertymanagment.network.RetrofitInstance;
 import com.example.purva.propertymanagment.ui.home.MainActivity;
-import com.example.purva.propertymanagment.ui.signup.Constants;
+import com.example.purva.propertymanagment.ui.Constants;
 import com.example.purva.propertymanagment.ui.signup.SignUpActivity;
 
 
@@ -29,25 +31,23 @@ import retrofit2.Response;
 
 public class LoginPresenter implements ILoginPresenter {
 
+
     Context context;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    ILoginView iLoginView;
 
-    public LoginPresenter(Context context) {
+    public LoginPresenter(Context context, ILoginView iLoginView) {
         this.context = context;
+        this.iLoginView = iLoginView;
     }
 
     @Override
     public void checkPermission() {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (!(ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)) {
                     Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                            Uri.parse("package:" + context.getPackageName()));
+                            Uri.parse(Constants.PACKAGE + ":" + context.getPackageName()));
                     context.startActivity(intent);
-
-            }
-        }
     }
 
     @Override
@@ -91,5 +91,10 @@ public class LoginPresenter implements ILoginPresenter {
                 Log.i(Constants.TAG,""+t);
             }
         });
+    }
+
+    @Override
+    public void getView(View v, MotionEvent event) {
+        iLoginView.setHint(v,event);
     }
 }

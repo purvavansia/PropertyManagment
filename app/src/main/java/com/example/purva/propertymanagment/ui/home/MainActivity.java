@@ -8,11 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.example.purva.propertymanagment.R;
+import com.example.purva.propertymanagment.ui.Constants;
 import com.example.purva.propertymanagment.ui.document.DocumentActivity;
-import com.example.purva.propertymanagment.ui.property.PropertyActivity;
-import com.example.purva.propertymanagment.ui.tenant.TenantActivity;
-import com.example.purva.propertymanagment.ui.todo.ToDoActivity;
-import com.example.purva.propertymanagment.ui.transaction.TransactionActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -30,11 +27,10 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements OnChartValueSelectedListener, IHomeView {
 
 
-
-    ImageView property, todo, transaction, document;
+    ImageView property, todo, transaction, viewTransaction, document;
     IHomePresenter iHomePresenter;
     private float[] yvalues = {50f, 25f, 25f};
-    private String[] xvals = {"Mortgage Interest","Property Management","Other"};
+    private String[] xvals = {Constants.MORTGAGE_INTEREST, Constants.PROPERTY_MANAGEMENT, Constants.OTHER};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +39,10 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         property = findViewById(R.id.imageProperty);
         todo = findViewById(R.id.imageToDo);
         transaction = findViewById(R.id.imageTransaction);
+
         document = findViewById(R.id.imageDocuments);
+        viewTransaction = findViewById(R.id.imageViewTransaction);
+
         iHomePresenter = new HomePresenter(this, (IHomeView) this);
 
         property.setOnClickListener(new View.OnClickListener() {
@@ -63,8 +62,14 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         transaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent transactionIntent = new Intent(MainActivity.this, TransactionActivity.class);
-                startActivity(transactionIntent);
+                iHomePresenter.onClickAddTransaction();
+            }
+        });
+
+        viewTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               iHomePresenter.onClickViewTransactions();
             }
         });
 
@@ -91,8 +96,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
 
     public void onClickTenants(View view) {
         Log.d("TEnant", "clicked");
-       Intent intent = new Intent(MainActivity.this, TenantActivity.class);
-       startActivity(intent);
+       iHomePresenter.onClickTenants();
 
     }
 
@@ -114,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
             xEntrys.add(xvals[i]);
 
         }
-        PieDataSet dataSet = new PieDataSet(yEntrys, "Expenses");
+        PieDataSet dataSet = new PieDataSet(yEntrys, Constants.EXPENSES);
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
         Legend legend = pieChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);

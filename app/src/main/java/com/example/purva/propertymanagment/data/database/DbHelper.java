@@ -182,7 +182,7 @@ public class DbHelper implements IDbHelper{
         Cursor cursor = mSQLiteDatabase.rawQuery(selectQuery,null);
         if (cursor.moveToFirst()){
             do{
-                String transactionId = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.TRANSACTION_ID));
+                Integer transactionId = cursor.getInt(cursor.getColumnIndex(TransactionContract.TransactionEntry.TRANSACTION_ID));
                 String landlordId = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.COLUMN_LANDLORD_ID));
                 String transactionDate = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_DATE));
                 String transactionSummary = cursor.getString(cursor.getColumnIndex(TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_SUMMARY));
@@ -221,9 +221,9 @@ public class DbHelper implements IDbHelper{
     }
 
     @Override
-    public void deleteTransactionById(String transactionId) {
-        mSQLiteDatabase.delete(TransactionContract.TransactionEntry.TABLE_NAME, TransactionContract.TransactionEntry.TRANSACTION_ID,
-                new String[]{transactionId});
+    public void deleteTransactionById(Integer transactionId) {
+        mSQLiteDatabase.delete(TransactionContract.TransactionEntry.TABLE_NAME, TransactionContract.TransactionEntry.TRANSACTION_ID+ " = ?",
+                new String[] {""+String.valueOf(transactionId)});
         Log.i("deleterows",""+getTransactionCount());
     }
 

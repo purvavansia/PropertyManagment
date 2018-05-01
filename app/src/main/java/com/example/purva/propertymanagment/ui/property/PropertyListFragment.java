@@ -19,7 +19,10 @@ import com.example.purva.propertymanagment.data.adapters.PropertyAdapter;
 import com.example.purva.propertymanagment.data.model.Property;
 import com.example.purva.propertymanagment.network.ApiService;
 import com.example.purva.propertymanagment.network.RetrofitInstance;
-import com.example.purva.propertymanagment.ui.signup.Constants;
+import com.example.purva.propertymanagment.ui.Constants;
+
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
