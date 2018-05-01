@@ -62,18 +62,14 @@ public class PropertyListFragment extends Fragment {
         propertyCall.enqueue(new Callback<Property>() {
             @Override
             public void onResponse(Call<Property> call, Response<Property> response) {
-
                 Log.i(Constants.TAG, "SIZE: " + response.body().getProperty().size()+"");
                 PropertyAdapter propertyAdapter = new PropertyAdapter(response.body().getProperty(),getActivity());
                 propertyAdapter.setImages(response.body().getProperty().size());
                 recyclerView.setAdapter(propertyAdapter);
-
-
             }
 
             @Override
             public void onFailure(Call<Property> call, Throwable t) {
-
                 Log.i(Constants.TAG,""+t);
             }
         });
@@ -81,9 +77,6 @@ public class PropertyListFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent addPropIntent = new Intent(getActivity(),PropertyActivity.class);
-//                addPropIntent.putExtra("selection","addprop");
-//                startActivity(addPropIntent);
                 PropertyInfoFragment propertyInfoFragment = new PropertyInfoFragment();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyInfoFragment,"add frag").commit();
             }

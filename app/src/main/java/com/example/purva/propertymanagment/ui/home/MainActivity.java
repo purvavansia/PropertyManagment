@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.example.purva.propertymanagment.R;
+import com.example.purva.propertymanagment.ui.document.DocumentActivity;
 import com.example.purva.propertymanagment.ui.property.PropertyActivity;
 import com.example.purva.propertymanagment.ui.tenant.TenantActivity;
 import com.example.purva.propertymanagment.ui.todo.ToDoActivity;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
 
 
 
-    ImageView property, todo, transaction;
+    ImageView property, todo, transaction, document;
     IHomePresenter iHomePresenter;
     private float[] yvalues = {50f, 25f, 25f};
     private String[] xvals = {"Mortgage Interest","Property Management","Other"};
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         property = findViewById(R.id.imageProperty);
         todo = findViewById(R.id.imageToDo);
         transaction = findViewById(R.id.imageTransaction);
-
+        document = findViewById(R.id.imageDocuments);
         iHomePresenter = new HomePresenter(this, (IHomeView) this);
 
         property.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +65,13 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
             public void onClick(View v) {
                 Intent transactionIntent = new Intent(MainActivity.this, TransactionActivity.class);
                 startActivity(transactionIntent);
+            }
+        });
+
+        document.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DocumentActivity.class));
             }
         });
 

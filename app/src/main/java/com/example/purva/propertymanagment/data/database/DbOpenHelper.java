@@ -5,15 +5,20 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.TextView;
+import com.example.purva.propertymanagment.data.model.DocumentContract;
 import com.example.purva.propertymanagment.data.model.PropertyContract;
 import com.example.purva.propertymanagment.data.model.TenantContract;
 import com.example.purva.propertymanagment.data.model.TransactionContract;
+
+import java.sql.Blob;
 
 public class DbOpenHelper extends SQLiteOpenHelper {
     private static final String dbname = "properties.db";
     private static final String TEXT_TYPE = " TEXT";
     private static final String INT_TYPE = " integer";
     private static final String COMMA_SEP = ",";
+    private static final String BLOB_TYPE = " BLOB";
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + PropertyContract.PropertyEntry.TABLE_NAME + " ("
                     + PropertyContract.PropertyEntry.PROPERTY_ID + TEXT_TYPE+ COMMA_SEP
@@ -53,6 +58,15 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                     + TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_AMOUNT + TEXT_TYPE + COMMA_SEP
                     + TransactionContract.TransactionEntry.COLUMN_NAME_TRANSACTION_TYPE + TEXT_TYPE +
                     ");";
+    private static final String SQL_CREATE_DOCUMENT_ENTRIES=
+            "CREATE TABLE " + DocumentContract.DocumentEntry.TABLE_NAME + " ("
+                    + DocumentContract.DocumentEntry.PROPERTY_ID + TEXT_TYPE + COMMA_SEP
+                    + DocumentContract.DocumentEntry.LANDLORD_ID + TEXT_TYPE + COMMA_SEP
+                    + DocumentContract.DocumentEntry.DOCUMENT_NAME + TEXT_TYPE + COMMA_SEP
+                    + DocumentContract.DocumentEntry.DOCUMENT_TYPE + TEXT_TYPE + COMMA_SEP
+                    + DocumentContract.DocumentEntry.DOCUMENT_COMMENT + TEXT_TYPE + COMMA_SEP
+                    + DocumentContract.DocumentEntry.PATH_ID + TEXT_TYPE + COMMA_SEP
+                    + DocumentContract.DocumentEntry.IMAGE_ID + BLOB_TYPE + ");";
 
 
     public DbOpenHelper(Context context) {
@@ -65,6 +79,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_ENTRIES);
         db.execSQL(SQL_CREATE_TENANT_ENTRIES);
         db.execSQL(SQL_CREATE_TRANSACTION_ENTRIES);
+        db.execSQL(SQL_CREATE_DOCUMENT_ENTRIES);
     }
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + PropertyContract.PropertyEntry.TABLE_NAME;
@@ -75,6 +90,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + PropertyContract.PropertyEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + TenantContract.TenantEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS "+ TransactionContract.TransactionEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + DocumentContract.DocumentEntry.TABLE_NAME);
         onCreate(db);
     }
 }

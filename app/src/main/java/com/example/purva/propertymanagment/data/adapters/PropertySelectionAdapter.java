@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.OnClick;
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.model.Property;
 
@@ -40,9 +38,7 @@ public class PropertySelectionAdapter extends ArrayAdapter<String> {
         TextView street = view.findViewById(R.id.streetAddr);
         TextView cityStateCountry = view.findViewById(R.id.city_state_country);
         street.setText(this.propertyBeans.get(position).getPropertyaddress());
-        cityStateCountry.setText(this.propertyBeans.get(position).getPropertycity() +
-                        " " + this.propertyBeans.get(position).getPropertystate()   +
-                        " " + this.propertyBeans.get(position).getPropertycountry());
+        cityStateCountry.setText(String.format("%s %s %s", this.propertyBeans.get(position).getPropertycity(), this.propertyBeans.get(position).getPropertystate(), this.propertyBeans.get(position).getPropertycountry()));
         return view;
     }
 

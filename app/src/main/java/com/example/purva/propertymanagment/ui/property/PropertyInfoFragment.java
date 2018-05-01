@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.database.DbHelper;
-import com.example.purva.propertymanagment.data.database.IDbHelper;
 import com.example.purva.propertymanagment.data.model.Property;
 import com.example.purva.propertymanagment.network.ApiServiceProperty;
 import com.example.purva.propertymanagment.ui.signup.Constants;
@@ -90,8 +89,6 @@ public class PropertyInfoFragment extends Fragment {
 
                                 Log.i("response", "" + reponse);
                                 if (reponse.contains("successfully")) {
-
-                                    Log.i("response", "" + reponse);
                                     return propertyObservable;
                                 }
                                 return null;
@@ -128,8 +125,8 @@ public class PropertyInfoFragment extends Fragment {
                                         break;
                                     }
                                 }
-                                IDbHelper iDbHelper = new DbHelper(getActivity());
-                                int row_id = iDbHelper.insertPropertyRecord(propertyId, userid, pro_country, pro_state, pro_city, pro_street, pro_price, pro_mortgage, pro_for);
+                                DbHelper dbHelper = new DbHelper(getActivity());
+                                int row_id = dbHelper.insertPropertyRecord(propertyId, userid, pro_country, pro_state, pro_city, pro_street, pro_price, pro_mortgage, pro_for);
                                 if (row_id == -1) {
                                     Log.d("FAILURE_INSERTED", "Failed inserted");
                                 }
