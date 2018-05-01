@@ -19,7 +19,7 @@ import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.data.database.IDbHelper;
 import com.example.purva.propertymanagment.data.model.Property;
 import com.example.purva.propertymanagment.network.ApiServiceProperty;
-import com.example.purva.propertymanagment.ui.signup.Constants;
+import com.example.purva.propertymanagment.ui.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

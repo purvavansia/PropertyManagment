@@ -19,7 +19,7 @@ import com.example.purva.propertymanagment.data.database.IDbHelper;
 import com.example.purva.propertymanagment.data.model.Property;
 import com.example.purva.propertymanagment.network.ApiService;
 import com.example.purva.propertymanagment.network.RetrofitInstance;
-import com.example.purva.propertymanagment.ui.signup.Constants;
+import com.example.purva.propertymanagment.ui.Constants;
 
 import retrofit2.Call;
 import retrofit2.Callback;

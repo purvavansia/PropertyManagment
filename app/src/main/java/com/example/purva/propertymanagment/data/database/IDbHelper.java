@@ -32,7 +32,7 @@ public interface IDbHelper {
     public int getTransactionCount();
     public int insertTransactionRecord(String LandlordId, String date, String summary, String description,
                                        String propertyId, String amount, String type);
-    public void deleteTransactionById(String transactionId);
+    public void deleteTransactionById(Integer transactionId);
     public boolean clearTransactionTable();
 
 }

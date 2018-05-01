@@ -8,4 +8,7 @@ public interface IHomePresenter {
 
     public void onClickProperty();
     public void onClickTodo();
+    public void onClickAddTransaction();
+    public void onClickViewTransactions();
+    public void onClickTenants();
 }

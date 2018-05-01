@@ -21,7 +21,7 @@ import com.example.purva.propertymanagment.network.ApiService;
 import com.example.purva.propertymanagment.network.RetrofitInstance;
 import com.example.purva.propertymanagment.ui.BaseFragment;
 import com.example.purva.propertymanagment.ui.login.LoginActivity;
-import com.example.purva.propertymanagment.ui.signup.Constants;
+import com.example.purva.propertymanagment.ui.Constants;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
 import java.util.concurrent.TimeUnit;

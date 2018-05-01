@@ -28,7 +28,18 @@
         <activity android:name=".ui.property.PropertyActivity" />
         <activity android:name=".ui.tenant.TenantActivity" />
         <activity android:name=".ui.todo.ToDoActivity" />
-        <activity android:name=".ui.transaction.TransactionActivity"></activity>
+        <activity android:name=".ui.transaction.TransactionActivity" />
+        <activity android:name=".ui.transaction.TransactionListActivity" />
+
+        <receiver android:name=".ui.widget.ToDoWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/to_do_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

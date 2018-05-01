@@ -22,11 +22,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.purva.propertymanagment.R;
+import com.example.purva.propertymanagment.ui.Constants;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements ILoginView {
+
+
 
     EditText editTextPassword, editTextName;
     ImageButton speak;
@@ -38,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     String storedName;
     String password;
     Boolean storedCheck;
+    SpeechRecognizer mSpeechRecognizer;
+    Intent mSpeechRecognizerIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +56,10 @@ public class LoginActivity extends AppCompatActivity {
         speak = findViewById(R.id.micImage);
         login = findViewById(R.id.buttonLogin);
         signup = findViewById(R.id.buttonCreateAcc);
-        final SpeechRecognizer mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-        iLoginPresenter = new LoginPresenter(this);
+        mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        iLoginPresenter = new LoginPresenter(this,this);
 
-        final Intent mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        mSpeechRecognizerIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         mSpeechRecognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 
@@ -134,7 +139,6 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putBoolean("checkbox", false);
                     editor.commit();
                 }
-
                 iLoginPresenter.callApiLogin(login_email,login_password);
 
             }
@@ -144,28 +148,14 @@ public class LoginActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent signUpIntent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(signUpIntent);*/
                 iLoginPresenter.signUpClicked();
             }
         });
         speak.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_UP:
-                        //when the user removed the finger
-                        mSpeechRecognizer.stopListening();
-                        editTextPassword.setHint("You will see input here");
-                        break;
 
-                    case MotionEvent.ACTION_DOWN:
-                        //finger is on the button
-                        mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
-                        editTextPassword.setText("");
-                        editTextPassword.setHint("Listening...");
-                        break;
-                }
+                iLoginPresenter.getView(v,event);
                 return false;
             }
 
@@ -176,14 +166,29 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkPermission() {
 
-        //iLoginPresenter.checkPermission();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)) {
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + this.getPackageName()));
-                startActivity(intent);
-
+                iLoginPresenter.checkPermission();
                 finish();
             }
+        }
+    }
+
+    @Override
+    public void setHint(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_UP:
+                //when the user removed the finger
+                mSpeechRecognizer.stopListening();
+                editTextPassword.setHint(Constants.YOU_WILL_SEE_INPUT_HERE);
+                break;
+
+            case MotionEvent.ACTION_DOWN:
+                //finger is on the button
+                mSpeechRecognizer.startListening(mSpeechRecognizerIntent);
+                editTextPassword.setText("");
+                editTextPassword.setHint(Constants.LISTENING);
+                break;
         }
     }
 }

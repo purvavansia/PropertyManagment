@@ -38,6 +38,8 @@
     <string name="quote2">Now, property managers should be using the latest technology to assist them with their property management duties. -SpiderMan</string>
     <string name="quote3">Property managers tend to juggle a lot in one day. Do all at one place. -Captain America</string>
     <string name="property_details">Property Details</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
     >>>>>>> copy_master
 </resources>

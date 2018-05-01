@@ -12,6 +12,7 @@ import com.example.purva.propertymanagment.ui.property.PropertyActivity;
 import com.example.purva.propertymanagment.ui.tenant.TenantActivity;
 import com.example.purva.propertymanagment.ui.todo.ToDoActivity;
 import com.example.purva.propertymanagment.ui.transaction.TransactionActivity;
+import com.example.purva.propertymanagment.ui.transaction.TransactionListActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
 
 
 
-    ImageView property, todo, transaction;
+    ImageView property, todo, transaction, viewTransaction;
     IHomePresenter iHomePresenter;
     private float[] yvalues = {50f, 25f, 25f};
     private String[] xvals = {"Mortgage Interest","Property Management","Other"};
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         property = findViewById(R.id.imageProperty);
         todo = findViewById(R.id.imageToDo);
         transaction = findViewById(R.id.imageTransaction);
+        viewTransaction = findViewById(R.id.imageViewTransaction);
 
         iHomePresenter = new HomePresenter(this, (IHomeView) this);
 
@@ -62,8 +64,14 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         transaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent transactionIntent = new Intent(MainActivity.this, TransactionActivity.class);
-                startActivity(transactionIntent);
+                iHomePresenter.onClickAddTransaction();
+            }
+        });
+
+        viewTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               iHomePresenter.onClickViewTransactions();
             }
         });
 
@@ -83,8 +91,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
 
     public void onClickTenants(View view) {
         Log.d("TEnant", "clicked");
-       Intent intent = new Intent(MainActivity.this, TenantActivity.class);
-       startActivity(intent);
+       iHomePresenter.onClickTenants();
 
     }
 
