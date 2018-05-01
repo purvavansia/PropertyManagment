@@ -13,14 +13,31 @@ import android.widget.VideoView;
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.ui.home.MainActivity;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity implements ISplashView {
 
     ISplashPresenter iSplashPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_splash);
 
+        iSplashPresenter = new SplashPresenter(this,this);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        jump();
+        return true;
+    }
+
+    private void jump() {
+        if (isFinishing())
+            return;
+        iSplashPresenter.startHomeActivity();
+        finish();
+    }
+
+    @Override
+    public void displayVideo() {
         try {
             FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
@@ -36,7 +53,7 @@ public class SplashActivity extends AppCompatActivity {
             fl.setBackground(getDrawable(R.drawable.gradient));
             Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.splash);
             videoHolder.setVideoURI(video);
-            iSplashPresenter = new SplashPresenter(this);
+
 
             videoHolder.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 public void onCompletion(MediaPlayer mp) {
@@ -47,18 +64,5 @@ public class SplashActivity extends AppCompatActivity {
         } catch (Exception ex) {
             jump();
         }
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        jump();
-        return true;
-    }
-
-    private void jump() {
-        if (isFinishing())
-            return;
-        iSplashPresenter.startHomeActivity();
-        finish();
     }
 }

@@ -7,7 +7,7 @@
         android:orientation="horizontal"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar_property"
+        android:id="@+id/toolbar_propertyDeatails"
         android:minHeight="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
 
         <ImageView
             android:textColor="@drawable/back_home"
-            android:id="@+id/imageViewTransactionHome"
+            android:id="@+id/imageViewDetailsHome"
             android:layout_marginLeft="210dp"
             android:src="@drawable/home"
             android:layout_width="30dp"

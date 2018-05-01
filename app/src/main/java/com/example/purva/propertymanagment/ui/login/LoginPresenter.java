@@ -31,6 +31,7 @@ import retrofit2.Response;
 
 public class LoginPresenter implements ILoginPresenter {
 
+
     Context context;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -45,7 +46,7 @@ public class LoginPresenter implements ILoginPresenter {
     public void checkPermission() {
 
                     Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                            Uri.parse("package:" + context.getPackageName()));
+                            Uri.parse(Constants.PACKAGE + ":" + context.getPackageName()));
                     context.startActivity(intent);
     }
 

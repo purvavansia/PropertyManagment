@@ -13,9 +13,12 @@ import com.example.purva.propertymanagment.ui.login.LoginActivity;
 public class SplashPresenter implements ISplashPresenter {
 
    Context context;
+   ISplashView iSplashView;
 
-    public SplashPresenter(Context context) {
+    public SplashPresenter(Context context, ISplashView iSplashView) {
         this.context = context;
+        this.iSplashView = iSplashView;
+        iSplashView.displayVideo();
 
     }
 

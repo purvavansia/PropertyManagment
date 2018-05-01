@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.example.purva.propertymanagment.R;
+import com.example.purva.propertymanagment.ui.Constants;
 import com.example.purva.propertymanagment.ui.property.PropertyActivity;
 import com.example.purva.propertymanagment.ui.tenant.TenantActivity;
 import com.example.purva.propertymanagment.ui.todo.ToDoActivity;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     ImageView property, todo, transaction, viewTransaction;
     IHomePresenter iHomePresenter;
     private float[] yvalues = {50f, 25f, 25f};
-    private String[] xvals = {"Mortgage Interest","Property Management","Other"};
+    private String[] xvals = {Constants.MORTGAGE_INTEREST, Constants.PROPERTY_MANAGEMENT, Constants.OTHER};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
             xEntrys.add(xvals[i]);
 
         }
-        PieDataSet dataSet = new PieDataSet(yEntrys, "Expenses");
+        PieDataSet dataSet = new PieDataSet(yEntrys, Constants.EXPENSES);
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
         Legend legend = pieChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);

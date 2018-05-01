@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.purva.propertymanagment.R;
@@ -20,6 +22,7 @@ import com.example.purva.propertymanagment.data.model.Property;
 import com.example.purva.propertymanagment.network.ApiService;
 import com.example.purva.propertymanagment.network.RetrofitInstance;
 import com.example.purva.propertymanagment.ui.Constants;
+import com.example.purva.propertymanagment.ui.home.MainActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,10 +38,24 @@ public class PropertyDetailsFragment extends Fragment {
     Button delete;
     SharedPreferences sharedPreferences;
     IDbHelper iDbHelper;
+    Toolbar toolbar;
+    ImageView imageView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_property_details,container,false);
+
+        toolbar = view.findViewById(R.id.toolbar_propertyDeatails);
+        imageView = toolbar.findViewById(R.id.imageViewDetailsHome);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent(getActivity(),MainActivity.class);
+                startActivity(homeIntent);
+            }
+        });
+
         sharedPreferences = getActivity().getSharedPreferences("mydata", Context.MODE_PRIVATE);
         String userid = sharedPreferences.getString("userid","");
         String pro_street = sharedPreferences.getString("propertystreet","");
