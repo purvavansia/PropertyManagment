@@ -49,6 +49,10 @@
     <string name="add_widget">Add widget</string>
     <string name="sign_out">Sign Out</string>
     <string name="signed_out">Signed out</string>
+    <string name="back_to_document_list">Back to Document List</string>
+    <string name="comment">Comment:</string>
+    <string name="document_name">Document Name:</string>
+    <string name="document_type">Document Type:</string>
 
     <string-array name="document_types">
         <item>Lease Agreement</item>
