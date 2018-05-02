@@ -45,11 +45,14 @@ import com.google.android.gms.tasks.Task;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static com.example.purva.propertymanagment.ui.Constants.CHECKBOX;
+import static com.example.purva.propertymanagment.ui.Constants.DISPLAY_NAME;
+import static com.example.purva.propertymanagment.ui.Constants.USEREMAIL;
+
 public class LoginActivity extends AppCompatActivity implements ILoginView, View.OnClickListener {
 
 
-    private static final int RC_SIGN_IN = 007 ;
-    private static final String TAG = "sign on test" ;
+
     private GoogleSignInClient mGoogleSignInClient;
     private TextView mStatusTextView;
     private ConstraintLayout container;
@@ -78,17 +81,16 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         alertDialog.setView(customView);
         TextView messageView = (TextView)customView.findViewById(R.id.messagetv);
         alertDialog.setCancelable(false);
-        alertDialog.setTitle("Technologies used");
+        alertDialog.setTitle(Constants.TECHNOLOGIES_USED);
         //alertDialog.setMessage();
 
-        alertDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(Constants.OKAY, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
-        messageView.setText("\nSpeech Recognition \n\nRetrofit2 \n\nRxJava2 \n\nRetrofit with RxJava \n\nButterKnife \n\nRecyclerView " +
-                "\n\nCardView \n\nSQLite Database \n\nArchitecture: MVP");
+        messageView.setText(Constants.TECHNOLOGIES);
         AlertDialog alert = alertDialog.create();
         alert.show();
 
@@ -178,9 +180,9 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
 
             }
         });
-        sharedPreferences = getSharedPreferences("mydata", Context.MODE_PRIVATE);
-        storedName = sharedPreferences.getString("useremail","");
-        storedCheck = sharedPreferences.getBoolean("checkbox", false);
+        sharedPreferences = getSharedPreferences(Constants.MYDATA, Context.MODE_PRIVATE);
+        storedName = sharedPreferences.getString(USEREMAIL,"");
+        storedCheck = sharedPreferences.getBoolean(CHECKBOX, false);
         editTextName.setText(storedName);
         cbRemember.setChecked(storedCheck);
         login.setOnClickListener(new View.OnClickListener() {
@@ -191,14 +193,14 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
                 Boolean remember = cbRemember.isChecked();
                 if(cbRemember.isChecked()) {
                     editor = sharedPreferences.edit();
-                    editor.putString("useremail", login_email);
-                    editor.putBoolean("checkbox", remember);
+                    editor.putString(USEREMAIL, login_email);
+                    editor.putBoolean(CHECKBOX, remember);
                     editor.commit();
                 }
                 else {
                     editor = sharedPreferences.edit();
-                    editor.putString("useremail", "");
-                    editor.putBoolean("checkbox", false);
+                    editor.putString(USEREMAIL, "");
+                    editor.putBoolean(CHECKBOX, false);
                     editor.commit();
                 }
                 iLoginPresenter.callApiLogin(login_email,login_password);
@@ -256,7 +258,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+        startActivityForResult(signInIntent, Constants.RC_SIGN_IN);
     }
 
     //log user out
@@ -282,7 +284,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == Constants.RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -300,24 +302,22 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+            Log.w(Constants.TAGTEST, Constants.SIGN_IN_RESULT_FAILED_CODE + e.getStatusCode());
             updateUI(null);
         }
     }
 
     private void updateUI(@Nullable GoogleSignInAccount account) {
         if (account != null) {
-            mStatusTextView.setText("signed in"+ account.getDisplayName());
-            Log.i(TAG, "updateUI: "+"\n display name: "+account.getDisplayName()+"" +
-                    "\n email: "+account.getEmail()+"" +
+            mStatusTextView.setText(Constants.SIGNED_IN + account.getDisplayName());
+            Log.i(Constants.TAGTEST, Constants.UPDATE_UI + " " + "\n " + DISPLAY_NAME + " " +account.getDisplayName()+"" + "\n " + Constants.EMAIL + " " +account.getEmail()+"" +
                     "n"+account.getFamilyName()
                     +"\n "+account.zzabc());
 
             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(homeIntent);
-            Snackbar.make(container,"Display Name: "+account.getDisplayName() +
-                    "\n Email: "+account.getEmail()+"" +
-                    "\n Family Name: "+account.getFamilyName(), Snackbar.LENGTH_SHORT).setAction("Ok", new View.OnClickListener() {
+            Snackbar.make(container, Constants.DISPLAY_NAME1 + " " +account.getDisplayName() + "\n " + Constants.EMAIL1 + " " +account.getEmail()+"" +
+                    "\n " + Constants.FAMILY_NAME + " " +account.getFamilyName(), Snackbar.LENGTH_SHORT).setAction(Constants.OK, new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 

@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.purva.propertymanagment.data.model.User;
 import com.example.purva.propertymanagment.network.ApiService;
@@ -30,6 +31,7 @@ import retrofit2.Response;
  */
 
 public class LoginPresenter implements ILoginPresenter {
+
 
 
     Context context;
@@ -59,26 +61,28 @@ public class LoginPresenter implements ILoginPresenter {
 
     @Override
     public void callApiLogin(String email, String password) {
-        sharedPreferences = context.getSharedPreferences("mydata",Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(Constants.MYDATA,Context.MODE_PRIVATE);
         ApiService apiService = RetrofitInstance.getRetrofitInstance().create(ApiService.class);
         Call<User> signUpCall =  apiService.getUserDetails(email,password);
         signUpCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.i(Constants.TAG,""+response.body().getMsg());
-                if(response.body().getMsg().contains("success")){
+                if(response.body().getMsg().contains(Constants.SUCCESS)){
 
                     editor = sharedPreferences.edit();
-                    editor.putString("userid", response.body().getUserid());
-                    editor.putString("usertype", response.body().getUsertype());
-                    editor.putString("useremail", response.body().getUseremail());
-                    editor.putString("appapikey", response.body().getAppapikey());
+                    editor.putString(Constants.USERID, response.body().getUserid());
+                    editor.putString(Constants.USERTYPE, response.body().getUsertype());
+                    editor.putString(Constants.USEREMAIL, response.body().getUseremail());
+                    editor.putString(Constants.APPAPIKEY, response.body().getAppapikey());
                     editor.commit();
 
-                    if (response.body().getUsertype().contains("tenant")) {
+                    if (response.body().getUsertype().contains(Constants.TENANT)) {
+
+                        Toast.makeText(context, Constants.NOTHING_FOR_TENANT_RIGHT_NOW_CHECK_IN_FUTUTRE_FOR_MORE_FUNCTIONALITY,Toast.LENGTH_LONG).show();
 
                     }
-                    else if(response.body().getUsertype().contains("landlord")){
+                    else if(response.body().getUsertype().contains(Constants.LANDLORD)){
 
                         Intent honeIntent = new Intent(context, MainActivity.class);
                         context.startActivity(honeIntent);
