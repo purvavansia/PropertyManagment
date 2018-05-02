@@ -3,6 +3,7 @@ package com.example.purva.propertymanagment.ui.home;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.purva.propertymanagment.ui.document.DocumentActivity;
 import com.example.purva.propertymanagment.ui.property.PropertyActivity;
 import com.example.purva.propertymanagment.ui.tenant.TenantActivity;
 import com.example.purva.propertymanagment.ui.todo.ToDoActivity;
@@ -52,5 +53,10 @@ public class HomePresenter implements IHomePresenter {
     public void onClickTenants() {
         Intent intent = new Intent(context, TenantActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    public void onClickDocuments() {
+        context.startActivity(new Intent(context, DocumentActivity.class));
     }
 }

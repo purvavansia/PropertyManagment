@@ -2,9 +2,11 @@ package com.example.purva.propertymanagment.ui.transaction;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.*;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
@@ -12,6 +14,7 @@ import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.data.database.IDbHelper;
 import com.example.purva.propertymanagment.data.model.Property;
+import com.example.purva.propertymanagment.ui.home.MainActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -23,11 +26,23 @@ public class TransactionActivity extends AppCompatActivity {
     EditText dateEt, summaryEt, descEt, amountEt;
     Button addTransaction;
     SharedPreferences sharedPreferences;
+    android.support.v7.widget.Toolbar toolbar;
+    ImageView imageView;
     Calendar myCalendar = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction);
+
+        toolbar = findViewById(R.id.toolbar_transactionAdd);
+        imageView = toolbar.findViewById(R.id.imageViewTransactionAdd);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homeIntent = new Intent(TransactionActivity.this,MainActivity.class);
+                startActivity(homeIntent);
+            }
+        });
 
         iDbHelper = new DbHelper(this);
         sharedPreferences = getSharedPreferences("mydata", Context.MODE_PRIVATE);
@@ -56,6 +71,9 @@ public class TransactionActivity extends AppCompatActivity {
                 int rowNum = iDbHelper.getTransactionCount();
                 Log.d("ROWS", ""+rowNum );
                 Toast.makeText(TransactionActivity.this,"Transaction Added",Toast.LENGTH_SHORT).show();
+                summaryEt.setText("");
+                descEt.setText("");
+                amountEt.setText("");
 
             }
         });

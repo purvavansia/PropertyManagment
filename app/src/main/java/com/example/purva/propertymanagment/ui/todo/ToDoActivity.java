@@ -1,7 +1,10 @@
 package com.example.purva.propertymanagment.ui.todo;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -21,6 +24,7 @@ import android.widget.Toast;
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.database.TaskDbHelper;
 import com.example.purva.propertymanagment.data.model.TaskContract;
+import com.example.purva.propertymanagment.ui.widget.ToDoWidget;
 
 import java.util.ArrayList;
 
@@ -117,6 +121,14 @@ public class ToDoActivity extends AppCompatActivity {
                 R.id.task_title, // where to put the String of data
                 taskList); // where to get all the data
 
+        Intent intent = new Intent(this, ToDoWidget.class);
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+// Use an array and EXTRA_APPWIDGET_IDS instead of AppWidgetManager.EXTRA_APPWIDGET_ID,
+// since it seems the onUpdate() is only fired on that:
+        int[] ids = AppWidgetManager.getInstance(getApplication())
+                .getAppWidgetIds(new ComponentName(getApplication(), ToDoWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        sendBroadcast(intent);
         if(taskList.size()==0){
             Toast.makeText(ToDoActivity.this,"No tasks yet to do in todo list",Toast.LENGTH_SHORT).show();
         }
