@@ -1,18 +1,12 @@
 package com.example.purva.propertymanagment;
 
 
+import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.test.runner.AndroidJUnitRunner;
-import android.test.AndroidTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
-
 import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.data.database.IDbHelper;
 import com.example.purva.propertymanagment.data.model.Transaction;
-
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,26 +22,12 @@ import static org.junit.Assert.assertThat;
  */
 
 @RunWith(AndroidJUnit4.class)
-@MediumTest
-public class DatabaseTest extends AndroidTestCase {
-
-    private IDbHelper dbHelper;
-
-   /* @Before
-    public void setUp(){
-
-
-        dbHelper.openDb();
-    }
-
-    @After
-    public void finish() {
-        dbHelper.closeDb();
-    }*/
+public class DatabaseTest {
 
     @Test
     public void testDeleteOnlyOne() throws Exception{
-        dbHelper = new DbHelper(InstrumentationRegistry.getContext());
+        Context context = InstrumentationRegistry.getTargetContext();
+        IDbHelper dbHelper = new DbHelper(context);
         dbHelper.clearTransactionTable();
         dbHelper.insertTransactionRecord("31","31 april 2018","abc","abc","134","1200","rent payment");
         List<Transaction.TransactionBean> rate = dbHelper.getAllTransaction();

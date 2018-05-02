@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     }
 
     public void onClickTenants(View view) {
-        Log.d("TEnant", "clicked");
        iHomePresenter.onClickTenants();
 
     }
