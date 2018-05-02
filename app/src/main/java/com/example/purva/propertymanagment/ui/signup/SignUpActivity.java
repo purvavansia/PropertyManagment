@@ -19,11 +19,14 @@ public class SignUpActivity extends AppCompatActivity implements TabLayout.OnTab
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;
 
+    ISignupPresenter iSignupPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
+
+        iSignupPresenter = new SignupPresenter(this);
         Log.d("SIGNUPACT", "Sign up Activity");
         tabLayout.addTab(tabLayout.newTab().setText("LandLord"));
         tabLayout.addTab(tabLayout.newTab().setText("Tenant"));
@@ -45,7 +48,8 @@ public class SignUpActivity extends AppCompatActivity implements TabLayout.OnTab
 
             }
         });
-        TabsPagerAdapter pageAdapter = new TabsPagerAdapter(SignUpActivity.this, getSupportFragmentManager(),tabLayout.getTabCount());
+        int count = tabLayout.getTabCount();
+        TabsPagerAdapter pageAdapter = iSignupPresenter.getTabs(count);
         viewPager.setAdapter(pageAdapter);
 
         tabLayout.addOnTabSelectedListener(this);

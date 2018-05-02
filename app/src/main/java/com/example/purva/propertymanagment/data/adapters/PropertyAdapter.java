@@ -17,6 +17,7 @@ import com.example.purva.propertymanagment.ui.property.PropertyDetailsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by purva on 4/26/18.
@@ -36,9 +37,12 @@ public class PropertyAdapter extends RecyclerView.Adapter<PropertyAdapter.MyView
     }
 
     public void setImages(int num) {
+        int[] sources = new int[]{R.drawable.buildingone, R.drawable.buidingtwo, R.drawable.buildingthree};
         int counter = 0;
+        Random rand = new Random();
         for (int i = 0; i < num; i++) {
-            image.add(R.drawable.buildingone);
+            int randIdx = rand.nextInt(3);
+            image.add(sources[randIdx]);
         }
     }
 

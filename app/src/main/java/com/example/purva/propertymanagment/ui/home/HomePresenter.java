@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.purva.propertymanagment.ui.document.DocumentActivity;
+import com.example.purva.propertymanagment.ui.login.LoginActivity;
 import com.example.purva.propertymanagment.ui.property.PropertyActivity;
 import com.example.purva.propertymanagment.ui.tenant.TenantActivity;
 import com.example.purva.propertymanagment.ui.todo.ToDoActivity;
@@ -18,6 +19,12 @@ public class HomePresenter implements IHomePresenter {
 
     Context context;
     IHomeView iHomeView;
+
+    /**
+     *
+     * @param context this is the context of the activity
+     * @param iHomeView same context is passed to the IHomeView interface in order to call its methods
+     */
     public HomePresenter(Context context, IHomeView iHomeView) {
         this.context = context;
         this.iHomeView = iHomeView;
@@ -58,5 +65,11 @@ public class HomePresenter implements IHomePresenter {
     @Override
     public void onClickDocuments() {
         context.startActivity(new Intent(context, DocumentActivity.class));
+    }
+
+    @Override
+    public void onClickLogout() {
+        Intent logoutIntent = new Intent(context, LoginActivity.class);
+        context.startActivity(logoutIntent);
     }
 }

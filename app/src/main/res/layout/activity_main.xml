@@ -222,6 +222,14 @@
 
             </TableLayout>
 
+            <Button
+                android:id="@+id/btnlogout"
+                android:text="@string/logout"
+                android:layout_gravity="center"
+                android:background="@drawable/button_layout_simple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
             <View
                 android:layout_marginTop="10dp"
                 android:layout_width="350dp"

@@ -5,7 +5,7 @@
     >
 
     <TextView
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:paddingLeft="20dp"
         android:id="@+id/messagetv"
         android:layout_gravity="center"

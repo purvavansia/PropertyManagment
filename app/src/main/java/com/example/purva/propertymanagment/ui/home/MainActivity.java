@@ -7,11 +7,13 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.ui.Constants;
 import com.example.purva.propertymanagment.ui.document.DocumentActivity;
+import com.example.purva.propertymanagment.ui.login.LoginActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
 
     ImageView property, todo, transaction, viewTransaction, document;
     IHomePresenter iHomePresenter;
+    Button logout;
     /*private float[] yvalues = {50f, 25f, 25f};
     private String[] xvals = {Constants.MORTGAGE_INTEREST, Constants.PROPERTY_MANAGEMENT, Constants.OTHER};*/
     @Override
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         property = findViewById(R.id.imageProperty);
         todo = findViewById(R.id.imageToDo);
         transaction = findViewById(R.id.imageTransaction);
-
+        logout = findViewById(R.id.btnlogout);
         document = findViewById(R.id.imageDocuments);
         viewTransaction = findViewById(R.id.imageViewTransaction);
 
@@ -83,12 +86,12 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
             }
         });
 
-//        DbHelper dbHelper = new DbHelper(MainActivity.this);
-//        File imgFile = new File(Environment.getExternalStorageDirectory()
-//                + "/Android/data/"
-//                + "/ImgFiles");
-//        File[] fileList = imgFile.listFiles();
-//        dbHelper.insertDocument()
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               iHomePresenter.onClickLogout();
+            }
+        });
 
     }
 

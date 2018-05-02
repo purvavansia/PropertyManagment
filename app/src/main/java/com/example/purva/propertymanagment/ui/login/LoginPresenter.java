@@ -42,6 +42,7 @@ public class LoginPresenter implements ILoginPresenter {
         this.iLoginView = iLoginView;
     }
 
+
     @Override
     public void checkPermission() {
 

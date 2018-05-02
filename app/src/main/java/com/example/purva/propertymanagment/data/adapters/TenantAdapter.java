@@ -48,6 +48,8 @@ public class TenantAdapter extends RecyclerView.Adapter<TenantAdapter.MyViewHold
         holder.address.setText(mTenants.get(position).getAddress());
         //holder.img.setImageDrawable();
         holder.name.setText(mTenants.get(position).getName());
+        holder.email.setText(mTenants.get(position).getEmail());
+        holder.mobile.setText(mTenants.get(position).getMobile());
         holder.itemView.setTag(this);
     }
 
@@ -59,12 +61,14 @@ public class TenantAdapter extends RecyclerView.Adapter<TenantAdapter.MyViewHold
 
     public class MyViewHolder extends ViewHolder implements View.OnClickListener{
         ImageView img;
-        TextView address, name;
+        TextView address, name, mobile, email;
         public MyViewHolder(View itemView) {
             super(itemView);
             img = itemView.findViewById(R.id.tenant_img);
             name = itemView.findViewById(R.id.tenant_name);
             address = itemView.findViewById(R.id.tenant_addr);
+            mobile = itemView.findViewById(R.id.tenant_mobile);
+            email = itemView.findViewById(R.id.tenant_email);
         }
 
         @Override

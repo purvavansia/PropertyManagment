@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, View
                 dialog.cancel();
             }
         });
-        messageView.setText("Retrofit \n\nRxJava \n\nRetrofit with RxJava \n\nButterKnife \n\nRecyclerView " +
+        messageView.setText("\nSpeech Recognition \n\nRetrofit2 \n\nRxJava2 \n\nRetrofit with RxJava \n\nButterKnife \n\nRecyclerView " +
                 "\n\nCardView \n\nSQLite Database \n\nArchitecture: MVP");
         AlertDialog alert = alertDialog.create();
         alert.show();

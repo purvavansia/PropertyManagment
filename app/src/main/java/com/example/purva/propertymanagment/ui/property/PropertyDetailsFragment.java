@@ -103,8 +103,8 @@ public class PropertyDetailsFragment extends android.support.v4.app.Fragment {
                 });
 
                 iDbHelper.deletePropertyById(propertyid,userid);
-               PropertyListFragment plf = new PropertyListFragment();
-               getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty, plf).commit();
+               PropertyListFragment propertyListFragment = new PropertyListFragment();
+               getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty, propertyListFragment).commit();
             }
         });
 

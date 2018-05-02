@@ -7,13 +7,15 @@ import com.example.purva.propertymanagment.R;
 
 public class PropertyActivity extends AppCompatActivity {
 
+    IPropertyPresenter iPropertyPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_property);
 
-        PropertyListFragment propertyListFragment = new PropertyListFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayoutProperty,propertyListFragment,"adding frag").commit();
+        iPropertyPresenter = new PropertyPresenter(this);
+
+        iPropertyPresenter.addFragment();
 
     }
 }

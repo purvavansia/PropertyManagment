@@ -3,9 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:layout_marginTop="10dp"
     android:padding="8dp">
 
     <ImageView
+
         android:id="@+id/tenant_img"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
@@ -32,6 +34,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tenant Address"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/tenant_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tenant Mobile"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/tenant_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tenant Email"
             android:textSize="24sp" />
     </LinearLayout>
 </LinearLayout>
