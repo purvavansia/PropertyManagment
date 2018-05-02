@@ -28,7 +28,8 @@
                android:layout_width="match_parent"
                android:layout_height="300dp"/>
     <LinearLayout android:layout_margin="12dp"
-                  android:layout_width="match_parent"
+                  android:layout_width="300dp"
+                  android:layout_gravity="center"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal">
         <TextView android:id="@+id/dtype"
@@ -46,7 +47,8 @@
     </LinearLayout>
 
     <LinearLayout android:layout_margin="12dp"
-                  android:layout_width="match_parent"
+                  android:layout_width="300dp"
+                  android:layout_gravity="center"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal">
         <TextView android:id="@+id/dname"
@@ -61,7 +63,8 @@
     </LinearLayout>
 
     <LinearLayout android:layout_margin="12dp"
-                  android:layout_width="match_parent"
+                  android:layout_width="300dp"
+                  android:layout_gravity="center"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal">
         <TextView android:id="@+id/dcomment"
@@ -81,6 +84,8 @@
                   android:orientation="horizontal">
 
         <Button
+                android:padding="10dp"
+
                 android:id="@+id/backToList"
                 android:background="@drawable/button_layout_simple"
                 android:layout_width="wrap_content"
@@ -88,6 +93,7 @@
                 android:text="@string/back_to_document_list"/>
         <View android:layout_width="50dp" android:layout_height="1dp"/>
         <Button
+                android:padding="10dp"
                 android:id="@+id/deleteDoc"
                 android:background="@drawable/button_layout_simple"
                 android:layout_width="wrap_content"

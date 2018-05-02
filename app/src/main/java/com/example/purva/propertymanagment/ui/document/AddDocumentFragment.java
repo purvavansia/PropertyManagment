@@ -196,19 +196,19 @@ public class AddDocumentFragment extends Fragment {
     @OnClick(R.id.saveDoc)
     public void saveImage(){
         if(imageTaken) {
-            Toast.makeText(getActivity(), "Document saved", Toast.LENGTH_SHORT).show();
-            String imgId = storeImage(bitmap);
-            imageTaken = false;
             documentComment = commentEt.getText().toString();
             documentname = docnameEt.getText().toString();
             byte[] img = imageViewToByte(bitmap);
             if (documentComment.isEmpty() || documentname.isEmpty() || documentype.isEmpty() || propertyId.isEmpty()) {
                 Toast.makeText(getActivity(), "No Field Can be blank.", Toast.LENGTH_SHORT).show();
             } else {
+                Toast.makeText(getActivity(), "Document saved", Toast.LENGTH_SHORT).show();
                 String landlordId = getActivity().getSharedPreferences("mydata", Context.MODE_PRIVATE).getString("userid", null);
                 dbHelper.insertDocument(propertyId, landlordId, documentype, documentname, documentComment, img);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.documentContainer, new DocumentListFragment()).commit();
             }
+        }else{
+            Toast.makeText(getActivity(), "Please take an image for the document", Toast.LENGTH_SHORT).show();
         }
     }
 
