@@ -11,11 +11,6 @@
                 android:id="@+id/documents_icon"
                 android:icon="@drawable/ic_documents"
                 app:showAsAction="never"/>
-        <item
-                android:title="search document"
-                android:id="@+id/searchD_icon"
-                android:icon="@drawable/ic_search_black_24dp"
-                app:showAsAction="never"/>
     </menu>
     </item>
 </menu>

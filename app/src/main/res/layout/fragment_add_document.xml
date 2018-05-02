@@ -29,7 +29,7 @@
                   android:layout_height="wrap_content"
                   android:layout_margin="10dp"
                   android:orientation="horizontal">
-        <ImageButton android:id="@+id/imgBtn"
+        <ImageButton android:id="@+id/imgButton"
                      android:layout_width="40dp"
                      android:layout_height="match_parent"
                      android:src="@drawable/ic_add_a_photo_black_24dp"/>
@@ -51,6 +51,10 @@
                   android:textStyle="bold"
                   android:text="Document Type"/>
         <Spinner android:layout_weight="1"
+                 android:id="@+id/docType"
+                 android:layout_marginLeft="8dp"
+                 android:spinnerMode="dialog"
+                 android:popupBackground="@color/primary"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -66,6 +70,10 @@
                   android:textStyle="bold"
                   android:text="Choose Proerty"/>
         <Spinner android:layout_weight="1"
+                 android:layout_marginLeft="8dp"
+                 android:spinnerMode="dialog"
+                 android:popupBackground="@color/primary"
+                 android:id="@+id/propertyType"
                  android:layout_width="match_parent"
                  android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -90,7 +98,7 @@
             android:id="@+id/saveDoc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="Save Document"
             android:background="@drawable/button_layout_simple"
             android:textStyle="bold"
             android:layout_gravity="center"/>

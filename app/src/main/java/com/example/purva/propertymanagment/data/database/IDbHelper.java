@@ -2,10 +2,7 @@ package com.example.purva.propertymanagment.data.database;
 
 
 import android.database.sqlite.SQLiteDatabase;
-import com.example.purva.propertymanagment.data.model.Tenant;
-import com.example.purva.propertymanagment.data.model.Property;
-import com.example.purva.propertymanagment.data.model.Transaction;
-import com.example.purva.propertymanagment.data.model.TransactionContract;
+import com.example.purva.propertymanagment.data.model.*;
 
 import java.util.List;
 
@@ -19,6 +16,7 @@ public interface IDbHelper {
     public void closeDb();
     public SQLiteDatabase openDb();
     public boolean validateProperty(String propertyId);
+    public Property.PropertyBean getPropertyBeanByKeys(String proertyId, String landlordId);
 
     List<Tenant.TenantBean> getAllTenants();
     public int getTenantCount();
@@ -34,6 +32,11 @@ public interface IDbHelper {
                                        String propertyId, String amount, String type);
     public void deleteTransactionById(Integer transactionId);
     public boolean clearTransactionTable();
+
+    List<Document.DocumentBean> getAllDocuments();
+    public int getDocumentCount();
+    public int insertDocument(String propertyId, String landlordId, String documentType, String documentName, String docComent, byte[] img);
+    public void deleteDocument(String propertyId, String landlordId, String documentId);
 
 }
 

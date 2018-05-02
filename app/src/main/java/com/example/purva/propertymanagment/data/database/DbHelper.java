@@ -5,13 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
-import com.example.purva.propertymanagment.data.model.Property;
-import com.example.purva.propertymanagment.data.model.PropertyContract;
-import com.example.purva.propertymanagment.data.model.Tenant;
-import com.example.purva.propertymanagment.data.model.TenantContract;
-import com.example.purva.propertymanagment.data.model.Transaction;
-import com.example.purva.propertymanagment.data.model.TransactionContract;
+import com.example.purva.propertymanagment.data.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +68,35 @@ public class DbHelper implements IDbHelper{
         return c.moveToFirst();
     }
 
+    @Override
+    public Property.PropertyBean getPropertyBeanByKeys(String propertyId, String landlordId) {
+        String where_str = PropertyContract.PropertyEntry.PROPERTY_ID + "= ? and " + PropertyContract.PropertyEntry.COLUMN_LANDLORD_ID +"= ?";
+        String[] projection = {
+                PropertyContract.PropertyEntry.PROPERTY_ID,
+                PropertyContract.PropertyEntry.COLUMN_LANDLORD_ID
+        };
+        String[] where_clause = {propertyId, landlordId};
+        Cursor c = mSQLiteDatabase.query(
+                PropertyContract.PropertyEntry.TABLE_NAME,
+                projection,
+                where_str,
+                where_clause,
+                null,
+                null,
+                null
+        );
+        String country = c.getString(c.getColumnIndex(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_COUNTRY));
+        String state = c.getString(c.getColumnIndex(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_STATE));
+        String city = c.getString(c.getColumnIndex(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_CITY));
+        String street = c.getString(c.getColumnIndex(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_STREET));
+        String price = c.getString(c.getColumnIndex(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_PRICE));
+        String mortgage = c.getString(c.getColumnIndex(PropertyContract.PropertyEntry.COLUMN_NAME_PROPETY_MORTAGE));
+        String status = c.getString(c.getColumnIndex(PropertyContract.PropertyEntry.COLUMN_NAME_PROPERTY_STATUS));
+        return new Property.PropertyBean(propertyId, landlordId, street
+                , city, state, country, price, mortgage, status);
+
+    }
+
 
     @Override
     public int insertPropertyRecord(String id, String lordId, String country, String state, String city, String street, String price, String mortage, String status) {
@@ -103,6 +128,8 @@ public class DbHelper implements IDbHelper{
         return getPropertyCount()==0;
 
     }
+
+
 
     @Override
     public void closeDb() {
@@ -231,6 +258,51 @@ public class DbHelper implements IDbHelper{
     public boolean clearTransactionTable() {
         mSQLiteDatabase.execSQL("delete from " + TransactionContract.TransactionEntry.TABLE_NAME);
         return getTransactionCount()==0;
+    }
+
+    @Override
+    public List<Document.DocumentBean> getAllDocuments() {
+        List<Document.DocumentBean> documentBeans = new ArrayList<>();
+        String selectQuery = "SELECT * FROM " + DocumentContract.DocumentEntry.TABLE_NAME;
+        Cursor cursor = mSQLiteDatabase.rawQuery(selectQuery,null);
+        if (cursor.moveToFirst()){
+            do{
+                String docName = cursor.getString(cursor.getColumnIndex(DocumentContract.DocumentEntry.DOCUMENT_NAME));
+                String landlordId = cursor.getString(cursor.getColumnIndex(DocumentContract.DocumentEntry.LANDLORD_ID));
+                String docuType = cursor.getString(cursor.getColumnIndex(DocumentContract.DocumentEntry.DOCUMENT_TYPE));
+                String docSummary = cursor.getString(cursor.getColumnIndex(DocumentContract.DocumentEntry.DOCUMENT_COMMENT));
+                String  propertyId= cursor.getString(cursor.getColumnIndex(DocumentContract.DocumentEntry.PROPERTY_ID));
+                byte[] imgInfo = cursor.getBlob(cursor.getColumnIndex(DocumentContract.DocumentEntry.IMAGE_ID));
+                Document.DocumentBean documentBean = new Document.DocumentBean(propertyId, landlordId, docuType, docName, docSummary, imgInfo);
+                documentBeans.add(documentBean);
+                Log.d("docSummary", docSummary);
+            }while (cursor.moveToNext());
+        }
+        return documentBeans;
+    }
+
+    @Override
+    public int getDocumentCount() {
+        return (int) DatabaseUtils.queryNumEntries(mSQLiteDatabase, DocumentContract.DocumentEntry.TABLE_NAME);
+    }
+
+    @Override
+    public int insertDocument(String propertyId, String landlordId, String documentType, String documentName, String docComent, byte[] img) {
+        String insertQuery = "INSERT INTO table_document VALUES (NULL, ?, ?, ?, ?, ?, ?)";
+        SQLiteStatement statement = mSQLiteDatabase.compileStatement(insertQuery);
+        statement.clearBindings();
+        statement.bindString(1, propertyId);
+        statement.bindString(2, landlordId);
+        statement.bindString(3, documentName);
+        statement.bindString(4, documentType);
+        statement.bindString(5, docComent);
+        statement.bindBlob(6, img);
+        return (int)statement.executeInsert();
+    }
+
+    @Override
+    public void deleteDocument(String propertyId, String landlordId, String documentId) {
+
     }
 
 }

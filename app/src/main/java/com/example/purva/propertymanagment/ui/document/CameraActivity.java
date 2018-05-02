@@ -214,15 +214,6 @@ public class CameraActivity extends AppCompatActivity {
                     super.onCaptureCompleted(session, request, result);
                     Toast.makeText(CameraActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
                     createCameraPreview();
-                    Bundle b = new Bundle();
-                    Log.d("CapturedImg", "IMGCAP");
-                    b.putByteArray("DOCIMG", s);
-                    Log.d("IMGDATA", s.toString());
-                    AddDocumentFragment adf = new AddDocumentFragment();
-                    adf.setArguments(b);
-                    Log.d("BUNDLE_ARGUMENT", "create bundle argument");
-                    getSupportFragmentManager().beginTransaction().replace(R.id.documentContainer, adf).commit();
-                    Log.d("FRAGMENTADD", "ADD fragment");
                 }
             };
             cameraDevice.createCaptureSession(outputSurfaces, new CameraCaptureSession.StateCallback() {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.purva.propertymanagment.data.database.DbHelper;
+import com.example.purva.propertymanagment.data.model.Document;
 import com.example.purva.propertymanagment.data.model.Property;
 import com.example.purva.propertymanagment.data.model.Tenant;
 import com.example.purva.propertymanagment.data.model.Transaction;
@@ -18,6 +19,7 @@ public class DataManager implements IDataManager {
 
     Context context;
     DbHelper dbHelper;
+
     public DataManager(Context context, DbHelper dbHelper) {
         this.context = context;
         this.dbHelper = dbHelper;
@@ -61,6 +63,11 @@ public class DataManager implements IDataManager {
     @Override
     public boolean validateProperty(String propertyId) {
         return dbHelper.validateProperty(propertyId);
+    }
+
+    @Override
+    public Property.PropertyBean getPropertyBeanByKeys(String proertyId, String landlordId) {
+        return dbHelper.getPropertyBeanByKeys(proertyId, landlordId);
     }
 
     @Override
@@ -116,5 +123,25 @@ public class DataManager implements IDataManager {
     @Override
     public boolean clearTransactionTable() {
         return dbHelper.clearTransactionTable();
+    }
+
+    @Override
+    public List<Document.DocumentBean> getAllDocuments() {
+        return null;
+    }
+
+    @Override
+    public int getDocumentCount() {
+        return 0;
+    }
+
+    @Override
+    public int insertDocument(String propertyId, String landlordId, String documentType, String documentName, String docComent, byte[] img) {
+        return 0;
+    }
+
+    @Override
+    public void deleteDocument(String propertyId, String landlordId, String documentId) {
+
     }
 }

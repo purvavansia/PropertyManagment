@@ -1,46 +1,93 @@
 package com.example.purva.propertymanagment.ui.document;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.*;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.*;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.example.purva.propertymanagment.R;
+import com.example.purva.propertymanagment.data.adapters.DocumentTypeAdapter;
+import com.example.purva.propertymanagment.data.adapters.PropertySelectionAdapter;
+import com.example.purva.propertymanagment.data.database.DbHelper;
+import com.example.purva.propertymanagment.data.model.Property;
+import com.example.purva.propertymanagment.ui.tenant.AddTenantFragment;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
 public class AddDocumentFragment extends Fragment {
     private static final int REQUEST_CODE = 1;
+    @BindView(R.id.docImg)
+    ImageView imgView;
+    @BindView(R.id.docName)
+    EditText docnameEt;
+    @BindView(R.id.docType)
+    Spinner docType;
+    @BindView(R.id.doComment)
+    EditText commentEt;
+    @BindView(R.id.propertyType)
+    Spinner propertyChoice;
+    @BindView(R.id.imgButton)
+    ImageButton imgBtn;
+    @BindView(R.id.saveDoc)
+    Button saveBtn;
+
     static Uri imageUri;
     private Toolbar toolbar;
-    private EditText commentEt;
-    private EditText docnameEt;
-    private Spinner docType;
-    private Spinner propertyChoice;
-    private ImageButton imgBtn;
-    private ImageView imgView;
-    private Button saveBtn;
     private boolean imageTaken = false;
+    private static DbHelper dbHelper;
+    private final int REQUEST_CAMERA_USAGE = 200;
+    Bitmap bitmap;
+    private String documentype;
+    private String documentComment;
+    private String documentname;
+    private String propertyId;
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CAMERA_USAGE:
+                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+
+                } else {
+                    Toast.makeText(getActivity(), "This Permission is needed for the app to work perfectly!", Toast.LENGTH_SHORT).show();
+                }
+            default:
+                Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        dbHelper = new DbHelper(getActivity());
     }
 
     @Override
@@ -67,18 +114,9 @@ public class AddDocumentFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.documents_icon) {
-            // ((AppCompatActivity)this.mContext).getSupportFragmentManager().beginTransaction().replace(R.id.tenantFragmentContainer, new AddTenantFragment()).commit();
+           getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.documentContainer, new DocumentListFragment()).commit();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void takePhoto() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        File photo = new File(Environment.getExternalStorageDirectory(), "Pic.jpg");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,
-                Uri.fromFile(photo));
-        imageUri = Uri.fromFile(photo);
-        this.startActivityForResult(intent, 1899);
     }
 
     @Override
@@ -89,14 +127,10 @@ public class AddDocumentFragment extends Fragment {
                 if (resultCode == RESULT_OK) {
                     Bitmap bmp = (Bitmap) data.getExtras().get("data");
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    //bmp.
                     bmp.compress(Bitmap.CompressFormat.PNG, 40, stream);
                     byte[] byteArray = stream.toByteArray();
-
-                    // convert byte array to Bitmap
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
+                    bitmap = BitmapFactory.decodeByteArray(byteArray, 0,
                             byteArray.length);
-                    storeImage(bitmap);
                     imgView.setImageBitmap(bitmap);
                 }
         }
@@ -105,34 +139,78 @@ public class AddDocumentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_document, container, false);
-        Bundle b = getArguments();
+        ButterKnife.bind(this, view);
         toolbar = view.findViewById(R.id.toolbaraddDoc);
-        imgBtn = view.findViewById(R.id.imgBtn);
-        imgView = view.findViewById(R.id.docImg);
-        commentEt = view.findViewById(R.id.doComment);
-        docnameEt = view.findViewById(R.id.docName);
-        saveBtn = view.findViewById(R.id.saveDoc);
-        imgBtn.setOnClickListener(new View.OnClickListener() {
+
+        if (Build.VERSION.SDK_INT >= 21) {
+            int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
+            if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_USAGE);
+            }
+        }
+        List<Property.PropertyBean> propertyBeans = dbHelper.getAllProperties();
+        PropertySelectionAdapter propertySelectionAdapter = new PropertySelectionAdapter(getActivity(), R.layout.property_selection_layout, propertyBeans);
+        propertySelectionAdapter.setDropDownViewResource(R.layout.property_selection_layout);
+        propertyChoice.setAdapter(propertySelectionAdapter);
+        propertyChoice.setPrompt("Please Select a Property From the list");
+        propertyChoice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 1899);
-                imageTaken = true;
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                propertyId = propertyBeans.get(position).getId();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        String[] docTypes = getResources().getStringArray(R.array.document_types);
+        DocumentTypeAdapter docAdapter = new DocumentTypeAdapter(getActivity(), R.layout.doctype_selection_layout, Arrays.asList(docTypes));
+        docType.setAdapter(docAdapter);
+        docType.setPrompt("Please choose a document type.");
+        docType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                if (imageTaken) {
-                    Toast.makeText(getActivity(), "Document Saved", Toast.LENGTH_SHORT).show();
-                }
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                documentype = ((TextView)view.findViewById(R.id.document_type)).getText().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
-
 
         return view;
     }
+
+
+    @OnClick(R.id.imgButton)
+    public void takeImage(){
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 1899);
+        imageTaken = true;
+    }
+
+    @OnClick(R.id.saveDoc)
+    public void saveImage(){
+        if(imageTaken) {
+            Toast.makeText(getActivity(), "Document saved", Toast.LENGTH_SHORT).show();
+            String imgId = storeImage(bitmap);
+            imageTaken = false;
+            documentComment = commentEt.getText().toString();
+            documentname = docnameEt.getText().toString();
+            byte[] img = imageViewToByte(bitmap);
+            if (documentComment.isEmpty() || documentname.isEmpty() || documentype.isEmpty() || propertyId.isEmpty()) {
+                Toast.makeText(getActivity(), "No Field Can be blank.", Toast.LENGTH_SHORT).show();
+            } else {
+                dbHelper.insertDocument("112", "32", documentype, documentname, documentComment, img);
+            }
+        }
+    }
+
+
 
     /** Create a File for saving an image or video */
     private  File getOutputMediaFile(){
@@ -143,7 +221,6 @@ public class AddDocumentFragment extends Fragment {
                 + "/ImgFiles");
         // This location works best if you want the created images to be shared
         // between applications and persist after your app has been uninstalled.
-
         // Create the storage directory if it does not exist
         if (! mediaStorageDir.exists()){
             if (! mediaStorageDir.mkdirs()){
@@ -154,30 +231,46 @@ public class AddDocumentFragment extends Fragment {
         // Create a media file name
         String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
         File mediaFile;
-        String mImageName="MI_"+ timeStamp +".jpg";
+        String mImageName="MI_"+ timeStamp +".png";
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
         Log.d("MediaFile", mediaFile.getPath());
         return mediaFile;
     }
 
-    private void storeImage(Bitmap image) {
+    private String storeImage(Bitmap image) {
+        Log.d("StoreFile", "Store Image to storage");
         File pictureFile = getOutputMediaFile();
         if (pictureFile == null) {
             Log.d("IMAGE",
                     "Error creating media file, check storage permissions: ");// e.getMessage());
-            return;
+            return null;
         }
         try {
             FileOutputStream fos = new FileOutputStream(pictureFile);
             image.compress(Bitmap.CompressFormat.PNG, 90, fos);
             fos.close();
+            return pictureFile.getPath();
         } catch (FileNotFoundException e) {
             Log.d("IMAGE", "File not found: " + e.getMessage());
         } catch (IOException e) {
             Log.d("IMAGE", "Error accessing file: " + e.getMessage());
         }
+        return null;
+    }
+
+    public static byte[] imageViewToByte(Bitmap bitmap){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+
+    public static Bitmap byteToBitmap(byte[] byteArray){
+        return BitmapFactory.decodeByteArray(byteArray, 0,
+                byteArray.length);
     }
 
 }
+
+
 
 

@@ -22,10 +22,6 @@ public class PropertySelectionAdapter extends ArrayAdapter<String> {
         this.mContext = context;
         this.inflater = LayoutInflater.from(context);
         this.propertyBeans = objects;
-        Log.d("LISTSIZE", this.propertyBeans.size()+"");
-        for(int i = 0; i < propertyBeans.size(); i++){
-            Log.d("BeanInfo"+i, propertyBeans.get(i).getId()+" "+propertyBeans.get(i).getPropertycountry());
-        }
     }
 
     @Override

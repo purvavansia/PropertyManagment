@@ -3,20 +3,24 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-android:padding="10dp">
+        android:background="@color/primary">
 
     <TextView
             android:id="@+id/streetAddr"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+
+            android:text="Street Address"/>
+
+    <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
-        android:textSize="16sp"
-
-    android:text="Street Address"/>
-
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:id="@+id/city_state_country"
+              android:id="@+id/city_state_country"
               android:layout_below="@+id/streetAddr"
-    android:textSize="16sp"
-    android:text="State, Country"/>
+              android:textSize="18sp"
+              android:text="State, Country"/>
 
+    <View android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#aeaeb5"/>
 </RelativeLayout>

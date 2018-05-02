@@ -60,12 +60,12 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                     ");";
     private static final String SQL_CREATE_DOCUMENT_ENTRIES=
             "CREATE TABLE " + DocumentContract.DocumentEntry.TABLE_NAME + " ("
+                    + DocumentContract.DocumentEntry.DOCUMENT_ID + INT_TYPE + " PRIMARY KEY AUTOINCREMENT NOT NULL" + COMMA_SEP
                     + DocumentContract.DocumentEntry.PROPERTY_ID + TEXT_TYPE + COMMA_SEP
                     + DocumentContract.DocumentEntry.LANDLORD_ID + TEXT_TYPE + COMMA_SEP
                     + DocumentContract.DocumentEntry.DOCUMENT_NAME + TEXT_TYPE + COMMA_SEP
                     + DocumentContract.DocumentEntry.DOCUMENT_TYPE + TEXT_TYPE + COMMA_SEP
                     + DocumentContract.DocumentEntry.DOCUMENT_COMMENT + TEXT_TYPE + COMMA_SEP
-                    + DocumentContract.DocumentEntry.PATH_ID + TEXT_TYPE + COMMA_SEP
                     + DocumentContract.DocumentEntry.IMAGE_ID + BLOB_TYPE + ");";
 
 

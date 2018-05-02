@@ -9,34 +9,64 @@ public class Document {
         return documentBeans;
     }
 
-    public class DocumentBean {
-        public DocumentBean(String propertyId, String landlordId, String documentPath, String documentType, String documentName, String docComment) {
-            this.propertyId = propertyId;
-            this.landlordId = landlordId;
-            this.documentPath = documentPath;
+    public static class DocumentBean {
+        public int getDocumentId() {
+            return documentId;
+        }
+
+        public void setDocumentId(int documentId) {
+            this.documentId = documentId;
+        }
+
+        public String getDocumentType() {
+            return documentType;
+        }
+
+        public void setDocumentType(String documentType) {
             this.documentType = documentType;
-            this.documentName = documentName;
+        }
+
+        public String getDocComment() {
+            return docComment;
+        }
+
+        public void setDocComment(String docComment) {
             this.docComment = docComment;
         }
+
+        public byte[] getImage() {
+            return image;
+        }
+
+        public void setImage(byte[] image) {
+            this.image = image;
+        }
+
+        private int documentId;
         private String propertyId;
         private String landlordId;
-        private String documentPath;
         private String documentType;
         private String documentName;
         private String docComment;
-        public DocumentBean(String propertyId, String landlordId, String documentPath, String documentType, String documentName) {
+        private byte[] image;
+
+        public DocumentBean(int documentId, String propertyId, String landlordId, String documentType, String documentName, String docComment, byte[] image) {
+            this.documentId = documentId;
             this.propertyId = propertyId;
             this.landlordId = landlordId;
-            this.documentPath = documentPath;
             this.documentType = documentType;
             this.documentName = documentName;
+            this.docComment = docComment;
+            this.image = image;
         }
 
-
-        public DocumentBean(String propertyId, String landlordId, String documentPath) {
+        public DocumentBean(String propertyId, String landlordId, String documentType, String documentName, String docComment, byte[] image) {
             this.propertyId = propertyId;
             this.landlordId = landlordId;
-            this.documentPath = documentPath;
+            this.documentType = documentType;
+            this.documentName = documentName;
+            this.docComment = docComment;
+            this.image = image;
         }
 
         public String getDocumentName() {
@@ -45,14 +75,6 @@ public class Document {
 
         public void setDocumentName(String documentName) {
             this.documentName = documentName;
-        }
-
-        public String getDocumentPath() {
-            return documentPath;
-        }
-
-        public void setDocumentPath(String documentPath) {
-            this.documentPath = documentPath;
         }
 
         public String getPropertyId() {
