@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
 
     ImageView property, todo, transaction, viewTransaction, document;
     IHomePresenter iHomePresenter;
-    private float[] yvalues = {50f, 25f, 25f};
-    private String[] xvals = {Constants.MORTGAGE_INTEREST, Constants.PROPERTY_MANAGEMENT, Constants.OTHER};
+    /*private float[] yvalues = {50f, 25f, 25f};
+    private String[] xvals = {Constants.MORTGAGE_INTEREST, Constants.PROPERTY_MANAGEMENT, Constants.OTHER};*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         document.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, DocumentActivity.class));
+                iHomePresenter.onClickDocuments();
             }
         });
 
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
 
     @Override
     public void displayPieChart() {
-        PieChart pieChart = (PieChart) findViewById(R.id.pieChart);
+       /* PieChart pieChart = (PieChart) findViewById(R.id.pieChart);
         pieChart.setUsePercentValues(true);
         pieChart.setRotationEnabled(true);
         pieChart.setDrawHoleEnabled(false);
@@ -129,6 +129,6 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         pieChart.getDescription().setEnabled(false);
         data.setValueTextSize(13f);
         data.setValueTextColor(Color.DKGRAY);
-        pieChart.setOnChartValueSelectedListener(MainActivity.this);
+        pieChart.setOnChartValueSelectedListener(MainActivity.this);*/
     }
 }

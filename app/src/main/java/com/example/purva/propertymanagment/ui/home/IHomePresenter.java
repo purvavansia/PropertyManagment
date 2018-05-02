@@ -11,4 +11,5 @@ public interface IHomePresenter {
     public void onClickAddTransaction();
     public void onClickViewTransactions();
     public void onClickTenants();
+    public void onClickDocuments();
 }
