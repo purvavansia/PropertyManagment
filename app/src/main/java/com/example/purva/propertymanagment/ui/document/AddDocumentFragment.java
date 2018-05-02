@@ -205,7 +205,9 @@ public class AddDocumentFragment extends Fragment {
             if (documentComment.isEmpty() || documentname.isEmpty() || documentype.isEmpty() || propertyId.isEmpty()) {
                 Toast.makeText(getActivity(), "No Field Can be blank.", Toast.LENGTH_SHORT).show();
             } else {
-                dbHelper.insertDocument("112", "32", documentype, documentname, documentComment, img);
+                String landlordId = getActivity().getSharedPreferences("mydata", Context.MODE_PRIVATE).getString("userid", null);
+                dbHelper.insertDocument(propertyId, landlordId, documentype, documentname, documentComment, img);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.documentContainer, new DocumentListFragment()).commit();
             }
         }
     }

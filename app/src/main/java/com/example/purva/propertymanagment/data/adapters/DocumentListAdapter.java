@@ -1,8 +1,10 @@
 package com.example.purva.propertymanagment.data.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import com.example.purva.propertymanagment.R;
 import com.example.purva.propertymanagment.data.database.DbHelper;
 import com.example.purva.propertymanagment.data.model.Document;
 import com.example.purva.propertymanagment.data.model.Property;
+import com.example.purva.propertymanagment.ui.document.DocumentDetailFragment;
 
 import java.util.List;
 
@@ -46,6 +49,19 @@ public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapte
         holder.docType.setText(documentType);
         holder.docName.setText(documentName);
         holder.docComment.setText(documentComment);
+        holder.docImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("ViewHOlder", "VIewholde clicked");
+                Bundle b = new Bundle();
+                b.putString("name", documentName);
+                b.putString("type", documentType);
+                b.putString("comment", documentComment);
+                DocumentDetailFragment detailFragment = new DocumentDetailFragment();
+                detailFragment.setArguments(b);
+                ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.documentContainer, detailFragment).commit();
+            }
+        });
         //Property.PropertyBean propertyBean = dbHelper.getPropertyBeanByKeys(propertyId, landlordId);
     }
 
@@ -67,5 +83,6 @@ public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapte
             tenantName = itemView.findViewById(R.id.tenantInfo);
             propertyInfo = itemView.findViewById(R.id.propertyInfo);
         }
+
     }
 }
