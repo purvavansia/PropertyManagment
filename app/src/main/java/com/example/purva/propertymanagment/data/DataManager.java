@@ -141,7 +141,8 @@ public class DataManager implements IDataManager {
     }
 
     @Override
-    public void deleteDocument(String propertyId, String landlordId, String documentId) {
+    public void deleteDocument(int documentId) {
 
     }
+
 }

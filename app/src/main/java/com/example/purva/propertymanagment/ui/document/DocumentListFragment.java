@@ -2,6 +2,7 @@ package com.example.purva.propertymanagment.ui.document;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +18,8 @@ import com.example.purva.propertymanagment.data.model.Document;
 
 import java.util.List;
 
+import static android.widget.LinearLayout.VERTICAL;
+
 public class DocumentListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private Toolbar mToolbar;
@@ -30,6 +33,8 @@ public class DocumentListFragment extends Fragment {
         List<Document.DocumentBean> list = dbHelper.getAllDocuments();
         Log.d("DATASIZE", list.size()+"");
         DocumentListAdapter documentListAdapter = new DocumentListAdapter(getActivity(), list);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(),VERTICAL);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
         mRecyclerView.setAdapter(documentListAdapter);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

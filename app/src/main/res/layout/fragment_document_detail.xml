@@ -75,13 +75,23 @@
                   android:layout_height="wrap_content"/>
     </LinearLayout>
 
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:gravity="center"
+                  android:orientation="horizontal">
 
-    <Button android:layout_marginTop="10dp"
-            android:id="@+id/backToList"
-            android:layout_gravity="center"
-            android:background="@drawable/button_layout_simple"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="@string/back_to_document_list"/>
-
+        <Button
+                android:id="@+id/backToList"
+                android:background="@drawable/button_layout_simple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/back_to_document_list"/>
+        <View android:layout_width="50dp" android:layout_height="1dp"/>
+        <Button
+                android:id="@+id/deleteDoc"
+                android:background="@drawable/button_layout_simple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_document"/>
+    </LinearLayout>
 </LinearLayout>

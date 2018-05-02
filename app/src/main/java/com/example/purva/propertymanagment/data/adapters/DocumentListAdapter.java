@@ -54,6 +54,9 @@ public class DocumentListAdapter extends RecyclerView.Adapter<DocumentListAdapte
             public void onClick(View v) {
                 Log.d("ViewHOlder", "VIewholde clicked");
                 Bundle b = new Bundle();
+                b.putInt("documentId",documentBean.getDocumentId());
+                Log.d("DOCUMENTID", documentBean.getDocumentId()+"");
+                b.putString("propertyId", propertyId);
                 b.putString("name", documentName);
                 b.putString("type", documentType);
                 b.putString("comment", documentComment);

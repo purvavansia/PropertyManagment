@@ -36,7 +36,7 @@ public interface IDbHelper {
     List<Document.DocumentBean> getAllDocuments();
     public int getDocumentCount();
     public int insertDocument(String propertyId, String landlordId, String documentType, String documentName, String docComent, byte[] img);
-    public void deleteDocument(String propertyId, String landlordId, String documentId);
+    public void deleteDocument(int documentId);
 
 }
 

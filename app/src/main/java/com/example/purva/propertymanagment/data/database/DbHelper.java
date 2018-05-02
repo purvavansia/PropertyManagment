@@ -267,13 +267,14 @@ public class DbHelper implements IDbHelper{
         Cursor cursor = mSQLiteDatabase.rawQuery(selectQuery,null);
         if (cursor.moveToFirst()){
             do{
+                int documentId = cursor.getInt(cursor.getColumnIndex(DocumentContract.DocumentEntry.DOCUMENT_ID));
                 String docName = cursor.getString(cursor.getColumnIndex(DocumentContract.DocumentEntry.DOCUMENT_NAME));
                 String landlordId = cursor.getString(cursor.getColumnIndex(DocumentContract.DocumentEntry.LANDLORD_ID));
                 String docuType = cursor.getString(cursor.getColumnIndex(DocumentContract.DocumentEntry.DOCUMENT_TYPE));
                 String docSummary = cursor.getString(cursor.getColumnIndex(DocumentContract.DocumentEntry.DOCUMENT_COMMENT));
                 String  propertyId= cursor.getString(cursor.getColumnIndex(DocumentContract.DocumentEntry.PROPERTY_ID));
                 byte[] imgInfo = cursor.getBlob(cursor.getColumnIndex(DocumentContract.DocumentEntry.IMAGE_ID));
-                Document.DocumentBean documentBean = new Document.DocumentBean(propertyId, landlordId, docuType, docName, docSummary, imgInfo);
+                Document.DocumentBean documentBean = new Document.DocumentBean(documentId,propertyId, landlordId, docuType, docName, docSummary, imgInfo);
                 documentBeans.add(documentBean);
                 Log.d("docSummary", docSummary);
             }while (cursor.moveToNext());
@@ -301,8 +302,13 @@ public class DbHelper implements IDbHelper{
     }
 
     @Override
-    public void deleteDocument(String propertyId, String landlordId, String documentId) {
-
+    public void deleteDocument(int documentId) {
+       // Log.d("PID+LID", propertyId + " " + landlordId);
+        Log.d("DOCUID", documentId+"");
+        int row_id = mSQLiteDatabase.delete(DocumentContract.DocumentEntry.TABLE_NAME, DocumentContract.DocumentEntry.DOCUMENT_ID+ " = ?",
+                new String[] {documentId+""});
+        Log.d("ROWIDDEL", row_id+"");
+        Log.d("DOCUMENTNUM", getDocumentCount()+"");
     }
 
 }
